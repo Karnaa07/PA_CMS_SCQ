@@ -1,0 +1,31 @@
+/:
+  controller: main
+  action: home
+
+/contact:
+  controller: main
+  action: contact
+
+/login:
+  controller: user
+  action: login
+
+/logout:
+  controller: user
+  action: logout
+
+/register:
+  controller: user
+  action: register
+
+/forget:
+  controller: user
+  action: pwdforget
+
+
+/dashboard:
+  controller: admin
+  action: dashboard
+  security:
+    - admin
+    - user
