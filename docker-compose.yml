@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     build: site
-    container_name: apache-3IW
+    container_name: apache-cms-scq
     ports :
      - "80:80"
     volumes:
@@ -15,7 +15,7 @@ services:
 
   database:
     image: mysql:5.7
-    container_name: mysql-mvc
+    container_name: mysql-cms-scq
     ports :
       - "3306:3306"
     environment:
@@ -29,7 +29,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: phpmyadmin-mvc
+    container_name: phpmyadmin-cms-scq
     depends_on:
       - database
     ports:
