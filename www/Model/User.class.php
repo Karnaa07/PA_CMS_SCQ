@@ -3,7 +3,7 @@ namespace App\Model;
 
 use App\Core\Sql;
 
-class User extends Sql
+class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
 {
     protected $id = null;
     protected $firstname = null;
@@ -26,17 +26,14 @@ class User extends Sql
     {
         return $this->id;
     }
-
-
-
     /**
      * @return null|string
      */
     public function getFirstname(): ?string
     {
+
         return $this->firstname;
     }
-
     /**
      * @param string $firstname
      */
@@ -44,7 +41,6 @@ class User extends Sql
     {
         $this->firstname = ucwords(strtolower(trim($firstname)));
     }
-
     /**
      * @return null|string
      */

@@ -5,16 +5,16 @@ namespace App\Core;
 
 class Verificator
 {
-
     public static function checkForm($config, $data): array
     {
         $result = [];
         //Le nb de inputs envoyés ?
         if( count($data) != count($config['inputs'])){
             die("Tentative de hack !!!!");
-        }
+        }// Si le nombre d'inputs renvoyé par notre formulaire ne correspond pas au nombres d'inputs de notre formulaire de base
+        // (Inspecter l'élément ajout d'un champ)
 
-        foreach ($config['inputs'] as $name=>$input){
+        foreach ($config['inputs'] as $name=>$input){ // ON boucle sur les données de nos inputs pour effectuer des vérifications
 
             if(!isset($data[$name]) ){
                 $result[] = "Le champs ".$name." n'existe pas";
@@ -35,6 +35,8 @@ class Verificator
             if(!empty($input["confirm"]) && $data[$name] != $data[$input["confirm"]]){
                 $result[] = $input["error"];
             }
+            
+            // a completer
 
 
         }
@@ -46,11 +48,11 @@ class Verificator
 
     public static function checkEmail($email): bool
     {
-       return filter_var($email, FILTER_VALIDATE_EMAIL);
+       return filter_var($email, FILTER_VALIDATE_EMAIL); // On vérifie si le champ mail contient une valeur d'email
     }
 
 
-    public static function checkPassword($password): bool
+    public static function checkPassword($password): bool // On vérifie le champ password
     {
 
         return strlen($password)>=8

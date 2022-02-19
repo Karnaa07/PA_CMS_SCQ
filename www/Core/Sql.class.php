@@ -7,7 +7,7 @@ abstract class Sql
     private $pdo;
     private $table;
 
-    public function __construct()
+    public function __construct() // Constructeur qui connect à la BDD à la création d'un objet de la classe SQL
     {
         //Se connecter à la bdd
         //il faudra mettre en place le singleton
@@ -27,14 +27,14 @@ abstract class Sql
     /**
      * @param int $id
      */
-    public function setId(?int $id): object
+    public function setId(?int $id): object // Return les données d'un utilisateur
     {
         $sql = "SELECT * FROM ".$this->table." WHERE id=".$id;
         $query = $this->pdo->query($sql);
-        return $query->fetchObject(get_called_class());
+        return $query->fetchObject(get_called_class()); 
     }
 
-    public function save()
+    public function save() // Enregistrement en BDD de valeurs provenants de formulaires
     {
 
         $columns = get_object_vars($this);
@@ -53,8 +53,8 @@ abstract class Sql
 
         }
 
-        $queryPrepared = $this->pdo->prepare($sql);
-        $queryPrepared->execute( $columns );
+        $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
+        $queryPrepared->execute( $columns ); // On les éxécutes avec nos données
 
     }
 

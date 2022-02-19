@@ -1,3 +1,4 @@
+<?php//Template back ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,7 +8,8 @@
 </head>
 <body>
 
-    <?php include "View/".$this->view.".view.php"; ?>
 
+    <?php include "View/".$this->view.".view.php"; ?>
+    
 </body>
 </html>

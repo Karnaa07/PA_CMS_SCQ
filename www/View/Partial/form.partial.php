@@ -1,3 +1,4 @@
+<?php//Partial permettant de créer des formulaires rapidement ?>
 <form method="<?= $data["config"]["method"]??"POST" ?>"  action="<?= $data["config"]["action"]??"" ?>">
 
     <?php foreach ($data["inputs"] as $name=>$input) :?>
