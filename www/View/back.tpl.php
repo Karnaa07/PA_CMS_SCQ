@@ -7,7 +7,7 @@
     <meta name="description" content="Description de ma page">
 </head>
 <body>
-
+afaf
 
     <?php include "View/".$this->view.".view.php"; ?>
     
