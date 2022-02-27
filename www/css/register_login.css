@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: cursive;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #503E9D;  
+}
+
+.logo{
+  background-image: url("../data/img/logo_225px.svg");
+  position: absolute;
+  top: center;
+  left: 15%;
+  padding: 10px;
+  width: 225px;
+  height: 225px;
+}
+
+.container {
+  position: relative;
+  width: 420px;
+  min-height: 490px;
+  height: auto;
+  max-height: 520px;
+  background-color: #F9F9F9;
+  padding: 15px 25px;
+  border-radius: 35px;
+  font-size: 18px;
+}
+
+
+.tab-body {
+  position: relative;
+  display: none;
+
+  height: auto;
+  max-height: 320px;
+  padding: 15% 5%;
+  margin-top: 20%;
+  background-color: #F9F9F9;
+  color: #82ade6de;
+  box-shadow: 0px 5px 10px #7c8395;
+  border-radius: 30px;
+  font-size: 1rem;
+}
+.tab-body.active {
+  display: block;
+}
+
+.row .input {
+  background-color: #C4C4C4;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 15px;
+  width: 90%;
+  height: 30px;
+  border: none;
+  outline: none;
+  color: whitesmoke;
+  font-weight: 550;
+}
+.input::placeholder {
+  color: whitesmoke;
+}
+
+.link {
+  display: inline-block;
+  font-size: 0.8em;
+  width: 100%;
+  text-decoration: none;
+  color: #2b384f;
+  text-align: center;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+.btn{
+  position: relative;
+  left: 50%;
+  bottom: -10%;
+  margin-top: 30.8%;
+  transform: translate(-50%, 50%);
+  width: 120px;
+  height: 45px;
+  border-radius: 50px;
+  background-color: #503E9D;
+  border: none;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn2{
+  position: relative;
+  left: 50%;
+  margin-top: 15%;
+  transform: translate(-50%, 50%);
+  width: 120px;
+  height: 45px;
+  border-radius: 50px;
+  background-color: #503E9D;
+  border: none;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.tab-footer {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  height: 30px;
+  border-radius: 50px;
+  display: flex;
+}
+
+.tab-link {
+  text-decoration: none;
+  color: whitesmoke;
+  margin: 0 3%;
+}
+
+.tab-link.active {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 520px) {
+  .container {
+    width: 80%;
+    min-width: 380px;
+    min-height: 490px;
+  }
+  .tab-body {
+    width: 100%;
+    padding: 15% 5%;
+    margin-top: 25%;
+    max-height: 420px;
+  }
+}

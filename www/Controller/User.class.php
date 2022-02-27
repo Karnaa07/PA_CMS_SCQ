@@ -20,7 +20,7 @@ class User {
              // Bouton deconnexion ?
         }
         else{
-            $view = new View("Login", "back"); // On crée une page de vue en appelant le partial Login avec un template Back (back.tpl.php)
+            $view = new View("login"); //,"back"); // On crée une page de vue en appelant le partial Login avec un template Back (back.tpl.php)
             $view->assign("user", $user); // On assigne la valeur user à la clé $user Pourquoi faire ?
 
         }
@@ -29,11 +29,24 @@ class User {
 
     public function register()
     {
+
         $user = new UserModel();
+
         if( !empty($_POST)){
+
             $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
+            //dans le cas il n'y a pas d'erreur, et insertion en base de donnée
+            $user->setEmail($_POST["email"]);
+            $user->setPassword($_POST["password"]);
+            $user->setFirstname($_POST["firstname"]);
+            $user->setLastname($_POST["lastname"]);
+            $user->generateToken();
+            $user->save();
+
             print_r($result);
+
         }
+
         $view = new View("register");
         $view->assign("user", $user);
     }
@@ -45,7 +58,7 @@ class User {
         <p> Ceci est un paragraphe de test </p>
         <?php
         // Gestion de déconnexion 
-            //Supprimer le Token
+        //Supprimer le Token    
 
         echo "Se déco";
     }
