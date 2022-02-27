@@ -12,6 +12,7 @@ class View // On définie nos vues
     {
         $this->setView($view);
         $this->setTemplate($template);
+        // $this->setStyle($view);
     }
 
     public function setView($view):void
@@ -23,6 +24,10 @@ class View // On définie nos vues
     {
         $this->template = strtolower($template); // Idem qu'au dessus
     }
+
+    // public function setStyle($view):void{
+
+    // }
 
 
     public function __toString():string
