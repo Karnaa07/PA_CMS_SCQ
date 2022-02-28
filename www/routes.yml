@@ -1,6 +1,4 @@
-/:
-  controller: main
-  action: home
+
 
 
 /contact:
@@ -27,10 +25,7 @@ action: media
   controller: user
   action: pwdforget
 
+/:
+  controller: main
+  action: home
 
-/dashboard:
-  controller: admin
-  action: dashboard
-  security:
-    - admin
-    - user
