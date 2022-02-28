@@ -50,16 +50,9 @@
             </div>
         </div>
         <div>
-<<<<<<< HEAD
              <?php include "View/".$this->view.".view.php"; 
              //var_dump($this->view);
              ?> 
-=======
-
-             <?php 
-                include "View/".$this->view.".view.php";
-            ?> 
->>>>>>> 3696935527649d7e58755ee1776b7fa98fed2385
         </div>
     </section>
     <footer class="footer">
