@@ -19,7 +19,7 @@
             <li class="cta-button"><a href="/"><img src="../data/snippets/Dashboard.svg">Dashboard</a></li>
             <li><a href="/media"><img src="../data/snippets/Media.svg">Media</a></li>
             <li><a href="#"><img src="../data/snippets/Plugins.svg">Plugin</a></li>
-            <li><a href="#"><img src="../data/snippets/Page.svg">Pages</a></li>
+            <li><a href="/pages"><img src="../data/snippets/Page.svg">Pages</a></li>
             <li><a href="#"><img src="../data/snippets/Articles.svg">Articles</a></li>
             <li><a href="#"><img src="../data/snippets/Categories.svg">Categories</a><li>
             <li><a href="#"><img src="../data/snippets/Utilisateurs.svg">Utilisateurs</a></li> 
@@ -50,8 +50,8 @@
             </div>
         </div>
         <div>
-             <?php //include "View/".$this->view.".view.php"; 
-             var_dump($this->view);
+             <?php include "View/".$this->view.".view.php"; 
+
              ?> 
         </div>
     </section>

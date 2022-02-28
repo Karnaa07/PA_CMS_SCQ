@@ -140,6 +140,10 @@ footer {
     border-radius: 30px;
 }
 
+li a {
+    padding: 10% 10%;
+}
+
 .main-content{
     margin-top: 27px;
     grid-column-start: line2;
