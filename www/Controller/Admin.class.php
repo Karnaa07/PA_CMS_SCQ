@@ -15,6 +15,7 @@ class Admin
     {
         $view = new View("dashboard","back"); // A l'appelle de contact on crée une vue de formumlaire de contact
     }
-
-
-}
+    public function media()
+    {
+        $view = new View("media","back");
+    }

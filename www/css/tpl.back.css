@@ -1,11 +1,13 @@
 body {
     background-color: #503E9D;
     font-family: 'Montserrat', sans-serif;
+    min-height: 100%
 }
 * {
     margin: 0;
     padding: 0;
 }
+html { height: 100%; }
 nav  {
     list-style-type: none;
 
@@ -20,12 +22,14 @@ nav ul:nth-child(2) {
     margin-left: 15%;
     background-color: antiquewhite;
 }
-div#socials{
+div#snippet{
     display: flex;
     justify-content: center;
 }
-div#socials img{
+div#snippet img{
     margin-right: 1em;
+    width:28px ;   
+    height:28px;
 }
 a{
     text-decoration: none;
@@ -67,11 +71,53 @@ header label {
     grid-row-start: head;
     grid-row-end: row1-start;
 }
-.test{
-    width: 650px;
+#headerDashboard{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 3%;
+}
+
+
+#headerDashboard > div{
+
+    margin:0%
+}
+#headerDashboard #snippet img{
+    padding: 5px;
+}
+#headerDashboard #profile{
+    display: flex;
+    justify-content: center;
+}
+#headerDashboard #profile img{
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+
+}
+footer {
+
+    color: #bbb;
+    text-align: center;
+  }
+    
+#searchbar{
+    width:60%;
     height: 45px;
     background: #E8E8E8;
     border-radius: 40px;
+    display: flex;
+    align-items: center;
+    
+    
+    
+}
+#searchbar img{
+    margin-left: 20px;
+    width: 20px;
+    height: 20px;
+    
 }
 .sidebar-left{
     margin-top: 27px;
@@ -83,7 +129,7 @@ header label {
 .container{
     display: grid; 
     grid-template-columns: [first] 250px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end];
-    grid-template-rows: [row1-start] 25% [row1-end] 100px [third-line] auto [last-line] 60px;
+    grid-template-rows: [row1-start] 25% [row1-end] 100px [third-line] auto [last-line] ;
 }
 
 
@@ -94,7 +140,6 @@ header label {
     box-sizing: border-box;
     box-shadow: 0px 4px 14px -5px rgba(0, 0, 0, 0.4);
     border-radius: 30px;
-
 }
 
 .main-content{
@@ -106,13 +151,13 @@ header label {
     background-color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
-    display: flex;
 }
 .footer{
     grid-column-start: first;
     grid-column-end: end;
     grid-row-start: last-line;
-    grid-row-end:last-line;
+    grid-row-end:end ;
+     
 }
 .sidebar-right{
     grid-column-start: col4-start;

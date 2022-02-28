@@ -11,6 +11,10 @@
   controller: user
   action: login
 
+/media:
+controller: admin
+action: media
+
 /logout:
   controller: user
   action: logout
