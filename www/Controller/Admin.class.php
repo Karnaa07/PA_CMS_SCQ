@@ -19,3 +19,4 @@ class Admin
     {
         $view = new View("media","back");
     }
+}

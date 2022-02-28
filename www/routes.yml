@@ -10,8 +10,8 @@
   action: login
 
 /media:
-controller: admin
-action: media
+  controller: admin
+  action: media
 
 /logout:
   controller: user
