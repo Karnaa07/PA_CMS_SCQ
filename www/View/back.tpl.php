@@ -50,8 +50,13 @@
             </div>
         </div>
         <div>
+<<<<<<< HEAD
              <?php 
                 include "View/".$this->view.".view.php"; 
+=======
+             <?php include "View/".$this->view.".view.php"; 
+
+>>>>>>> 6b1d552e4e1f1acd9f862b3609bba8a7757ee0b6
              ?> 
         </div>
     </section>

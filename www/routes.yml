@@ -13,6 +13,10 @@
   controller: admin
   action: media
 
+/pages:
+  controller: admin
+  action: pages
+
 /logout:
   controller: user
   action: logout

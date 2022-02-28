@@ -19,4 +19,8 @@ class Admin
     {
         $view = new View("media","back");
     }
+    public function pages()
+    {
+        $view = new View("pages","back");
+    }
 }
