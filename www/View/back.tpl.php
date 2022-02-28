@@ -50,8 +50,8 @@
             </div>
         </div>
         <div>
-             <?php //include "View/".$this->view.".view.php"; 
-             var_dump($this->view);
+             <?php include "View/".$this->view.".view.php"; 
+             //var_dump($this->view);
              ?> 
         </div>
     </section>
