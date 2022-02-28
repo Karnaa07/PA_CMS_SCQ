@@ -51,13 +51,14 @@
         </div>
         <div>
 
+
              <?php
                 include "View/".$this->view.".view.php"; 
              ?> 
         </div>
     </section>
     <footer class="footer">
-        
+
     </footer>
 </body>
 </html>
