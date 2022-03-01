@@ -52,8 +52,8 @@ nav li {
 nav li img{
     margin-right:10px;
     vertical-align: middle; 
-    width:28px ;   
-    height:28px ;
+    width:22px ;   
+    height:22px ;
 }
 header{
     text-align: center;
@@ -97,7 +97,6 @@ header label {
 
 }
 footer {
-
     color: #bbb;
     text-align: center;
   }
@@ -108,10 +107,7 @@ footer {
     background: #E8E8E8;
     border-radius: 40px;
     display: flex;
-    align-items: center;
-    
-    
-    
+    align-items: center; 
 }
 #searchbar img{
     margin-left: 20px;
@@ -132,7 +128,6 @@ footer {
     grid-template-rows: [row1-start] 25% [row1-end] 100px [third-line] auto [last-line] ;
 }
 .cta-button{
-    
     background: #5D4F9C;
     border: 1px solid #735FC8;
     box-sizing: border-box;

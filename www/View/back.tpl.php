@@ -16,7 +16,7 @@
     <nav class="sidebar-left">
         <img id="logo" src="../data/img/Logo.svg"> <br><br><br> 
         <ul>
-            <li ><a href="#"><img src="../data/snippets/Dashboard.svg">Dashboard</a></li>
+            <li class="cta-button"><a href="#"><img src="../data/snippets/Dashboard.svg">Dashboard</a></li>
             <li><a href="#"><img src="../data/snippets/Media.svg">Media</a></li>
             <li><a href="#"><img src="../data/snippets/Plugins.svg">Plugin</a></li>
             <li><a href="#"><img src="../data/snippets/Page.svg">Pages</a></li>

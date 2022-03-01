@@ -1,16 +1,20 @@
 <link href="../css/dashboard.css" rel="stylesheet">
-<body>
-<div class="wrapper">
-    <div class="bar-stat two">
-        <div class="utilisateurs-stat">
-            <h1>Utilisateurs</h1>
-        </div>
-        <div class="utilisateurs-stat">
-            <h1>Clics</h1>
-        </div>
-        <div class="utilisateurs-stat">
-                <h1>Articles postés</h1>
-        </div>
 
-</div>
-</body>
+<section class="wrapper">
+        <section class="bar-stat two">
+            <div class="utilisateurs-stat">
+               
+            </div>
+            <div class="utilisateurs-stat">
+               
+            </div>
+            <div class="utilisateurs-stat">
+               
+            </div>
+        </section>
+    <!-- <div class="two"></div>
+    <div class="three"></div>
+    <div class="four">Quatre</div>
+    <div class="five">Cinq</div>
+    <div class="six">Six</div> -->
+</section>
