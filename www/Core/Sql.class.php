@@ -61,7 +61,7 @@ abstract class Sql
         $req = "SELECT * FROM esgi_user WHERE email = ? and password = ?";
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute(array($email)); // On les éxécutes avec nos données
-        $result = $queryPrepared->fetch();
+        $result = $queryPrepared->fetch();// Ceci est un test
         return $result;
     }
 }
