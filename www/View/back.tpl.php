@@ -22,7 +22,9 @@
             <li><a href="#"><img src="../data/snippets/Page.svg">Pages</a></li>
             <li><a href="#"><img src="../data/snippets/Articles.svg">Articles</a></li>
             <li><a href="#"><img src="../data/snippets/Categories.svg">Categories</a><li>
-            <li><a href="#"><img src="../data/snippets/Utilisateurs.svg">Utilisateurs</a></li> 
+            <hr/>
+            <li><a href="#"><img src="../data/snippets/Utilisateurs.svg">Utilisateurs</a></li>
+            
             <li><a href="#"><img src="../data/snippets/Assistances.svg">Assistances</a></li>
             <li><a href="#"><img src="../data/snippets/Reglage.svg">Réglages</a></li>
         </ul>

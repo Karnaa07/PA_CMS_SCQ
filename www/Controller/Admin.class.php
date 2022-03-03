@@ -8,7 +8,6 @@ use App\Core\View;
 // de communiquer les changements aux modèles
 
 class Admin
-// Classe ADMIN 
 {
 
     public function dashboard()
