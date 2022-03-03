@@ -17,4 +17,4 @@ class Main { // Définition de la classe Main
         $view = new View("contact"); // A l'appelle de contact on crée une vue de formumlaire de contact
     }
   
-}
+} 
