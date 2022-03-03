@@ -11,6 +11,7 @@ class User {
 
     public function login() //login
     {
+<<<<<<< HEAD
         $user = new UserModel();
         if(!empty($_POST))
         {
@@ -26,6 +27,15 @@ class User {
             {
                 echo("Nom de compte ou mot de passe incorrect");
             }
+=======
+        $user = new UserModel(); // On appelle la classe User pour créer un objet $user
+        // var_dump($user->getId());
+        if(!empty($_POST)){
+            echo('Page Profil de '); // appelle Base SQL Pour écrire les données utilisateur 
+
+            
+             // Bouton deconnexion ?
+>>>>>>> featureClem
         }
         else {
             $view = new View("login","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)    
