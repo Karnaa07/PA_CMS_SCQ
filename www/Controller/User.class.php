@@ -11,20 +11,21 @@ class User {
 
     public function login()
     {
-        $user = new UserModel(); // On appelle la classe User pour créer un objet $user
-        var_dump($user->getId());
+        $user = new UserModel();
         if(!empty($_POST)){
-            echo('Page Profil de '); // appelle Base SQL Pour écrire les données utilisateur 
+            var_dump($_POST);
+            $user->setUser();
+            var_dump($user->exist_user($_POST["email"]));
 
-            
-             // Bouton deconnexion ?
-        }
-        else{
-            $view = new View("login"); //,"back"); // On crée une page de vue en appelant le partial Login avec un template Back (back.tpl.php)
-            $view->assign("user", $user); // On assigne la valeur user à la clé $user Pourquoi faire ?
 
         }
-      
+        else {
+            $view = new View("login","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)
+            $view->assign("user", $user);
+        }
+
+ 
+
     }
 
     public function register()
@@ -32,19 +33,13 @@ class User {
 
         $user = new UserModel();
 
-        if( !empty($_POST)){
+        if(!empty($_POST)){
 
             $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
             //dans le cas il n'y a pas d'erreur, et insertion en base de donnée
-            $user->setEmail($_POST["email"]);
-            $user->setPassword($_POST["password"]);
-            $user->setFirstname($_POST["firstname"]);
-            $user->setLastname($_POST["lastname"]);
-            $user->generateToken();
+            $user->setUser();
             $user->save();
-
             print_r($result);
-
         }
 
         $view = new View("register");
