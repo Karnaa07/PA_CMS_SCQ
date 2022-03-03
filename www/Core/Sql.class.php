@@ -62,6 +62,6 @@ abstract class Sql
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute(array($email)); // On les éxécutes avec nos données
         $result = $queryPrepared->fetch();
-        return $result;
+        return $result; // TEST
     }
 }
