@@ -19,8 +19,8 @@ class Admin
     {
         $view = new View("media","back");
     }
-    public function pages()
+    public function pages_settings()
     {
-        $view = new View("pages","back");
+        $view = new View("pages_settings","back");
     }
 }

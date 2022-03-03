@@ -15,7 +15,7 @@
 
 /pages:
   controller: admin
-  action: pages
+  action: pages_settings
 
 /logout:
   controller: user
