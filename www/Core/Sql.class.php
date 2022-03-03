@@ -50,13 +50,18 @@ abstract class Sql
                 $update[] = $column."=:".$column;
             }
             $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
-
         }
 
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
         $queryPrepared->execute( $columns ); // On les éxécutes avec nos données
 
     }
-
-
+    public function exist_user($email)
+    {
+        $req = "SELECT * FROM esgi_user WHERE email = ? and password = ?";
+        $queryPrepared = $this->pdo->prepare($req);
+        $queryPrepared->execute(array($email)); // On les éxécutes avec nos données
+        $result = $queryPrepared->fetch();
+        return $result; // TEST
+    }
 }

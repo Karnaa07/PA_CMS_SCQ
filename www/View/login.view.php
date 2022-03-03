@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
         <h1>Login</h1>
         <?php //$this->includePartial("form", $user->getLoginForm()) a remettre plus tard?>
          
@@ -39,3 +40,10 @@
 </body>
 
 </html>
+=======
+        <h1>Page de login</h1>
+        <?php $this->includePartial("form", $user->getLoginForm());
+          
+          var_dump($user->getLastName());
+        ?>
+>>>>>>> 3008b9ea3bd7afdf5e3bebc89a482eecaff7c651
