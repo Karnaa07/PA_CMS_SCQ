@@ -12,20 +12,26 @@ class User {
     public function login()
     {
         $user = new UserModel();
-        if(!empty($_POST)){
-            var_dump($_POST);
+        if(!empty($_POST))
+        {
             $user->setUser();
-            var_dump($user->exist_user($_POST["email"]));
-
-
+            $exist = $user->exist_user($_POST["email"],$_POST["password"]);
+            if($exist["id"]){
+                session_start();
+                $_SESSION['id'] = $exist['id'];
+                $_SESSION['firstname'] = $exist['firstname']; 
+                $view = new View("dashboard","back");
+            }
+            else
+            {
+                echo("Nom de compte ou mot de passe incorrect");
+            }
         }
         else {
-            $view = new View("login","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)
+            $view = new View("login","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)    
             $view->assign("user", $user);
+    
         }
-
- 
-
     }
 
     public function register()
@@ -53,7 +59,7 @@ class User {
         <p> Ceci est un paragraphe de test </p>
         <?php
         // Gestion de déconnexion 
-        //Supprimer le Token    
+        // Supprimer le Token    
 
         echo "Se déco";
     }

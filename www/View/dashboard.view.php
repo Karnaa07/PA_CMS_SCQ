@@ -18,3 +18,10 @@
     <div class="five">Cinq</div>
     <div class="six">Six</div> -->
 </section>
+<label>
+    <?php 
+    if($_SESSION['id']){
+        echo('Voici votre dashboard '.$_SESSION['firstname']);
+    }
+    ?>
+</label>
