@@ -29,6 +29,7 @@
   controller: user
   action: pwdforget
 
+
 /:
   controller: main
   action: home

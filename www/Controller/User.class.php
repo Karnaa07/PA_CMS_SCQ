@@ -12,7 +12,7 @@ class User {
     public function login()
     {
         $user = new UserModel(); // On appelle la classe User pour créer un objet $user
-        var_dump($user->getId());
+        // var_dump($user->getId());
         if(!empty($_POST)){
             echo('Page Profil de '); // appelle Base SQL Pour écrire les données utilisateur 
 
