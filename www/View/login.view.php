@@ -1,9 +1,6 @@
 
-<<<<<<< Updated upstream
         <h1>Page de login</h1>
-=======
-        <h1>Bonsoir6</h1>
->>>>>>> Stashed changes
+
         <?php //$this->includePartial("form", $user->getLoginForm()) a remettre plus tard?>
          
 
