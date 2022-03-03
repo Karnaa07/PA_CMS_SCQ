@@ -9,7 +9,7 @@ use App\Model\User as UserModel;  // Alias de class User dans Model/User.class.p
 
 class User {
 
-    public function login()
+    public function login() //login
     {
         $user = new UserModel();
         if(!empty($_POST)){
