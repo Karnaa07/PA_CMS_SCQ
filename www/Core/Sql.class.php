@@ -56,12 +56,12 @@ abstract class Sql
         $queryPrepared->execute( $columns ); // On les éxécutes avec nos données
 
     }
-    public function exist_user($email)
+    public function exist_user($email,$password)
     {
-        $req = "SELECT * FROM esgi_user WHERE email = ? and password = ?";
+        $req = "SELECT * FROM esgi_user WHERE email = ? AND password = ?";
         $queryPrepared = $this->pdo->prepare($req);
-        $queryPrepared->execute(array($email)); // On les éxécutes avec nos données
+        $queryPrepared->execute(array($email,$password)); // On les éxécutes avec nos données
         $result = $queryPrepared->fetch();
-        return $result; // TEST
+        return $result; 
     }
 }
