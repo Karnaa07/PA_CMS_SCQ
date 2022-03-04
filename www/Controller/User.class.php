@@ -66,7 +66,6 @@ class User {
         <?php
         // Gestion de déconnexion 
         // Supprimer le Token    
-
         echo "Se déco";
     }
 
