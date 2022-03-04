@@ -12,8 +12,10 @@ class User {
 
     public function login() //login
     {
+
         $Mail= new Mail();
         $Mail->send_mail();
+
         $user = new UserModel();
         if(!empty($_POST))
         {
