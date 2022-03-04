@@ -1,5 +1,5 @@
 
-<?php //$this->includePartial("form", $user->getRegisterForm()) // à remettre plus tard ?> 
+<?php $this->includePartial("form", $user->getRegisterForm()) // à remettre plus tard ?> 
 
 <html lang="fr">
 
