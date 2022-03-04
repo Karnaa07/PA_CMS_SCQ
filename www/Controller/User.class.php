@@ -33,10 +33,8 @@ class User {
             }
 
         }
-        else {
-            $view = new View("login","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)    
-            $view->assign("user", $user);
-    
+        else{
+            header('Location: dashboard');
         }
     }
 
@@ -61,12 +59,11 @@ class User {
 
     public function logout()
     {
-        ?>
-        <p> Ceci est un paragraphe de test </p>
-        <?php
         // Gestion de déconnexion 
         // Supprimer le Token    
-        echo "Se déco";
+        setcookie('token',"test",1);
+        header('Location: dashboard');
+       
     }
 
 
