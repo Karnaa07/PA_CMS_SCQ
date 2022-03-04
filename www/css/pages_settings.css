@@ -22,3 +22,16 @@
     height: auto;
     justify-content: space-evenly;
 }
+
+.section2{
+    display: flex;  
+    width: auto;
+    height: auto;
+}
+
+.benefit2{
+    display: flex;
+    margin-top: 3%;
+    width: auto;
+    height: auto;
+}
