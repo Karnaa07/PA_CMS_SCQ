@@ -3,4 +3,5 @@
         <?php $this->includePartial("form", $user->getLoginForm());
         
         ?>
+ <?php $this->includePartial("form", $user->getLoginForm());?>
 

@@ -6,32 +6,32 @@ use App\Core\Sql;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\User as UserModel;  // Alias de class User dans Model/User.class.php
+use App\Core\Mail;
 
 class User {
 
     public function login() //login
     {
 
-        if(!isset($_COOKIE['token']))
+        $Mail= new Mail();
+        $Mail->send_mail();
+
+        $user = new UserModel();
+        if(!empty($_POST))
         {
-            $user = new UserModel();
-            session_start();
-            if(!empty($_POST))
-                {
-                    $user->setUser();              
-                    $exist = $user->exist_user($_POST["email"],$_POST["password"]);
-                    if($exist["id"]){
-                        header('Location: dashboard');
-                    }
-                    else
-                    {
-                        var_dump("Test");
-                    }
-                }
-                else {
-                    $view = new View("login","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)    
-                    $view->assign("user", $user);
-                }
+            $user->setUser();
+            $exist = $user->exist_user($_POST["email"],$_POST["password"]);
+            if($exist["id"]){
+                session_start();
+                $_SESSION['id'] = $exist['id'];
+                $_SESSION['firstname'] = $exist['firstname']; 
+                $view = new View("dashboard","back");
+            }
+            else
+            {
+                echo("Nom de compte ou mot de passe incorrect");
+            }
+
         }
         else{
             header('Location: dashboard');
