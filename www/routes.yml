@@ -33,3 +33,7 @@
   controller: main
   action: home
 
+/dashboard:
+  controller: main
+  action: home
+

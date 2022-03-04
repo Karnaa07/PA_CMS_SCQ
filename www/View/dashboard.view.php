@@ -20,8 +20,9 @@
 </section>
 <label>
     <?php 
-    if($_SESSION['id']){
-        echo('Voici votre dashboard '.$_SESSION['firstname']);
+    session_start();
+    if(isset($_COOKIE['token'])){
+        echo('Voici votre dashboard ');
     }
     ?>
 </label>

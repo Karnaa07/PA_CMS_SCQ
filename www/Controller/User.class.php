@@ -11,26 +11,30 @@ class User {
 
     public function login() //login
     {
-        $user = new UserModel();
-        if(!empty($_POST))
+
+        if(!isset($_COOKIE['token']))
         {
-            $user->setUser();
-            $exist = $user->exist_user($_POST["email"],$_POST["password"]);
-            if($exist["id"]){
-                session_start();
-                $_SESSION['id'] = $exist['id'];
-                $_SESSION['firstname'] = $exist['firstname']; 
-                $view = new View("dashboard","back");
-            }
-            else
-            {
-                echo("Nom de compte ou mot de passe incorrect");
-            }
+            $user = new UserModel();
+            session_start();
+            if(!empty($_POST))
+                {
+                    $user->setUser();              
+                    $exist = $user->exist_user($_POST["email"],$_POST["password"]);
+                    if($exist["id"]){
+                        header('Location: dashboard');
+                    }
+                    else
+                    {
+                        var_dump("Test");
+                    }
+                }
+                else {
+                    $view = new View("login","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)    
+                    $view->assign("user", $user);
+                }
         }
-        else {
-            $view = new View("login","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)    
-            $view->assign("user", $user);
-    
+        else{
+            header('Location: dashboard');
         }
     }
 
@@ -55,13 +59,11 @@ class User {
 
     public function logout()
     {
-        ?>
-        <p> Ceci est un paragraphe de test </p>
-        <?php
         // Gestion de déconnexion 
         // Supprimer le Token    
-
-        echo "Se déco";
+        setcookie('token',"test",1);
+        header('Location: dashboard');
+       
     }
 
 
