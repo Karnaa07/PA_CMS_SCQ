@@ -9,23 +9,33 @@ use App\Model\User as UserModel;  // Alias de class User dans Model/User.class.p
 
 class User {
 
-    public function login()
+    public function login() //login
     {
-        $user = new UserModel();
-        if(!empty($_POST)){
-            var_dump($_POST);
-            $user->setUser();
-            var_dump($user->exist_user($_POST["email"]));
 
-
+        if(!isset($_COOKIE['token']))
+        {
+            $user = new UserModel();
+            session_start();
+            if(!empty($_POST))
+                {
+                    $user->setUser();              
+                    $exist = $user->exist_user($_POST["email"],$_POST["password"]);
+                    if($exist["id"]){
+                        header('Location: dashboard');
+                    }
+                    else
+                    {
+                        var_dump("Test");
+                    }
+                }
+                else {
+                    $view = new View("login","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)    
+                    $view->assign("user", $user);
+                }
         }
-        else {
-            $view = new View("login","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)
-            $view->assign("user", $user);
+        else{
+            header('Location: dashboard');
         }
-
- 
-
     }
 
     public function register()
@@ -49,13 +59,11 @@ class User {
 
     public function logout()
     {
-        ?>
-        <p> Ceci est un paragraphe de test </p>
-        <?php
         // Gestion de déconnexion 
-        //Supprimer le Token    
-
-        echo "Se déco";
+        // Supprimer le Token    
+        setcookie('token',"test",1);
+        header('Location: dashboard');
+       
     }
 
 

@@ -8,7 +8,6 @@ use App\Core\View;
 // de communiquer les changements aux modèles
 
 class Admin
-// Classe ADMIN 
 {
 
     public function dashboard()
@@ -19,8 +18,8 @@ class Admin
     {
         $view = new View("media","back");
     }
-    public function pages()
+    public function pages_settings()
     {
-        $view = new View("pages","back");
+        $view = new View("pages_settings","back");
     }
 }

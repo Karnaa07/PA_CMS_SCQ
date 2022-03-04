@@ -1,0 +1,24 @@
+.flexbox
+{
+    display:flex;
+}
+
+.container_view_pages{
+    width: auto;
+    margin:auto;
+    position: relative;
+}
+
+#section1 .container_view_pages
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.benefit{
+    display: flex;
+    margin-top: 3%;
+    width: auto;
+    height: auto;
+    justify-content: space-evenly;
+}

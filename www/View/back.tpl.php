@@ -22,7 +22,9 @@
             <li><a href="#"><img src="../data/snippets/Page.svg">Pages</a></li>
             <li><a href="#"><img src="../data/snippets/Articles.svg">Articles</a></li>
             <li><a href="#"><img src="../data/snippets/Categories.svg">Categories</a><li>
-            <li><a href="#"><img src="../data/snippets/Utilisateurs.svg">Utilisateurs</a></li> 
+            <hr/>
+            <li><a href="#"><img src="../data/snippets/Utilisateurs.svg">Utilisateurs</a></li>
+            
             <li><a href="#"><img src="../data/snippets/Assistances.svg">Assistances</a></li>
             <li><a href="#"><img src="../data/snippets/Reglage.svg">Réglages</a></li>
         </ul>
@@ -42,7 +44,7 @@
             </div>
             <div id="snippet">
                 <a href = "/login"><img src="../data/snippets/Profile.svg"> </a>
-                <a href = "#"><img src="../data/snippets/Deconnexion.svg"> </a>
+                <a href = "/logout"><img src="../data/snippets/Deconnexion.svg"> </a>
                 <a href = "#"><img src="../data/snippets/Sombre.svg"> </a>
             </div>
             <div id="profile">
@@ -50,8 +52,6 @@
             </div>
         </div>
         <div>
-
-
              <?php
                 include "View/".$this->view.".view.php"; 
              ?> 

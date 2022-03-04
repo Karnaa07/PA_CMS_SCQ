@@ -1,8 +1,8 @@
-<h1>S'inscrire</h1>
+<?php $this->includePartial("form", $user->getRegisterForm()) // à remettre plus tard ?> 
 
-<?php //$this->includePartial("form", $user->getRegisterForm()) // à remettre plus tard ?> 
 
-<html lang="fr">
+
+<!-- <html lang="fr">
 
 <head>
   <meta charset="UTF-8">
@@ -53,7 +53,7 @@
 </body>
 
 </html>
-
+ -->
 
 
 
