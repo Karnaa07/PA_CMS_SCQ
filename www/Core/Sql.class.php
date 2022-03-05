@@ -69,4 +69,26 @@ abstract class Sql
         }
 
     }
+
+    public function getOneBy(?array $where=null) : ?array 
+    {
+        $sql= "SELECT * FROM ".$this->table;
+        if (!is_null($where)){
+            foreach ($where as $column=>$value)
+            {
+                $select[] = $column."=:".$column;
+            }
+            $sql.=" WHERE ".implode(" AND ", $select);
+        }
+        
+        $prepare=$this->pdo->prepare($sql);
+        $prepare->execute($where);
+        $result=$prepare->fetch();
+        if(gettype($result)!=="array"){
+            $result=null;
+            
+        }
+        return $result;
+
+    }
 }

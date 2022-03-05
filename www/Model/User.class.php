@@ -210,6 +210,10 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     public function setUser(){
         $this->setEmail($_POST["email"]);
         $this->setPassword($_POST["password"]);
+        if(!empty($_POST['firstname']))
+            $this->setFirstname($_POST['firstname']);
+        if(!empty($_POST['lastname']))
+            $this->setLastname($_POST['lastname']);
         $this->generateToken();
         $this->setStatus(0);
     }

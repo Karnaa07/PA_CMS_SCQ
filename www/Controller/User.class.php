@@ -44,12 +44,25 @@ class User {
         $user = new UserModel();
 
         if(!empty($_POST)){
+            $unicity=$user->getOneBy(["email"=>$_POST['email']]);
+            if($unicity==null)
+            {
+                $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
+                //dans le cas il n'y a pas d'erreur, et insertion en base de donnée
+                if(count($result)<1){
+                    echo "ce mail n'existe pas, utilisateur enregistre";
+                    $user->setUser();
+                    $user->save();
+                    print_r($result);
+                }
+                else{
+                    echo $result[0];
+                }
+            }
+            else{
+                echo "ce mail existe deja";
+            }
 
-            $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
-            //dans le cas il n'y a pas d'erreur, et insertion en base de donnée
-            $user->setUser();
-            $user->save();
-            print_r($result);
         }
 
         $view = new View("register");
