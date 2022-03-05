@@ -24,8 +24,14 @@
             </article>
         </div>
     </section>
-    <section class = "section2">
-    
+    <section class= "section1">
+        <div class="container_view_pages">
+            <article class="benefit">
+                <a href="#">
+                    <img src="../data/img/vos_pages.svg">
+                </a>
+            </article>    
+        </div>
     </section>
 </body>
 </html>

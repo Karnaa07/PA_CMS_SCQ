@@ -25,7 +25,7 @@ class User {
                     }
                     else
                     {
-                        var_dump("Test");
+                        echo("Mot de passe ou utilisateur incorrect");
                     }
                 }
                 else {
@@ -62,7 +62,7 @@ class User {
         // Gestion de déconnexion 
         // Supprimer le Token    
         setcookie('token',"test",1);
-        header('Location: dashboard');
+        header('Location: login');
        
     }
 

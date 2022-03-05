@@ -1,5 +1,27 @@
 
+/:
+  controller: main
+  action: home
 
+/media:
+  controller: admin
+  action: media
+
+/plugin:
+  controller: admin
+  action: plugin
+
+/pages:
+  controller: admin
+  action: pages_settings
+
+/articles:
+  controller: admin
+  action: articles
+
+/categories:
+  controller: admin
+  action: categorie
 
 /contact:
   controller: main
@@ -9,18 +31,6 @@
   controller: user
   action: login
 
-/media:
-  controller: admin
-  action: media
-
-/pages:
-  controller: admin
-  action: pages_settings
-
-/logout:
-  controller: user
-  action: logout
-
 /register:
   controller: user
   action: register
@@ -29,9 +39,10 @@
   controller: user
   action: pwdforget
 
-/:
-  controller: main
-  action: home
+/logout:
+  controller: user
+  action: logout
+
 
 /dashboard:
   controller: main
