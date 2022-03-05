@@ -16,14 +16,14 @@
     <nav class="sidebar-left">
         <img id="logo" src="../data/img/Logo.svg"> <br><br><br> 
         <ul>
-            <li class="cta-button"><a href="#"><img src="../data/snippets/Dashboard.svg">Dashboard</a></li>
+            <li class="cta-button"><a href="/"><img src="../data/snippets/Dashboard.svg">Dashboard</a></li>
             <li><a href="#"><img src="../data/snippets/Media.svg">Media</a></li>
             <li><a href="#"><img src="../data/snippets/Plugins.svg">Plugin</a></li>
             <li><a href="#"><img src="../data/snippets/Page.svg">Pages</a></li>
             <li><a href="#"><img src="../data/snippets/Articles.svg">Articles</a></li>
             <li><a href="#"><img src="../data/snippets/Categories.svg">Categories</a><li>
             <hr/>
-            <li><a href="#"><img src="../data/snippets/Utilisateurs.svg">Utilisateurs</a></li>
+            <li><a href="/user_settings"><img src="../data/snippets/Utilisateurs.svg">Utilisateurs</a></li>
             
             <li><a href="#"><img src="../data/snippets/Assistances.svg">Assistances</a></li>
             <li><a href="#"><img src="../data/snippets/Reglage.svg">Réglages</a></li>

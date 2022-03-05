@@ -19,6 +19,10 @@
   controller: admin
   action: articles
 
+/user_settings:
+  controller: admin
+  action: user_settings
+
 /categories:
   controller: admin
   action: categorie

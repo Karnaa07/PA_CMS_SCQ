@@ -43,7 +43,7 @@ abstract class Sql
         if($this->getId() == null){
             $sql = "INSERT INTO ".$this->table." (".implode(",",array_keys($columns)).") 
             VALUES ( :".implode(",:",array_keys($columns)).")";
-        }else{
+        }else{ 
             $update = [];
             foreach ($columns as $column=>$value)
             {
@@ -60,7 +60,7 @@ abstract class Sql
     {
         $req = "SELECT * FROM esgi_user WHERE email = ?";
         $queryPrepared = $this->pdo->prepare($req);
-        $queryPrepared->execute(array($email)); // On les éxécutes avec nos données
+        $queryPrepared->execute(array($email));
         $result = $queryPrepared->fetch();
 
         if (password_verify($password,$result["password"])){
@@ -68,5 +68,12 @@ abstract class Sql
             return $result; 
         }
 
+    }
+    public function Crud(){
+        $req = "SELECT * FROM esgi_user";
+        $queryPrepared = $this->pdo->prepare($req);
+        $queryPrepared->execute(array());
+        $res = $queryPrepared->fetch();
+        return $res;
     }
 }

@@ -11,7 +11,6 @@ class User {
 
     public function login() //login
     {
-
         if(!isset($_COOKIE['token']))
         {
             $user = new UserModel();
