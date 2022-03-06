@@ -30,10 +30,6 @@ class Admin
         $user = new UserModel();
         $tabData = $user->Crud();
         $view = new View("user_settings","back");
-        $view->assign("tabData", $tabData);
-        // foreach ($tabData as $tabData) {
-        //     echo('<p>'.$tabData."\n"."</p>");
-        // }
-        
+        $view->assign("tabData", $tabData);      
     }
 }
