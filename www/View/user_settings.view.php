@@ -20,7 +20,7 @@
         foreach ($tabData[$i] as $key => $value) 
         {
             if(array_key_exists($key,$tab))
-                {echo('<td> '.$value.' </td>');}
+                {echo('<td> '.utf8_encode($value).' </td>');}
         }
         echo('</tr>');
     }
