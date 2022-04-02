@@ -80,7 +80,7 @@ class User {
     {
         // Gestion de déconnexion 
         // Supprimer le Token    
-        setcookie('token',"test",1);
+        setcookie('Connected',"test",1);
         header('Location: login');
        
     }
