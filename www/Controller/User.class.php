@@ -12,6 +12,7 @@ class User {
 
     public function login() //login
     {
+<<<<<<< HEAD
 
         $Mail= new Mail();
         $Mail->send_mail();
@@ -32,6 +33,28 @@ class User {
                 echo("Nom de compte ou mot de passe incorrect");
             }
 
+=======
+        if(!isset($_COOKIE['token']))
+        {
+            $user = new UserModel();
+            session_start();
+            if(!empty($_POST))
+                {
+                    $user->setUser();              
+                    $exist = $user->exist_user($_POST["email"],$_POST["password"]);
+                    if($exist["id"]){
+                        header('Location: dashboard');
+                    }
+                    else
+                    {
+                        echo("Mot de passe ou utilisateur incorrect");
+                    }
+                }
+                else {
+                    $view = new View("login","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)    
+                    $view->assign("user", $user);
+                }
+>>>>>>> feature_seb
         }
         else{
             header('Location: dashboard');
@@ -75,7 +98,7 @@ class User {
         // Gestion de déconnexion 
         // Supprimer le Token    
         setcookie('token',"test",1);
-        header('Location: dashboard');
+        header('Location: login');
        
     }
 

@@ -12,18 +12,11 @@ abstract class Sql
         //Se connecter à la bdd
         //il faudra mettre en place le singleton
         try{
-            $this->pdo = new \PDO( DBDRIVER.":host=".DBHOST.";port=".DBPORT.";dbname=".DBNAME
-                ,DBUSER, DBPWD , [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_WARNING]);
+            $this->pdo = new \PDO( DBDRIVER.":host=".DBHOST.";port=".DBPORT.";dbname=".DBNAME,DBUSER, DBPWD);
         }catch (\Exception $e){
             die("Erreur SQL : ".$e->getMessage());
         }
-
-        //Si l'id n'est pas null alors on fait un update sinon on fait un insert
-        $calledClassExploded = explode("\\",get_called_class());
-        $this->table = strtolower(DBPREFIXE.end($calledClassExploded));
-
     }
-
     /**
      * @param int $id
      */
@@ -43,7 +36,7 @@ abstract class Sql
         if($this->getId() == null){
             $sql = "INSERT INTO ".$this->table." (".implode(",",array_keys($columns)).") 
             VALUES ( :".implode(",:",array_keys($columns)).")";
-        }else{
+        }else{ 
             $update = [];
             foreach ($columns as $column=>$value)
             {
@@ -60,14 +53,17 @@ abstract class Sql
     {
         $req = "SELECT * FROM esgi_user WHERE email = ?";
         $queryPrepared = $this->pdo->prepare($req);
-        $queryPrepared->execute(array($email)); // On les éxécutes avec nos données
+        $queryPrepared->execute(array($email));
         $result = $queryPrepared->fetch();
-
         if (password_verify($password,$result["password"])){
             setcookie(token,$result["token"],time()+3600);
             return $result; 
         }
-
+    }
+    public function Crud(){
+        $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM `esgi_user`");
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll();
     }
 
     public function getOneBy(?array $where=null) : ?array 
