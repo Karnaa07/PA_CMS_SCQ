@@ -1,4 +1,4 @@
-<?php//Partial permettant de créer des formulaires rapidement ?>
+<?php //Partial permettant de créer des formulaires rapidement ?>
 <form method="<?= $data["config"]["method"]??"POST" ?>"  action="<?= $data["config"]["action"]??"" ?>">
 
     <?php foreach ($data["inputs"] as $name=>$input) :?>
@@ -9,6 +9,7 @@
             placeholder="<?= $input["placeholder"]??"" ?>"
             id="<?= $input["id"]??"" ?>"
             class="<?= $input["class"]??"" ?>"
+            value="<?= $input["value"]??"" ?>"
             <?= empty($input["required"])?"":'required="required"' ?>
     ><br>
 

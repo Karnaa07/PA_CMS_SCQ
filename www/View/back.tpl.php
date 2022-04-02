@@ -8,7 +8,6 @@
     <link href="../css/tpl.back.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="../js/tpl.back.js"></script>
-    
 
 
 </head>
@@ -31,10 +30,10 @@
         </ul>
         <br><br>
         <div id="snippet">
-            <a href = "#"><img src="../data/snippets/Instagram.svg">  </a>
-            <a href = "#"><img src="../data/snippets/Facebook.svg"></a>
+            <a href = "#"><img src="../data/snippets/Instagram.svg"> </a>
+            <a href = "#"><img src="../data/snippets/Facebook.svg"> </a>
             <a href = "#"><img src="../data/snippets/Twitter.svg"> </a>
-            <a href = "#"><img src="../data/snippets/Linkedin.svg"></a>
+            <a href = "#"><img src="../data/snippets/Linkedin.svg"> </a>
         </div>
     </nav>
 
@@ -44,7 +43,7 @@
                 <img src="../data/snippets/Loupe.svg">
             </div>
             <div id="snippet">
-                <a href = "/login"><img src="../data/snippets/Profile.svg"> </a>
+                <a href = "#"><img src="../data/snippets/Profile.svg"> </a>
                 <a href = "/logout"><img src="../data/snippets/Deconnexion.svg"> </a>
                 <a href = "#"><img src="../data/snippets/Sombre.svg"> </a>
             </div>

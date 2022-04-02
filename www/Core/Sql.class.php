@@ -56,7 +56,6 @@ abstract class Sql
         $queryPrepared->execute(array($email));
         $result = $queryPrepared->fetch();
         if (password_verify($password,$result["password"])){
-            setcookie(token,$result["token"],time()+3600);
             return $result; 
         }
     }
