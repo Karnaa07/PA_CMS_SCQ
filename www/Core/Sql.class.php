@@ -17,7 +17,6 @@ abstract class Sql
             die("Erreur SQL : ".$e->getMessage());
         }
     }
-
     /**
      * @param int $id
      */
@@ -56,12 +55,10 @@ abstract class Sql
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute(array($email));
         $result = $queryPrepared->fetch();
-
         if (password_verify($password,$result["password"])){
             setcookie(token,$result["token"],time()+3600);
             return $result; 
         }
-
     }
     public function Crud(){
         $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM `esgi_user`");
