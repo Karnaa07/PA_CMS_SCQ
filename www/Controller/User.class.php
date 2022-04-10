@@ -82,7 +82,6 @@ class User {
         // Supprimer le Token    
         setcookie('Connected',"test",1);
         header('Location: login');
-       
     }
     public function pwdforget()
     {

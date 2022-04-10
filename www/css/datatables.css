@@ -1,0 +1,21 @@
+#table_id_wrapper{
+    padding: 10px;
+}
+body{
+    background-color: black;
+}
+.buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+.buttons > button {
+    all: unset;
+    cursor: pointer;
+  }
+.buttons >button:focus {
+    outline:black 5px auto;
+}
+.buttons > button:hover {
+    transition: transform .2s;
+    transform: scale(1.5); 
+}
