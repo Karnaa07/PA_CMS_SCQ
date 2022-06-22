@@ -7,6 +7,7 @@ abstract class Sql
     private $pdo;
     private $table;
 
+
     public function __construct() // Constructeur qui connect à la BDD à la création d'un objet de la classe SQL
     {
         //Se connecter à la bdd
@@ -16,6 +17,7 @@ abstract class Sql
         }catch (\Exception $e){
             die("Erreur SQL : ".$e->getMessage());
         }
+
     }
     /**
      * @param int $id
@@ -32,6 +34,7 @@ abstract class Sql
 
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
+        var_dump($this);
 
         if($this->getId() == null){
             $sql = "INSERT INTO ".$this->table." (".implode(",",array_keys($columns)).") 
@@ -44,7 +47,7 @@ abstract class Sql
             }
             $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
         }
-
+        var_dump($sql);
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
         $queryPrepared->execute( $columns ); // On les éxécutes avec nos données
 
