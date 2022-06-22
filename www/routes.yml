@@ -39,6 +39,10 @@
   controller: user
   action: register
 
+/addArticle:
+  controller: article
+  action: addArticle
+
 /forget:
   controller: user
   action: pwdforget

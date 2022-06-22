@@ -13,6 +13,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     protected $id = null;
     protected $idPage = null;
 
+
     public function __construct()
     {
         parent::__construct();
@@ -64,7 +65,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         $this->content = trim($content);
     }
-
+    
 //faut il un setter pour l'url ou faut il le générer?
     public function getArticleForm(): array
     {
@@ -76,7 +77,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                 "submit"=>"Ajouter"
             ],
             'inputs'=>[
-                "titre"=>[
+                "title"=>[
                     "type"=>"text",
                     "placeholder"=>"Titre de l'article...",
                     "required"=>true,
@@ -100,7 +101,18 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "id"=>"urlImageForm",
                     "error"=>"Contenu incorect",
                     ],
+                "idCategory"=>[
+                    "type"=>"select",
+                    "option"=>['ok','good'],
+                    "class"=>"inputForm",
+                    "id"=>"urlImageForm",
+                    "error"=>"Contenu incorect",
+                    ],
             ]
         ];
+    }
+    public function setArticle(){
+        $this->setTitle($_POST["title"]);
+        $this->setContent($_POST["content"]);
     }
 }
