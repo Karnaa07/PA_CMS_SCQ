@@ -2,14 +2,9 @@
 
 namespace App\Controller;
 
-
-use App\Core\Sql;
 use App\Core\View;
+use App\Core\MysqlBuilder;
 use App\Model\User as UserModel; 
-// Controller : 
-// Il va s'occupper de recevoir les données entrées par l'utilisateur et 
-// de communiquer les changements aux modèles
-
 class Admin
 {
 
@@ -25,11 +20,32 @@ class Admin
     {
         $view = new View("pages_settings","back");
     }
+    public function builder() {
+        $test = new MysqlBuilder();
+        $query = $test 
+            ->select("esgi_user", ["id","email","password","firstname","lastname"])
+            ->limit( 0, 1)
+            ->getQuery();
+        //var_dump( $db->pdo->query($query));
+        //var_dump($avengers);
+        // $sql = new Sql;
+        // foreach($avengers as $avenger){
+        //     echo $avenger->name.'<br>';
+        // }
+    }
     public function user_settings()
-    {    
+    {
         $user = new UserModel();
         $tabData = $user->Crud();
         $view = new View("user_settings","back");
         $view->assign("tabData", $tabData);      
     }
+    public function delete()
+    {   if(!empty($_POST))
+        {
+            var_dump($_POST);
+        }   
+    }
+
+
 }

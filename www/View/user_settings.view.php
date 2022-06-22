@@ -5,13 +5,13 @@
 <script type="text/javascript" src="../js/dtb.js"></script>
 
 <table id="table_id" class="display cell-border" >
+<!-- <input type="text" id="mySearchText" placeholder="Rechercher..."> -->
     <thead>
             <tr>
                 <th>Email</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Actions</th>
-
             </tr>
     </thead>
     <tbody>
@@ -23,9 +23,9 @@
         foreach ($tabData[$i] as $key => $value) 
         {
             if(array_key_exists($key,$tab))
-                {echo('<td> '.utf8_encode($value).' </td>');}
+                {echo('<td class="userInfos"> '.utf8_encode($value).' </td>');}
         }
-        echo('<td class="buttons"> '.'<button><img src="../data/snippets/Eye.svg"></button><button><img src="../data/snippets/Edit.svg"></button><button><img src="../data/snippets/trash.svg"></button>'.' </td>');
+        echo('<td class="buttons"> '.'<button class="view"><img src="../data/snippets/Eye.svg"></button><button class="modify"><img src="../data/snippets/Edit.svg"></button><button class="delete"><img src="../data/snippets/trash.svg"></button>'.' </td>');
         echo('</tr>');
     }
     ?> 
