@@ -25,12 +25,35 @@
             if(array_key_exists($key,$tab))
                 {echo('<td class="userInfos"> '.utf8_encode($value).' </td>');}
         }
-        echo('<td class="buttons"> '.'<button class="view"><img src="../data/snippets/Eye.svg"></button><button class="modify"><img src="../data/snippets/Edit.svg"></button><button class="delete"><img src="../data/snippets/trash.svg"></button>'.' </td>');
+        echo('<td class="buttons"> '.'<button  class="modify"><img src="../data/snippets/Edit.svg"></button><button class="delete"><img src="../data/snippets/trash.svg"></button>'.' </td>');
         echo('</tr>');
     }
     ?> 
     </tbody>
 </table>
+
+<script type="text/javascript" src="../js/user_settings.js"></script>
+
+<div class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <div class = "modal--inputs">
+        <form id="modifUser" method="post" action="">
+            <label for="email">Email</label>
+            <input name="email" type="text" value=""><br>
+
+            <label for="firstname">Firstname</label>
+            <input name="firstname" type="text" value=""><br>
+
+            <label for="lastname">Lastname</label>
+            <input name="lastname" type="text" value=""><br>
+            <input type="submit" value="Confirmer les changements">
+
+        </form>
+    </div>
+  </div>
+</div>
+
 
 
 

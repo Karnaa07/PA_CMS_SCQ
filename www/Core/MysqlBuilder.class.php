@@ -3,7 +3,7 @@ namespace App\Core;
 
 use App\Core\QueryBuilder;
 
-class MysqlBuilder implements QueryBuilder{
+class MysqlBuilder implements QueryBuilder {
     private $query;
     private function reset(){
         $this->query = new \stdClass;
@@ -22,13 +22,19 @@ class MysqlBuilder implements QueryBuilder{
     }
     public function update(string $table, array $datas):QueryBuilder
     {
-        $strout="";
+        $strout = '' ;
         foreach ($datas as $key => $value) {
-            $strout =$strout.$key."=".$value.",";
+            $strout =$strout.$key."="."'".$value."'".",";
         }
-        $strout = substr($strout, 0, -1);
-        $this->query->base="UPADATE ".$table." SET (".$strout.")";
-        return $this;
+        if(strlen($strout) > 1){
+            $strout = substr($strout, 0, -1);
+            $this->query->base="UPDATE ".$table." SET (".$strout.")";
+
+        }
+        else{
+            var_dump('test');
+        }
+                return $this;
     }
 
     public function where(string $column, string $value, string $operator="="):QueryBuilder

@@ -25,12 +25,15 @@ class CrudUsers
     }
     public function updateUser($infos){
 
-        $req = $this->builder-> select('esgi_user', ["email","firstname","lastname"])
+        $req = $this->builder-> update('esgi_user', $infos)
+        ->where("email",$infos['email'],"=")
         ->getQuery();
-        // var_dump($req);
+
+
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
-        return $queryPrepared->fetchAll();
+        var_dump($queryPrepared);
+        return "done";
     }
 
 }

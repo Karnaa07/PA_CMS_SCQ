@@ -13,8 +13,10 @@ $(document).ready( function () {
             $(this).parents('tr').find('td').eq(1).text().trim(),
             $(this).parents('tr').find('td').eq(2).text().trim()
         ]
+        prompt()
+
         $.ajax({
-            type: 'POST',          //La méthode cible (POST ou GET)
+            type: 'POST',           //La méthode cible (POST ou GET)
             url : 'Controller.php', //Script Cible
             data: userDatas,
             dataType: 'json'
@@ -22,16 +24,16 @@ $(document).ready( function () {
     })
 
     $('button.delete').click(function(){
-        let userDatas = [
+        var userDatas = [
             $(this).parents('tr').find('td').eq(0).text().trim(),
             $(this).parents('tr').find('td').eq(1).text().trim(),
             $(this).parents('tr').find('td').eq(2).text().trim()
         ]
-        console.log(userDatas)
+        // console.log(userDatas)
         $.ajax({
-            url:"/user_settings",
+            url:"/delete_user",
             type: 'POST',
-            data: userDatas
+            data: 'test'
         })  
     })
 });

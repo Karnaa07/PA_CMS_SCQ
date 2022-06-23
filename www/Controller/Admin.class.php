@@ -27,15 +27,15 @@ class Admin
         //     ->update("esgi_user", ["id"=>2,"email"=>"yalicheff.sebastien@gmail.com","password"=>"test","firstname"=>'test',"lastname"=>'test'])
         //     ->limit( 0, 1)
         //     ->getQuery();
-        $view = new View("dashboard","back");    }
+    }
     public function user_settings()
     { 
-        var_dump($_POST);
-        if($_POST)
-        {
-            echo('<script>alert("test")</script>');
-        }
         $users = new CrudUsers();
+        if($_POST) // Secu a revoir
+        {
+            $users->updateUser($_POST);
+        }
+
         $tabData = $users->displayUsers();
         $view = new View("user_settings","back");
         $view->assign("tabData", $tabData);      
