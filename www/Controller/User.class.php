@@ -70,9 +70,7 @@ class User {
             else{
                 echo "ce mail existe deja";
             }
-
         }
-
         $view = new View("register");
         $view->assign("user", $user);
     }

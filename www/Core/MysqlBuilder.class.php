@@ -20,9 +20,14 @@ class MysqlBuilder implements QueryBuilder{
         $this->query->base="INSERT INTO ".$table." VALUES (".implode(", ",$values).")";
         return $this;
     }
-    public function update(string $table,array $values ,array $column,):QueryBuilder
+    public function update(string $table, array $datas):QueryBuilder
     {
-        $this->query->base="UPDATE".$table."SET(". implode(' ',$columns).")"
+        $strout="";
+        foreach ($datas as $key => $value) {
+            $strout =$strout.$key."=".$value.",";
+        }
+        $strout = substr($strout, 0, -1);
+        $this->query->base="UPADATE ".$table." SET (".$strout.")";
         return $this;
     }
 

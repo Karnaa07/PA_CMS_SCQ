@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Core\View;
 use App\Core\MysqlBuilder;
+use App\Core\CrudUsers;
 use App\Model\User as UserModel; 
 class Admin
 {
@@ -20,23 +21,22 @@ class Admin
     {
         $view = new View("pages_settings","back");
     }
-    public function builder() {
-        $test = new MysqlBuilder();
-        $query = $test 
-            ->select("esgi_user", ["id","email","password","firstname","lastname"])
-            ->limit( 0, 1)
-            ->getQuery();
-        //var_dump( $db->pdo->query($query));
-        //var_dump($avengers);
-        // $sql = new Sql;
-        // foreach($avengers as $avenger){
-        //     echo $avenger->name.'<br>';
-        // }
-    }
+    public function Testbuilder() {
+        // $test = new MysqlBuilder();
+        //  $query = $test 
+        //     ->update("esgi_user", ["id"=>2,"email"=>"yalicheff.sebastien@gmail.com","password"=>"test","firstname"=>'test',"lastname"=>'test'])
+        //     ->limit( 0, 1)
+        //     ->getQuery();
+        $view = new View("dashboard","back");    }
     public function user_settings()
-    {
-        $user = new UserModel();
-        $tabData = $user->Crud();
+    { 
+        var_dump($_POST);
+        if($_POST)
+        {
+            echo('<script>alert("test")</script>');
+        }
+        $users = new CrudUsers();
+        $tabData = $users->displayUsers();
         $view = new View("user_settings","back");
         $view->assign("tabData", $tabData);      
     }

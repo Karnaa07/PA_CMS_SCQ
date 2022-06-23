@@ -1,9 +1,7 @@
 #table_id_wrapper{
     padding: 10px;
 }
-body{
-    background-color: black;
-}
+
 .buttons{
     display: flex;
     justify-content: space-evenly;

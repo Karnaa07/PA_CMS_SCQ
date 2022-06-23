@@ -6,6 +6,7 @@ $(document).ready( function () {
             url:'https://cdn.datatables.net/plug-ins/1.11.5/i18n/fr-FR.json'
         }
     });  
+
     $('button.view').click(function(){
         let userDatas = [
             $(this).parents('tr').find('td').eq(0).text().trim(),
@@ -19,17 +20,18 @@ $(document).ready( function () {
             dataType: 'json'
          });
     })
+
     $('button.delete').click(function(){
         let userDatas = [
             $(this).parents('tr').find('td').eq(0).text().trim(),
             $(this).parents('tr').find('td').eq(1).text().trim(),
             $(this).parents('tr').find('td').eq(2).text().trim()
         ]
-        console.log("test")
+        console.log(userDatas)
         $.ajax({
+            url:"/user_settings",
             type: 'POST',
-            url: '/dashboard',
-            data: userDatas            
-         });
+            data: userDatas
+        })  
     })
 });

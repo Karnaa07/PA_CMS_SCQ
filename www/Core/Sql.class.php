@@ -18,42 +18,40 @@ abstract class Sql
         }catch (\Exception $e){
             die("Erreur SQL : ".$e->getMessage());
         }
-        $builder = new MysqlBuilder();
+        //$this->builder =new MysqlBuilder();
     }
     /**
      * @param int $id
      */
 
-    // $query = $test 
-    // ->select("esgi_user", ["id","email","password","firstname","lastname"])
-    // ->limit( 0, 1)
-    // ->getQuery();
+
     public function setId(?int $id): object // Return les données d'un utilisateur
     {
-       
-        $sql = $this->builder-> select($this->table, ["*"])
+        $sql =  $this->builder-> select($this->table, ["*"])
         -> where("id",$id);
         $query = $this->pdo->query($sql);
         return $query->fetchObject(get_called_class()); 
     }
-
     public function save() // Enregistrement en BDD de valeurs provenants de formulaires
     {
-
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
 
+
         if($this->getId() == null){
-            // $sql = "INSERT INTO ".$this->table." (".implode(",",array_keys($columns)).") 
-            // VALUES ( :".implode(",:",array_keys($columns)).")";
-            $sql = $this->builder-> insert($this->table, $columns);
+            $sql =  $this->builder-> insert($this->table, $columns)
+            ->getQuery();
         }else{ 
-            $update = [];
-            foreach ($columns as $column=>$value)
-            {
-                $update[] = $column."=:".$column;
-            }
-            $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
+            // $update = [];
+            // foreach ($columns as $column=>$value)
+            // {
+            //     $update[] = $column."=:".$column;
+            // }
+            // $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
+            $sql =  $this->builder-> update($this->table, $columns)
+            -> where("id",$this->getId())
+            ->getQuery();
+            var_dump($sql);
         }
 
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
@@ -62,17 +60,15 @@ abstract class Sql
     }
     public function exist_user($email,$password)
     {
-        $req = "SELECT * FROM esgi_user WHERE email = ?";
+        $req =  $this->builder-> select($this->table, ["*"])
+        -> where("email","?")
+        ->getQuery();
+        //$req = "SELECT * FROM esgi_user WHERE email = ?";
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute(array($email));
         $result = $queryPrepared->fetch();
         if (password_verify($password,$result["password"])){
             return $result; 
         }
-    }
-    public function Crud() {
-        $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM `esgi_user`");
-        $queryPrepared->execute();
-        return $queryPrepared->fetchAll();
     }
 }
