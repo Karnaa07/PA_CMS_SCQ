@@ -12,7 +12,7 @@
   action: plugin
 
 /pages:
-  controller: admin
+  controller: page
   action: pages_settings
 
 /articles:
@@ -22,6 +22,7 @@
 /user_settings:
   controller: admin
   action: user_settings
+
 
 /categories:
   controller: admin
@@ -42,6 +43,10 @@
 /addArticle:
   controller: article
   action: addArticle
+
+/addPage:
+  controller: page
+  action: addPage
 
 /forget:
   controller: user

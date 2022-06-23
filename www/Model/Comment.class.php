@@ -17,7 +17,7 @@ class Comment extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     /**
      * @return null|int
      */
-    public function getComment(): ?int
+    public function getId(): ?int
     {
         return $this->idComment;
     }
@@ -33,7 +33,7 @@ class Comment extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     /**
      * @return string
      */
-    public function getId(): string
+    public function getIdUser(): string
     {
         return $this->id;
     }

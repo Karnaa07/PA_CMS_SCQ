@@ -34,7 +34,6 @@ abstract class Sql
 
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
-        var_dump($this);
 
         if($this->getId() == null){
             $sql = "INSERT INTO ".$this->table." (".implode(",",array_keys($columns)).") 
@@ -50,6 +49,7 @@ abstract class Sql
         var_dump($sql);
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
         $queryPrepared->execute( $columns ); // On les éxécutes avec nos données
+        var_dump($columns);
 
     }
     public function exist_user($email,$password)

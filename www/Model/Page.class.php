@@ -16,7 +16,7 @@ class Page extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     /**
      * @return null|int
      */
-    public function getPage(): ?int
+    public function getId(): ?int
     {
         return $this->idPage;
     }
@@ -36,13 +36,7 @@ class Page extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         $this->name = trim($name);
     }
-    /**
-    * @param string $id
-    */
-//    public function setId(?string $id): void
-//    {
-//        $this->id = $id;
-//    }
+
 public function getPageForm(): array
     {
         return [
@@ -62,5 +56,8 @@ public function getPageForm(): array
                 ],
             ]
         ];
+    }
+    public function setPage(){
+        $this->setName($_POST["name"]);
     }
 }

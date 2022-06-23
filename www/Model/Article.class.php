@@ -19,10 +19,11 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
         parent::__construct();
     }
 
+
     /**
      * @return null|int
      */
-    public function getIdArticle(): ?int
+    public function getId(): ?int
     {
         return $this->idArticle;
     }

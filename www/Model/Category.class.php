@@ -17,7 +17,7 @@ class Category extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     /**
      * @return null|int
      */
-    public function getCategory(): ?int
+    public function getId(): ?int
     {
         return $this->idCategory;
     }

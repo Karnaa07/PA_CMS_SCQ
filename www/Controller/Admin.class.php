@@ -21,10 +21,7 @@ class Admin
     {
         $view = new View("media","back");
     }
-    public function pages_settings()
-    {
-        $view = new View("pages_settings","back");
-    }
+
     public function user_settings()
     {    
         $user = new UserModel();
