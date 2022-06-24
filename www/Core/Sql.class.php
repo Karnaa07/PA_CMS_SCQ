@@ -71,4 +71,34 @@ abstract class Sql
             return $result; 
         }
     }
+<<<<<<< HEAD
+=======
+    public function Crud(){
+        $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM `esgi_user`");
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll();
+    }
+
+    public function getOneBy(?array $where=null) : ?array 
+    {
+        $sql= "SELECT * FROM ".$this->table;
+        if (!is_null($where)){
+            foreach ($where as $column=>$value)
+            {
+                $select[] = $column."=:".$column;
+            }
+            $sql.=" WHERE ".implode(" AND ", $select);
+        }
+        
+        $prepare=$this->pdo->prepare($sql);
+        $prepare->execute($where);
+        $result=$prepare->fetch();
+        if(gettype($result)!=="array"){
+            $result=null;
+            
+        }
+        return $result;
+
+    }
+>>>>>>> developpement
 }

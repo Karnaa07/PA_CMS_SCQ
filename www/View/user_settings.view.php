@@ -8,6 +8,7 @@
 <!-- <input type="text" id="mySearchText" placeholder="Rechercher..."> -->
     <thead>
             <tr>
+                <th>Id</th>
                 <th>Email</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
@@ -39,6 +40,11 @@
     <span class="close-btn">&times;</span>
     <div class = "modal--inputs">
         <form id="modifUser" method="post" action="">
+
+        
+            <input  name="id" type="hidden" value=""><br>
+
+
             <label for="email">Email</label>
             <input name="email" type="text" value=""><br>
 

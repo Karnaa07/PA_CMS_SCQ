@@ -31,6 +31,18 @@ class User {
                     // return 405 http status code
                     header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
                     exit;
+            // if(!empty($_POST))
+            //     {
+            //         $user->setUser();              
+            //         $exist = $user->exist_user($_POST["email"],$_POST["password"]);
+            //         if($exist["id"]){
+            //             $_SESSION['firstname'] = $exist['firstname']; 
+            //             $view = new View("dashboard","back");
+            //         }
+            //         else
+            //         {
+            //             echo("Mot de passe ou utilisateur incorrect");
+            //         }
                 }
                 $exist = $user->exist_user($_POST["email"],$_POST["password"]);
                 if($exist["id"]){

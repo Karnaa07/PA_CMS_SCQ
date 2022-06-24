@@ -28,8 +28,8 @@ class MysqlBuilder implements QueryBuilder {
         }
         if(strlen($strout) > 1){
             $strout = substr($strout, 0, -1);
-            $this->query->base="UPDATE ".$table." SET (".$strout.")";
-
+            //var_dump($strout);
+            $this->query->base="UPDATE ".$table." SET ".$strout;
         }
         else{
             var_dump('test');
