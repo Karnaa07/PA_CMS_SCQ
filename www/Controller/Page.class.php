@@ -16,7 +16,7 @@ class Page
             $result = Verificator::checkForm($page->getPageForm(), $_POST);
             $page->setPage();
             var_dump($page);
-            $page->save();
+            $page->save("page");
         }
         $view = new View("addPage","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)    
         $view->assign("page", $page);
