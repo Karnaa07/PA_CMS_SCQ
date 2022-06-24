@@ -5,8 +5,9 @@ use App\Core\CleanWords;
 use App\Core\Sql;
 use App\Core\Verificator;
 use App\Core\View;
-use App\Model\Page as PageModel;  
-use App\Core\Mail;
+use App\Core\MysqlBuilder;
+use App\Core\CrudPages as PageCrud;
+use App\Model\Page as PageModel; 
 
 class Page
 {
@@ -24,9 +25,14 @@ class Page
 
     public function pages_settings()
     {    
-        $page = new PageModel();
-        //$tabData = $page->Crud();
+        $page = new PageCrud();
+        if($_POST) // Secu a revoir
+        {
+            $page->updatePages($_POST);
+        }
+
+        $tabData = $page->displayPages();
         $view = new View("pages_settings","back");
-        //$view->assign("tabData", $tabData);      
+        $view->assign("tabData", $tabData);      
     }
 }

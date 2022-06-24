@@ -22,6 +22,7 @@ class MysqlBuilder implements QueryBuilder {
     }
     public function update(string $table, array $datas):QueryBuilder
     {
+        $this->reset();
         $strout = '' ;
         foreach ($datas as $key => $value) {
             $strout =$strout.$key."="."'".$value."'".",";
