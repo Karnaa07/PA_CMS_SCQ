@@ -78,15 +78,21 @@ abstract class Sql
 
 
     }
-    public function exist_user($email,$password)
+    public function exist_user($table,$email,$password)
     {
-        $req =  $this->builder-> select($this->table, ["*"])
-        -> where("email","?")
+        $table=DBPREFIXE.$table;
+        $req =  $this->builder-> select($table, ["*"])
+        -> where("email", $email)
         ->getQuery();
+        var_dump($email);
         //$req = "SELECT * FROM esgi_user WHERE email = ?";
-        $queryPrepared = $this->pdo->prepare($req);
-        $queryPrepared->execute(array($email));
+        $queryPrepared = $this->pdo->query($req);
+        // $queryPrepared->execute([
+        //     'email'=> $email 
+        // ]);
+        var_dump($req);
         $result = $queryPrepared->fetch();
+        var_dump($result);
         if (password_verify($password,$result["password"])){
             return $result; 
         }

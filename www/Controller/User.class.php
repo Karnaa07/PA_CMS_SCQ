@@ -26,34 +26,26 @@ class User {
             } elseif ($request_method === 'POST') {
                 
                 $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
-                $user->setUser();              
-                if (!$token || $token !== $_SESSION['token']) {
-                    // return 405 http status code
-                    header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
-                    exit;
-                }}
-            if(!empty($_POST))
-            {
-                $user->setUser();              
-                $exist = $user->exist_user($_POST["email"],$_POST["password"]);
-                if($exist["id"]){
-                    $_SESSION['firstname'] = $exist['firstname']; 
-                    $view = new View("dashboard","back");
-                }
-                else
+            
+                // if (!$token || $token !== $_SESSION['token']) {
+                //     // return 405 http status code
+                //     header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+                //     exit;
+                // }
+                if(!empty($_POST))
                 {
-                    echo("Mot de passe ou utilisateur incorrect");
+                    $user->setUser();              
+                    $exist = $user->exist_user('user',$_POST["email"],$_POST["password"]);
+                    var_dump($exist);
+                    if($exist["id"]){
+                        $_SESSION['firstname'] = $exist['firstname']; 
+                        $view = new View("dashboard","back");
+                    }
+                    else
+                    {
+                        echo("Mot de passe ou email incorrect");
+                    }
                 }
-                
-                $exist = $user->exist_user($_POST["email"],$_POST["password"]);
-                if($exist["id"]){
-                    setcookie('Connected',$_SESSION['token'],time()+1800); // L'utilisateur reste connecté 30 MINUTES
-                    header('Location: dashboard');
-                }
-                else
-                {
-                    echo("Mot de passe ou utilisateur incorrect");
-                }  
             }
         }
         else {
