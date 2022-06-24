@@ -7,8 +7,9 @@ use App\Core\MysqlBuilder;
 abstract class Sql
 {
     private $pdo;
-    private $table; 
-    private $builder;
+    private $table;
+
+
     public function __construct() // Constructeur qui connect à la BDD à la création d'un objet de la classe SQL
     {
         //Se connecter à la bdd
@@ -18,7 +19,11 @@ abstract class Sql
         }catch (\Exception $e){
             die("Erreur SQL : ".$e->getMessage());
         }
+
+
+
         //$this->builder =new MysqlBuilder();
+
     }
     /**
      * @param int $id
@@ -53,9 +58,10 @@ abstract class Sql
             ->getQuery();
             var_dump($sql);
         }
-
+        var_dump($sql);
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
         $queryPrepared->execute( $columns ); // On les éxécutes avec nos données
+        var_dump($columns);
 
     }
     public function exist_user($email,$password)
@@ -71,8 +77,7 @@ abstract class Sql
             return $result; 
         }
     }
-<<<<<<< HEAD
-=======
+
     public function Crud(){
         $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM `esgi_user`");
         $queryPrepared->execute();
@@ -100,5 +105,5 @@ abstract class Sql
         return $result;
 
     }
->>>>>>> developpement
+
 }

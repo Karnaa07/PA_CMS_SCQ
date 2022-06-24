@@ -17,17 +17,6 @@ class Admin
     {
         $view = new View("media","back");
     }
-    public function pages_settings()
-    {
-        $view = new View("pages_settings","back");
-    }
-    public function Testbuilder() {
-        // $test = new MysqlBuilder();
-        //  $query = $test 
-        //     ->update("esgi_user", ["id"=>2,"email"=>"yalicheff.sebastien@gmail.com","password"=>"test","firstname"=>'test',"lastname"=>'test'])
-        //     ->limit( 0, 1)
-        //     ->getQuery();
-    }
     public function user_settings()
     { 
         $users = new CrudUsers();
