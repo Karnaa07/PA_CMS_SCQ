@@ -8,7 +8,6 @@
     <link href="../css/tpl.back.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="../js/tpl.back.js"></script>
-    
 
 
 </head>
@@ -17,7 +16,7 @@
     <nav class="sidebar-left">
         <img id="logo" src="../data/img/Logo.svg"> <br><br><br> 
         <ul>
-            <li class="cta-button"><a href="/"><img src="../data/snippets/Dashboard.svg">Dashboard</a></li>
+            <li><a href="/dashboard"><img src="../data/snippets/Dashboard.svg">Dashboard</a></li>
             <li><a href="#"><img src="../data/snippets/Media.svg">Media</a></li>
             <li><a href="#"><img src="../data/snippets/Plugins.svg">Plugin</a></li>
             <li><a href="#"><img src="../data/snippets/Page.svg">Pages</a></li>
@@ -31,10 +30,10 @@
         </ul>
         <br><br>
         <div id="snippet">
-            <a href = "#"><img src="../data/snippets/Instagram.svg">  </a>
-            <a href = "#"><img src="../data/snippets/Facebook.svg"></a>
+            <a href = "#"><img src="../data/snippets/Instagram.svg"> </a>
+            <a href = "#"><img src="../data/snippets/Facebook.svg"> </a>
             <a href = "#"><img src="../data/snippets/Twitter.svg"> </a>
-            <a href = "#"><img src="../data/snippets/Linkedin.svg"></a>
+            <a href = "#"><img src="../data/snippets/Linkedin.svg"> </a>
         </div>
     </nav>
 

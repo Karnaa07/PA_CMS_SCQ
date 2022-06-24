@@ -27,7 +27,6 @@
         class="<?= $input["class"]??"" ?>"
         <?= empty($input["required"])?"":'required="required"' ?>
     ><br>
-   
 
     <?php endif;endforeach;?>
 

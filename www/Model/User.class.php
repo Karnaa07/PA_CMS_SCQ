@@ -189,6 +189,10 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                 "submit"=>"Se connecter"
             ],
             'inputs'=>[
+                "token"=>[
+                    "type"=>"hidden",
+                    "value"=> $_SESSION['token']
+                ],
                 "email"=>[
                     "type"=>"email",
                     "placeholder"=>"Votre email ...",

@@ -2,14 +2,10 @@
 
 namespace App\Controller;
 
-
-use App\Core\Sql;
 use App\Core\View;
+use App\Core\MysqlBuilder;
+use App\Core\CrudUsers;
 use App\Model\User as UserModel; 
-// Controller : 
-// Il va s'occupper de recevoir les données entrées par l'utilisateur et 
-// de communiquer les changements aux modèles
-
 class Admin
 {
 
@@ -21,12 +17,24 @@ class Admin
     {
         $view = new View("media","back");
     }
-
     public function user_settings()
-    {    
-        $user = new UserModel();
-        $tabData = $user->Crud();
+    { 
+        $users = new CrudUsers();
+        if($_POST) // Secu a revoir
+        {
+            $users->updateUser($_POST);
+        }
+
+        $tabData = $users->displayUsers();
         $view = new View("user_settings","back");
         $view->assign("tabData", $tabData);      
     }
+    public function delete()
+    {   if(!empty($_POST))
+        {
+            var_dump($_POST);
+        }   
+    }
+
+
 }
