@@ -18,7 +18,6 @@ class CrudUsers
     public function displayUsers(){
         $req =  $this->builder-> select('esgi_user', ["email","firstname","lastname"])
         ->getQuery();
-        // var_dump($req);
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
