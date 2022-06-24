@@ -47,8 +47,17 @@
   controller: user
   action: logout
 
+/test:
+  controller: admin
+  action: builder
+
+/test:
+  controller: admin
+  action: builder
+
 
 /dashboard:
   controller: main
   action: home
+
 

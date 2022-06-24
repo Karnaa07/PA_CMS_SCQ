@@ -6,13 +6,13 @@ class View // On définie nos vues
 {
     private $view; // Le nom du fichier view qu'on souhaite appeller exemple : ( App/View/VALEUR.view.php )
     private $template; // Le template utilisé ( Back , front ...) exemple : ( App/View/back.tpl.php )
+    private $style;
     private $data=[];
 
     public function __construct($view, $template="front")
     {
         $this->setView($view);
         $this->setTemplate($template);
-        // $this->setStyle($view);
     }
 
     public function setView($view):void
@@ -25,9 +25,9 @@ class View // On définie nos vues
         $this->template = strtolower($template); // Idem qu'au dessus
     }
 
-    // public function setStyle($view):void{
-
-    // }
+    public function setStyle($view):void{
+        $this->style = strtolower($template);
+    }
 
 
     public function __toString():string
