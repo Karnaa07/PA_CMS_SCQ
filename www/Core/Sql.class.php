@@ -8,6 +8,7 @@ abstract class Sql
 {
     private $pdo;
     private $table;
+    private $builder;
 
 
     public function __construct() // Constructeur qui connect à la BDD à la création d'un objet de la classe SQL
@@ -22,7 +23,7 @@ abstract class Sql
 
 
 
-        //$this->builder =new MysqlBuilder();
+        $this->builder =new MysqlBuilder();
 
     }
     /**
@@ -37,15 +38,18 @@ abstract class Sql
         $query = $this->pdo->query($sql);
         return $query->fetchObject(get_called_class()); 
     }
-    public function save() // Enregistrement en BDD de valeurs provenants de formulaires
+    public function save($table) // Enregistrement en BDD de valeurs provenants de formulaires
     {
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
 
-
+        $table=DBPREFIXE.$table;
+        $values=array_keys($columns);
         if($this->getId() == null){
-            $sql =  $this->builder-> insert($this->table, $columns)
-            ->getQuery();
+            
+            $sql =  $this->builder-> insert($table, $columns)->getQuery();
+           
+            
         }else{ 
             // $update = [];
             // foreach ($columns as $column=>$value)
@@ -57,11 +61,21 @@ abstract class Sql
             -> where("id",$this->getId())
             ->getQuery();
             var_dump($sql);
+         
         }
-        var_dump($sql);
+       
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
-        $queryPrepared->execute( $columns ); // On les éxécutes avec nos données
-        var_dump($columns);
+        $queryPrepared->execute([
+            $columns['id'],
+            $columns['firstname'],
+            $columns['lastname'],
+            $columns['email'],
+            $columns['password'],
+            $columns['status'],
+            $columns['token']
+
+        ]); // On les éxécutes avec nos données
+
 
     }
     public function exist_user($email,$password)
@@ -84,9 +98,10 @@ abstract class Sql
         return $queryPrepared->fetchAll();
     }
 
-    public function getOneBy(?array $where=null) : ?array 
+    public function getOneBy(string $table, ?array $where=null) : ?array 
     {
-        $sql= "SELECT * FROM ".$this->table;
+        $table=DBPREFIXE.$table;
+        $sql= "SELECT * FROM ".$table;
         if (!is_null($where)){
             foreach ($where as $column=>$value)
             {
