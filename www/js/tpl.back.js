@@ -8,7 +8,6 @@ $(document).ready(function () {
             $this.parent().addClass('cta-button');
         }
     })
-})
-
+  })
 })
 

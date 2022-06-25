@@ -9,6 +9,7 @@ $(document).ready(function () {
         modal.css("display", "block");
 
         // Datatable Inputs Values
+
         let Id = $(this).parents('tr').find('td').eq(0).text().trim()
         let Mail = $(this).parents('tr').find('td').eq(1).text().trim()
         let Firstname = $(this).parents('tr').find('td').eq(2).text().trim()

@@ -1,0 +1,83 @@
+body {
+    background-color: #503E9D;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100%
+}
+html, body {margin: 0; height: 100%; overflow: hidden}
+
+.login--container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.login--form{
+    background: #F9F9F9;
+    width: 600px;
+    height: 300px;
+    box-shadow: 0px 4px 4px #000000;
+    border-radius: 50px;
+}
+.login--mdpoublie{
+    color: white;
+}
+.login--form  > form{
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+form > input{
+    background: #C4C4C4;
+    border-radius: 25px;
+    margin: 2em 4em;
+    height: 40px;
+    border: 0;
+    padding-left: 15px;
+}
+.btn--submit{
+    background: #503E9D;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 20px;
+    color: white;
+    width: 50%;
+    align-self: center;
+    height: 50px;
+}
+.login--logo{
+    width: 300px;
+    height: 300px;
+}
+.login--separator{
+    border: 1px solid #B6ABE6;
+    width: 300px;
+    margin-bottom: 50px;
+}
+.login--socials{
+
+margin-top: 2em;
+
+}
+.login--socials img {
+    height: 60px;
+    width: 60px;
+    fill: #BEB3E9;
+    margin-right: 30px;
+}
+.login--img--leftcorner--container{
+    position: absolute;
+    height: 750px;
+    width: 750px;
+    top: 15em;
+   
+
+}
+
+.login--img--leftcorner{
+
+    position: absolute;
+    top: 0px;
+    width: 630px;
+    height: 994px;
+
+}

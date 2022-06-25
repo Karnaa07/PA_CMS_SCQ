@@ -71,8 +71,6 @@ abstract class Sql
             return $result; 
         }
     }
-<<<<<<< HEAD
-=======
     public function Crud(){
         $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM `esgi_user`");
         $queryPrepared->execute();
@@ -100,5 +98,4 @@ abstract class Sql
         return $result;
 
     }
->>>>>>> developpement
 }
