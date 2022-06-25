@@ -38,6 +38,14 @@ class MysqlBuilder implements QueryBuilder {
                 return $this;
     }
 
+    public function delete(string $table):QueryBuilder
+    {
+        $this->reset();
+        $this->query->base="DELETE FROM ".$table;
+        return $this;
+
+    }
+
     public function where(string $column, string $value, string $operator="="):QueryBuilder
     {
         $this->query->where[]=$column.$operator."'".$value."'";

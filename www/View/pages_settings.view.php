@@ -68,7 +68,7 @@
     </tbody>
 </table>
 
-<script type="text/javascript" src="../js/user_settings.js"></script>
+<script type="text/javascript" src="../js/page_settings.js"></script>
 
 <div class="modal">
   <div class="modal-content">
@@ -84,6 +84,22 @@
             <input name="name" type="text" value=""><br>
 
             <input type="submit" value="Confirmer les changements">
+
+        </form>
+    </div>
+  </div>
+</div>
+
+<div class="modalDelete">
+  <div class="modal-content">
+    <span class="close-btnDelete">&times;</span>
+    <div class = "modal--inputs">
+        <form id="modifUser" method="post" action="">
+
+        
+            <input  name="id" type="hidden" value=""><br>
+
+            <input type="submit" value="Confirmer la suppression">
 
         </form>
     </div>

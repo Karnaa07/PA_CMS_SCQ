@@ -29,9 +29,17 @@ class CrudPages
         ->where("id",$infos['id'],"=")
         ->getQuery();
 
-
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
+        //var_dump($queryPrepared);
+        //return "done";
+    }
+    public function deletePages($infos){
+
+        $req = $this->builder-> delete(DBPREFIXE."page")
+        ->where("id",$infos['id'],"=")
+        ->getQuery();
+        $queryPrepared = $this->pdo->query($req);
         //var_dump($queryPrepared);
         //return "done";
     }

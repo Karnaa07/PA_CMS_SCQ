@@ -40,10 +40,8 @@
     <span class="close-btn">&times;</span>
     <div class = "modal--inputs">
         <form id="modifUser" method="post" action="">
-
         
             <input  name="id" type="hidden" value=""><br>
-
 
             <label for="email">Email</label>
             <input name="email" type="text" value=""><br>
