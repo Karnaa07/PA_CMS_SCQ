@@ -88,6 +88,26 @@ class User {
     }
     public function pwdforget()
     {
+        $user = new UserModel();
+        $unicity = new UserModel();
+        if(!empty($_POST)){
+            $unicity=$user->getOneBy('user',["email"=>$_POST['email']]);
+            if($unicity!==null)
+            {
+                $user->setForgetUser($unicity['id'],$unicity['firstname'], $unicity['lastname'], $unicity['email'], $unicity['status']);
+                $pwd=substr(bin2hex(random_bytes(128)), 0, 15);
+                //envoyer par mail le pwd
+                $user->setPassword($pwd);
+                var_dump($user);
+                $user->save('user');
+                
+            }
+            else{
+                echo "ce mail n'existe pas";
+            }
+        }
+        $view = new View("forgetPassword");
+        $view->assign("user", $user);
         echo "Mot de passe oublié";
     }
 }

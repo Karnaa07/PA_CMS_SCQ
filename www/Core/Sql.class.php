@@ -48,7 +48,6 @@ abstract class Sql
         if($this->getId() == null){
             
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
-           
             
         }else{ 
             // $update = [];
@@ -57,10 +56,9 @@ abstract class Sql
             //     $update[] = $column."=:".$column;
             // }
             // $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
-            $sql =  $this->builder-> update($this->table, $columns)
+            $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
-            var_dump($sql);
          
         }
        

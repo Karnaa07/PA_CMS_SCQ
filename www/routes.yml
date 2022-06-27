@@ -40,6 +40,7 @@
   controller: user
   action: register
 
+
 /addArticle:
   controller: article
   action: addArticle
