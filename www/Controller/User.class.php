@@ -72,7 +72,7 @@ class User {
                 if(count($result)<1){
                     echo "ce mail n'existe pas, utilisateur enregistre";
                     $user->setUser();
-                    $user->save();
+                    $user->save('user');
                     print_r($result);
                 }
                 else{

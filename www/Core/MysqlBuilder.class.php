@@ -17,6 +17,8 @@ class MysqlBuilder implements QueryBuilder {
 
     public function insert(string $table,array $values):QueryBuilder
     {
+        $this->reset();
+        var_dump($values);
         $this->query->base="INSERT INTO ".$table." VALUES (".implode(", ",$values).")";
         return $this;
     }

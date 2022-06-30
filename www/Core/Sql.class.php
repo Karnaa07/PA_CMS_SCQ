@@ -8,6 +8,7 @@ abstract class Sql
 {
     private $pdo;
     private $table;
+    private $builder;
 
 
     public function __construct() // Constructeur qui connect à la BDD à la création d'un objet de la classe SQL
@@ -22,7 +23,7 @@ abstract class Sql
 
 
 
-        //$this->builder =new MysqlBuilder();
+        $this->builder =new MysqlBuilder();
 
     }
     /**
@@ -37,14 +38,15 @@ abstract class Sql
         $query = $this->pdo->query($sql);
         return $query->fetchObject(get_called_class()); 
     }
-    public function save() // Enregistrement en BDD de valeurs provenants de formulaires
+    public function save($table) // Enregistrement en BDD de valeurs provenants de formulaires
     {
+        $table=DBPREFIXE.$table;
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
 
 
         if($this->getId() == null){
-            $sql =  $this->builder-> insert($this->table, $columns)
+            $sql =  $this->builder-> insert($table, $columns)
             ->getQuery();
         }else{ 
             // $update = [];
@@ -53,7 +55,7 @@ abstract class Sql
             //     $update[] = $column."=:".$column;
             // }
             // $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
-            $sql =  $this->builder-> update($this->table, $columns)
+            $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
             var_dump($sql);
