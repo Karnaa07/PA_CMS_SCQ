@@ -65,17 +65,24 @@ abstract class Sql
         }
        
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
-        $queryPrepared->execute([
-            $columns['id'],
-            $columns['firstname'],
-            $columns['lastname'],
-            $columns['email'],
-            $columns['password'],
-            $columns['status'],
-            $columns['token']
-
-        ]); // On les éxécutes avec nos données
-
+        var_dump($columns);
+        if($table==DBPREFIXE.'user'){
+            $queryPrepared->execute([
+                $columns['id'],
+                $columns['firstname'],
+                $columns['lastname'],
+                $columns['email'],
+                $columns['password'],
+                $columns['status'],
+                $columns['token']
+    
+            ]);
+        }
+        else{
+            $queryPrepared->execute($columns);
+        }
+ // On les éxécutes avec nos données
+        var_dump($queryPrepared);
 
     }
     public function exist_user($table,$email,$password)
