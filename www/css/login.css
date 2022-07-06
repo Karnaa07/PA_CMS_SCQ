@@ -22,7 +22,6 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     color: white;
 }
 .login--form  > form{
-
     display: flex;
     justify-content: center;
     flex-direction: column;
