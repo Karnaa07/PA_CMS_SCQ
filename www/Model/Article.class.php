@@ -103,7 +103,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     ],
                 "idCategory"=>[
                     "type"=>"select",
-                    "option"=>['ok','good'],
+                    "option"=>['Information','Développement personnel','Decouverte','Evenement','Tutoriel','Réponse au question'],
                     "class"=>"inputForm",
                     "id"=>"urlImageForm",
                     "error"=>"Contenu incorect",
@@ -115,4 +115,4 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
         $this->setTitle($_POST["title"]);
         $this->setContent($_POST["content"]);
     }
-}
+} 
