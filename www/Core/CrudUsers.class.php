@@ -16,7 +16,7 @@ class CrudUsers
     }
 
     public function displayUsers(){
-        $req =  $this->builder-> select('esgi_user', ["id","email","firstname","lastname"])
+        $req =  $this->builder-> select('waterlily_user', ["id","email","firstname","lastname"])
         ->getQuery();
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
@@ -24,7 +24,7 @@ class CrudUsers
     }
     public function updateUser($infos){
 
-        $req = $this->builder-> update('esgi_user', $infos)
+        $req = $this->builder-> update('waterlily_user', $infos)
         ->where("id",$infos['id'],"=")
         ->getQuery();
 

@@ -22,7 +22,7 @@ class View // On définie nos vues
 
     public function setTemplate($template):void
     {
-        $this->template = strtolower($template); // Idem qu'au dessus
+        $this->template = strtolower($template);
     }
 
     public function setStyle($view):void{

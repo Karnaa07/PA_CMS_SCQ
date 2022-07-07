@@ -91,9 +91,3 @@ class User {
         echo "Mot de passe oublié";
     }
 }
-
-
-
-
-
-

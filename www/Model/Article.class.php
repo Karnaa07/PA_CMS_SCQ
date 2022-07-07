@@ -80,7 +80,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
             'inputs'=>[
                 "title"=>[
                     "type"=>"text",
-                    "placeholder"=>"Titre de l'article...",
+                    "placeholder"=>"Titre de votre article...",
                     "required"=>true,
                     "class"=>"inputForm",
                     "id"=>"titleForm",
@@ -88,7 +88,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                 ],
                 "content"=>[
                     "type"=>"textarea",
-                    "placeholder"=>"",
+                    "placeholder"=>"Description breve de votre article",
                     "required"=>true,
                     "class"=>"inputForm",
                     "id"=>"contentArticleForm",
@@ -100,11 +100,12 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "required"=>true,
                     "class"=>"inputForm",
                     "id"=>"urlImageForm",
-                    "error"=>"Contenu incorect",
+                    "error"=>"Image manquante",
                     ],
                 "idCategory"=>[
                     "type"=>"select",
-                    "option"=>['ok','good'],
+                    "placeholder"=>"Quelle est la catégorie de votre article ?",
+                    "option"=>['Publicité','Documentation','Etude','Information','Revue','Debat'],
                     "class"=>"inputForm",
                     "id"=>"urlImageForm",
                     "error"=>"Contenu incorect",
