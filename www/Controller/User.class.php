@@ -30,10 +30,12 @@ class User {
                 {
                     $user->setUser();              
                     $exist = $user->exist_user('user',$_POST["email"],$_POST["password"]);
-                    //var_dump($exist);
+                    
                     if($exist["id"]){
-                        $_SESSION['firstname'] = $exist['firstname']; 
+                        // var_dump($exist['firstname']);
+                        setcookie('Connected',$exist['firstname'],time()+3600); 
                         $view = new View("dashboard","back");
+                        // var_dump($exist);
                     }
                     else
                     {
@@ -43,33 +45,38 @@ class User {
             }
         }
         else {
+            //var_dump($_SESSION);
             header('Location: dashboard'); // Utilisateur déjà connecté
         }
     }
     public function register()
     {
-        $user = new UserModel();
-        if(!empty($_POST)){
-            $unicity=$user->getOneBy('user',["email"=>$_POST['email']]);
-            if($unicity==null)
-            {
-                $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
-                //dans le cas il n'y a pas d'erreur, et insertion en base de donnée
-                if(count($result)<1){
-                    echo "ce mail n'existe pas, utilisateur enregistre";
-                    $user->setUser();
-                    $user->save('user');
+        if(!isset($_COOKIE["Connected"])){
+            $user = new UserModel();
+            if(!empty($_POST)){
+                $unicity=$user->getOneBy('user',["email"=>$_POST['email']]);
+                if($unicity==null)
+                {
+                    $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
+                    //dans le cas il n'y a pas d'erreur, et insertion en base de donnée
+                    if(count($result)<1){
+                        echo "ce mail n'existe pas, utilisateur enregistre";
+                        $user->setUser();
+                        $user->save('user');
+                    }
+                    else{
+                        echo $result[0];
+                    }
                 }
                 else{
-                    echo $result[0];
+                    echo "ce mail existe deja";
                 }
             }
-            else{
-                echo "ce mail existe deja";
-            }
+            $view = new View("register");
+            $view->assign("user", $user);
+        } else {
+            header('Location: dashboard');
         }
-        $view = new View("register");
-        $view->assign("user", $user);
     }
     public function logout()
     {

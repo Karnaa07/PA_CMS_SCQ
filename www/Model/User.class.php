@@ -111,6 +111,14 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         $this->status = $status;
     }
+    public function getPerms(): array
+    {
+        return $this->perms;
+    }
+    public function setPerms(array $perms): void
+    {
+        $this->perms = $perms;
+    }
 
     /**
      * @return null|string

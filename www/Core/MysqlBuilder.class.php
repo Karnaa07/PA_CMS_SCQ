@@ -69,6 +69,12 @@ class MysqlBuilder implements QueryBuilder {
         return $this;
     }
 
+    public function join(string $table,string $id):QueryBuilder
+    {
+        $this->query->join="JOIN".$table."USING('".$id."')";
+        return $this;
+    }
+
     public function getQuery(): string
     {
         $query = $this->query;

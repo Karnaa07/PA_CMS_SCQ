@@ -48,8 +48,7 @@ abstract class Sql
         if($this->getId() == null){
             
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
-            //var_dump($sql);
-            //var_dump($columns);
+           
             
         }else{ 
             // $update = [];
@@ -58,44 +57,54 @@ abstract class Sql
             //     $update[] = $column."=:".$column;
             // }
             // $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
-            $sql =  $this->builder-> update($table, $columns)
+            $sql =  $this->builder-> update($this->table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
+            //var_dump($sql);
          
         }
        
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
-        $queryPrepared->execute([
-            $columns['id'],
-            $columns['firstname'],
-            $columns['lastname'],
-            $columns['email'],
-            $columns['password'],
-            $columns['status'],
-            $columns['token']
-
-        ]); // On les éxécutes avec nos données
+        //var_dump($columns);
+        if($table==DBPREFIXE.'user'){
+            $queryPrepared->execute([
+                $columns['id'],
+                $columns['firstname'],
+                $columns['lastname'],
+                $columns['email'],
+                $columns['password'],
+                $columns['status'],
+                $columns['token']
+    
+            ]);
+        }
+        else{
+            //var_dump($columns);
+            $queryPrepared->execute($columns);
+        }
+ // On les éxécutes avec nos données
+       // var_dump($queryPrepared);
 
     }
     public function exist_user($table,$email,$password)
     {
         $table=DBPREFIXE.$table;
         $req =  $this->builder-> select($table, ["*"])
+        -> join("waterlily_roles","role_id")
         -> where("email", $email)
-        ->getQuery();
-        var_dump($email);
-        //$req = "SELECT * FROM waterlily_user WHERE email = ?";
+        -> getQuery();
+
         $queryPrepared = $this->pdo->query($req);
-        // $queryPrepared->execute([
-        //     'email'=> $email 
-        // ]);
-        var_dump($req);
+
+
         $result = $queryPrepared->fetch();
-        var_dump($result);
+
         if (password_verify($password,$result["password"])){
+            $_SESSION["user"]["permissions"] = [];
             return $result; 
         }
     }
+
     public function Crud(){
         $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM `waterlily_user`");
         $queryPrepared->execute();
@@ -124,4 +133,27 @@ abstract class Sql
         return $result;
 
     }
+    public function getPerms(string $table, ?array $where=null) : ?array 
+    {
+        $table=DBPREFIXE.$table;
+        $sql= "SELECT * FROM ".$table;
+        if (!is_null($where)){
+            foreach ($where as $column=>$value)
+            {
+                $select[] = $column."=:".$column;
+            }
+            $sql.=" WHERE ".implode(" AND ", $select);
+        }
+        
+        $prepare=$this->pdo->prepare($sql);
+        $prepare->execute($where);
+        $result=$prepare->fetch();
+        if(gettype($result)!=="array"){
+            $result=null;
+            
+        }
+        return $result;
+
+    }
+
 }

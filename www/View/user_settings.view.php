@@ -12,6 +12,7 @@
                 <th>Email</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
+                <th>Role</th>
                 <th>Actions</th>
             </tr>
     </thead>
@@ -53,6 +54,10 @@
 
             <label for="lastname">Lastname</label>
             <input name="lastname" type="text" value=""><br>
+
+            <label for="role_id">Role</label>
+            <input name="role_id" type="text" value=""><br>
+
             <input type="submit" value="Confirmer les changements">
 
         </form>
