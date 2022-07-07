@@ -9,6 +9,7 @@ class Main { // Définition de la classe Main
     public function home()
     {
         $view = new View("dashboard","back");
+        var_dump($_SESSION);
     }
 
     public function contact()

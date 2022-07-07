@@ -17,7 +17,26 @@ class MysqlBuilder implements QueryBuilder {
 
     public function insert(string $table,array $values):QueryBuilder
     {
-        $this->query->base="INSERT INTO ".$table." VALUES (".implode(", ",$values).")";
+        // $this->reset();
+        // $this->query->base="INSERT INTO ".$table." VALUES (".implode(", ",$values).")";
+        // return $this;
+
+        $this->reset();
+        $keys = array_keys($values);
+        $this->query->base = "INSERT INTO " . $table . " (" . implode(", ", $keys) . ") VALUES (";
+
+        for ($i = 0; $i < count($values) ; $i++) { 
+
+            if($i == 0) {
+                $this->query->base .= '?';
+            } else {
+                $this->query->base .= ', ?';
+            }
+            
+        }
+
+        $this->query->base .= ')';
+
         return $this;
     }
     public function update(string $table, array $datas):QueryBuilder

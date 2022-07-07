@@ -26,45 +26,31 @@ class User {
             } elseif ($request_method === 'POST') {
                 
                 $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
-                $user->setUser();              
-                if (!$token || $token !== $_SESSION['token']) {
-                    // return 405 http status code
-                    header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
-                    exit;
-            // if(!empty($_POST))
-            //     {
-            //         $user->setUser();              
-            //         $exist = $user->exist_user($_POST["email"],$_POST["password"]);
-            //         if($exist["id"]){
-            //             $_SESSION['firstname'] = $exist['firstname']; 
-            //             $view = new View("dashboard","back");
-            //         }
-            //         else
-            //         {
-            //             echo("Mot de passe ou utilisateur incorrect");
-            //         }
-                }
-                $exist = $user->exist_user($_POST["email"],$_POST["password"]);
-                if($exist["id"]){
-                    setcookie('Connected',$_SESSION['token'],time()+1800); // L'utilisateur reste connecté 30 MINUTES
-                    header('Location: dashboard');
-                }
-                else
+                if(!empty($_POST))
                 {
-                    echo("Mot de passe ou utilisateur incorrect");
-                }  
+                    $user->setUser();              
+                    $exist = $user->exist_user('user',$_POST["email"],$_POST["password"]);
+                    //var_dump($exist);
+                    if($exist["id"]){
+                        $_SESSION['firstname'] = $exist['firstname']; 
+                        $view = new View("dashboard","back");
+                    }
+                    else
+                    {
+                        echo("Mot de passe ou email incorrect");
+                    }
+                }
             }
         }
         else {
             header('Location: dashboard'); // Utilisateur déjà connecté
         }
-
     }
     public function register()
     {
         $user = new UserModel();
         if(!empty($_POST)){
-            $unicity=$user->getOneBy(["email"=>$_POST['email']]);
+            $unicity=$user->getOneBy('user',["email"=>$_POST['email']]);
             if($unicity==null)
             {
                 $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
@@ -72,8 +58,7 @@ class User {
                 if(count($result)<1){
                     echo "ce mail n'existe pas, utilisateur enregistre";
                     $user->setUser();
-                    $user->save();
-                    print_r($result);
+                    $user->save('user');
                 }
                 else{
                     echo $result[0];
@@ -95,9 +80,36 @@ class User {
     }
     public function pwdforget()
     {
-        echo "Mot de passe oublié";
+        $user = new UserModel();
+        $unicity = new UserModel();
+        if(!empty($_POST)){
+            $unicity=$user->getOneBy('user',["email"=>$_POST['email']]);
+            if($unicity!==null)
+            {
+                session_start();
+                $user->setForgetUser($unicity['id'],$unicity['firstname'], $unicity['lastname'], $unicity['email'], $unicity['status']);
+                $pwd=substr(bin2hex(random_bytes(128)), 0, 15);
+                //envoyer par mail le pwd
+                $user->setPassword($pwd);
+                //var_dump($user);
+                $user->save('user');
+                $view = new View("login");
+                $view->assign("user", $user);
+                
+            }
+            else{
+                echo "ce mail n'existe pas";
+            }
+        }
+        else{
+            $view = new View("forgetPassword");
+            $view->assign("user", $user);
+            echo "Mot de passe oublié";
+        }
+
     }
 }
+
 
 
 

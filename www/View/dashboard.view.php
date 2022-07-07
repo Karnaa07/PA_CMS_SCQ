@@ -1,5 +1,6 @@
 <link href="../css/dashboard.css" rel="stylesheet">
 
+
 <section class="wrapper">
         <section class="bar-stat two">
             <div class="utilisateurs-stat">
@@ -20,7 +21,8 @@
 </section>
 <label>
     <?php 
-    session_start();
+    // var_dump($_SESSION['firstname']); 
+    // $_COOKIE["Connected"]
     if(isset($_COOKIE['token'])){
         echo('Voici votre dashboard ');
     }
