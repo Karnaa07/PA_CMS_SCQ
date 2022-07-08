@@ -27,8 +27,10 @@
             if(array_key_exists($key,$tab))
                 {echo('<td class="userInfos"> '.utf8_encode($value).' </td>');}
         }
-        echo('<td class="buttons"> '.'<button  class="modify"><img src="../data/snippets/Edit.svg"></button><button class="delete"><img src="../data/snippets/trash.svg"></button>'.' </td>');
-        echo('</tr>');
+        if($perms->cando(1 ,"view")){
+            echo('<td class="buttons"> '.'<button  class="modify"><img src="../data/snippets/Edit.svg"></button><button class="delete"><img src="../data/snippets/trash.svg"></button>'.' </td>');
+            echo('</tr>');
+        }
     }
     ?> 
     </tbody>

@@ -3,7 +3,7 @@ namespace App\Core;
 use App\Core\MysqlBuilder;
 
 
-class CrudUsers 
+class Crud
 {
     public function __construct()
     {

@@ -13,7 +13,7 @@ class Page
 {
     public function addPage(){
         $perms = new Permissions();
-        if($perms->cando(3)){ // Create Page right
+        if($perms->cando(3) && $perms->cando(13)){ // Create Page right and Back end access
             $page = new PageModel();
             if(!empty($_POST)){
                 $result = Verificator::checkForm($page->getPageForm(), $_POST);
@@ -25,15 +25,22 @@ class Page
             $view->assign("page", $page);
         }
         else{
+            //http_response_code(403);
             header("HTTP/1.1 403 No perms");
         }
     }
 
     public function pages_settings()
     {    
-        $page = new PageModel();
-        //$tabData = $page->Crud();
-        $view = new View("pages_settings","back");
-        //$view->assign("tabData", $tabData);      
+        $perms = new Permissions();
+        if($perms->cando(3)){ 
+            $page = new PageModel();
+            //$tabData = $page->Crud();
+            $view = new View("pages_settings","back");
+            //$view->assign("tabData", $tabData);      
+        } else {
+            //http_response_code(403);
+            header("HTTP/1.1 403 No perms");
+        }
     }
 }

@@ -12,14 +12,19 @@ use App\Core\Mail;
 class Article
 {
     public function addArticle(){
-        $article = new ArticleModel();
-        if(!empty($_POST)){
-        $result = Verificator::checkForm($article->getArticleForm(), $_POST);
-        $article->setArticle();
-
+        $perms = new Permissions();
+        if($perms->cando(3) && $perms->cando(8)){ // right Back end access and create articles
+            $article = new ArticleModel();
+            if(!empty($_POST)){
+            $result = Verificator::checkForm($article->getArticleForm(), $_POST);
+            $article->setArticle();
+            }
+            $view = new View("addArticle","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)    
+            $view->assign("article", $article);
+        } else {
+            //http_response_code(403);
+            header("HTTP/1.1 403 No perms");
         }
-        $view = new View("addArticle","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)    
-        $view->assign("article", $article);
     }
 }
 

@@ -45,7 +45,7 @@ abstract class Sql
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
            
             
-        }else{ 
+        } else { 
             // $update = [];
             // foreach ($columns as $column=>$value)
             // {
