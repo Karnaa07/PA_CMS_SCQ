@@ -40,6 +40,8 @@ abstract class Sql
 
         $table=DBPREFIXE.$table;
         $values=array_keys($columns);
+        var_dump('toto');
+        var_dump($this->getId());
         if($this->getId() == null){
             
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
@@ -60,7 +62,7 @@ abstract class Sql
         }
        
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
-        //var_dump($columns);
+        var_dump($columns);
         if($table==DBPREFIXE.'user'){
             $queryPrepared->execute([
                 $columns['id'],

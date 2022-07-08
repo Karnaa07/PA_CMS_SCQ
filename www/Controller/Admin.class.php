@@ -36,6 +36,8 @@ class Admin
         $perms = new Permissions();
         if($perms->cando(3)){ // right  Back end access
             $users = new Crud();
+            var_dump($_POST);
+
             if($_POST) // Secu a revoir
             {
                 $users->updateUser($_POST);

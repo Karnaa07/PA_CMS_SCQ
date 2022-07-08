@@ -74,6 +74,12 @@ class MysqlBuilder implements QueryBuilder {
         $this->query->join="JOIN ".$table." USING(".$id.")";
         return $this;
     }
+    public function delete(string $table):QueryBuilder
+    {
+        $this->reset();
+        $this->query->base="DELETE ".$table;
+        return $this;
+    }
 
     public function getQuery(): string
     {

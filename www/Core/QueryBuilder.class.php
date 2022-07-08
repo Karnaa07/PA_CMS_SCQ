@@ -6,6 +6,8 @@ interface QueryBuilder{
     public function insert(string $table, array $values) : QueryBuilder;
     public function where(string $column, string $value, string $operator = '=') : QueryBuilder;
     public function limit(int $from,int $offset):QueryBuilder;
+    public function join(string $table,string $id):QueryBuilder;
+    public function delete(string $table):QueryBuilder;
     public function getQuery(): string;
 }
 

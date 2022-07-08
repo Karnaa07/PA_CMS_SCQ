@@ -34,6 +34,14 @@ class Crud
         //var_dump($queryPrepared);
         //return "done";
     }
+    public function deleteRow(string $table, string $column, string $id){
+        $tableBD=DBPREFIXE.$table;
+        $req = $this->builder-> delete($tableBD)
+        ->where($column,$id,"=")
+        ->getQuery();
+        $queryPrepared = $this->pdo->query($req);
+
+    }
     public function addUser(){
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
