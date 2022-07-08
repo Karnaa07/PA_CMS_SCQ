@@ -9,8 +9,7 @@ abstract class Sql
     private $pdo;
     private $table;
     private $builder;
-
-
+    
     public function __construct() // Constructeur qui connect à la BDD à la création d'un objet de la classe SQL
     {
         //Se connecter à la bdd
@@ -20,11 +19,7 @@ abstract class Sql
         }catch (\Exception $e){
             die("Erreur SQL : ".$e->getMessage());
         }
-
-
-
         $this->builder =new MysqlBuilder();
-
     }
     /**
      * @param int $id
@@ -95,11 +90,11 @@ abstract class Sql
         -> getQuery();
 
         $queryPrepared = $this->pdo->query($req);
-
-
         $result = $queryPrepared->fetch();
+        //var_dump($result);
 
         if (password_verify($password,$result["password"])){
+            
             $_SESSION["user"]["permissions"] = [];
             return $result; 
         }
@@ -133,27 +128,14 @@ abstract class Sql
         return $result;
 
     }
-    public function getPerms(string $table, ?array $where=null) : ?array 
+    public function getUserPerms(string $permsId) : ?array 
     {
-        $table=DBPREFIXE.$table;
-        $sql= "SELECT * FROM ".$table;
-        if (!is_null($where)){
-            foreach ($where as $column=>$value)
-            {
-                $select[] = $column."=:".$column;
-            }
-            $sql.=" WHERE ".implode(" AND ", $select);
-        }
-        
-        $prepare=$this->pdo->prepare($sql);
-        $prepare->execute($where);
-        $result=$prepare->fetch();
-        if(gettype($result)!=="array"){
-            $result=null;
-            
-        }
-        return $result;
-
+        $req =  $this->builder-> select('waterlily_roles_permissions', ["*"])
+        -> where("role_id", $permsId)
+        -> getQuery();
+        $reqPrep = $this->pdo->prepare($req);
+        $reqPrep -> execute();
+        return $reqPrep->fetchAll();
     }
 
 }

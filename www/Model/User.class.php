@@ -11,6 +11,8 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     protected $email;
     protected $password;
     protected $status = 0;
+    protected $role_id = null;
+    protected $perms = null;
     protected $token = null;
 
     public function __construct()
@@ -119,6 +121,16 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         $this->perms = $perms;
     }
+
+    public function getRole(): int
+    {
+        return $this->role;
+    }
+    public function setRole(int $role_id): void
+    {
+        $this->role = $role_id;
+    }
+    
 
     /**
      * @return null|string
@@ -256,6 +268,8 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
             $this->setFirstname($_POST['firstname']);
         if(!empty($_POST['lastname']))
             $this->setLastname($_POST['lastname']);
+        if(!empty($_POST['role_id']))
+            $this->setRole($_POST['role_id']);
         $this->generateToken();
         $this->setStatus(0);
     }

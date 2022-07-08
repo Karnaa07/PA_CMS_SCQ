@@ -5,6 +5,7 @@ use App\Core\CleanWords;
 use App\Core\Sql;
 use App\Core\Verificator;
 use App\Core\View;
+use App\Core\Permissions;
 use App\Model\Article as ArticleModel;  // Alias de class User dans Model/User.class.php
 use App\Core\Mail;
 

@@ -7,8 +7,9 @@ use App\Core\Verificator;
 use App\Core\View;
 use App\Model\User as UserModel;  // Alias de class User dans Model/User.class.php
 use App\Core\Mail;
+use App\Core\Permissions;
 
-class User {
+class User {    
     public function login() //login
     {
         if(!isset($_COOKIE["Connected"]))
@@ -35,7 +36,16 @@ class User {
                         // var_dump($exist['firstname']);
                         setcookie('Connected',$exist['firstname'],time()+3600); 
                         $view = new View("dashboard","back");
+                        // var_dump($);
+                        $user->setRole($exist['role_id']);
+                        $perms = $user->getUserPerms($user->getRole());
+                        foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; }
+                        // $_SESSION["user"]["permissions"]; 
+                        // $user->setPerms($perms);
+                        // var_dump($user->getPerms());
+                        // var_dump($user);
                         // var_dump($exist);
+
                     }
                     else
                     {

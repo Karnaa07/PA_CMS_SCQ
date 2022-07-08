@@ -71,7 +71,7 @@ class MysqlBuilder implements QueryBuilder {
 
     public function join(string $table,string $id):QueryBuilder
     {
-        $this->query->join="JOIN".$table."USING('".$id."')";
+        $this->query->join="JOIN ".$table." USING(".$id.")";
         return $this;
     }
 
@@ -85,10 +85,8 @@ class MysqlBuilder implements QueryBuilder {
         if(isset($query->limit)){
             $sql .= $query->limit;
         }
-        
         $sql .= ';';
         return $sql;
     }
-    
 }
 ?>

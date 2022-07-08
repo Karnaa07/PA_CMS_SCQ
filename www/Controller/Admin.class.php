@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Core\View;
 use App\Core\MysqlBuilder;
 use App\Core\CrudUsers;
+use App\Core\Permissions;
 use App\Model\User as UserModel; 
+
 class Admin
 {
 
