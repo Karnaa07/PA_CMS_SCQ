@@ -6,14 +6,14 @@
     <textarea 
         name="<?= $name?>" 
         rows = "5" 
-        cols = "33"
+        cols = "30"
         placeholder="<?= $input["placeholder"]??"" ?>"
         id="<?= $input["id"]??"" ?>"
         class="<?= $input["class"]??"" ?>" >
     </textarea><br>
     <?php elseif($input["type"]==="select"):?>
     <select name="<?= $name?>" id="<?= $input["id"]??"" ?>">
-        <option value="">--Please choose an option--</option>
+        <option class="option"value="">Choisir une option</option>
         <?php foreach ($input["option"] as $option):?>
         <option value="<?= $option ?>"><?= $option ?></option>
         <?php endforeach;?>
@@ -30,5 +30,5 @@
 
     <?php endif;endforeach;?>
 
-    <input type="submit" value="<?= $data["config"]["submit"]??"Valider" ?>">
+    <input class="btn--submit" type="submit" value="<?= $data["config"]["submit"]??"Valider" ?>">
 </form>

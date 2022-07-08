@@ -16,7 +16,7 @@ class CrudUsers
     }
 
     public function displayUsers(){
-        $req =  $this->builder-> select('waterlily_user', ["id","email","firstname","lastname"])
+        $req =  $this->builder-> select('waterlily_user', ["id","email","firstname","lastname","role_id"])
         ->getQuery();
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
@@ -27,7 +27,7 @@ class CrudUsers
         $req = $this->builder-> update('waterlily_user', $infos)
         ->where("id",$infos['id'],"=")
         ->getQuery();
-
+        // var_dump($req);
 
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
@@ -40,11 +40,18 @@ class CrudUsers
 
         $table=DBPREFIXE.'user';
         
-        var_dump($table);
+        // var_dump($table);
         
             $sql =  $this->builder-> insert($table, $columns);
-            var_dump($sql);
+            // var_dump($sql);
 
+    }
+    public function getArticles(){
+        $req =  $this->builder-> select('waterlily_article', ["idArticle","title","content","idCategory","idCategory"])
+        ->getQuery();
+        $queryPrepared = $this->pdo->prepare($req);
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll();
     }
 
 }

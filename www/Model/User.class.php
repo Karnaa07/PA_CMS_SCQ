@@ -26,6 +26,13 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         return $this->id;
     }
+       /**
+     * @param int $id
+     */
+    public function setIdUser(string $id): void
+    {
+        $this->id = $id;
+    }
     /**
      * @return null|string
      */
@@ -211,6 +218,29 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
             ]
         ];
     }
+    public function getForgetForm(): array{
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "submit"=>"Changer de mot de passe"
+            ],
+            'inputs'=>[
+                "email"=>[
+                    "type"=>"email",
+                    "placeholder"=>"Votre email ...",
+                    "required"=>true,
+                    "class"=>"inputForm",
+                    "id"=>"emailForm",
+                    "error"=>"Email incorrect",
+                    "unicity"=>"true",
+                    "errorUnicity"=>"Email déjà en bdd",
+                ],
+               
+            ]
+        ];
+
+    }
     public function setUser(){
         $this->setEmail($_POST["email"]);
         $this->setPassword($_POST["password"]);
@@ -220,6 +250,16 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
             $this->setLastname($_POST['lastname']);
         $this->generateToken();
         $this->setStatus(0);
+    }
+    public function setForgetUser($id,$firstname, $lastname, $email, $status){
+        $this->setIdUser($id);
+        $this->setEmail($email);
+        if(!empty($firstname))
+            $this->setFirstname($firstname);
+        if(!empty($lastname))
+            $this->setLastname($lastname);
+        $this->generateToken();
+        $this->setStatus($status);
     }
 
 }

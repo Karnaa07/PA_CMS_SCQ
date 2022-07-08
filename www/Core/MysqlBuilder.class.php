@@ -42,6 +42,7 @@ class MysqlBuilder implements QueryBuilder {
     public function update(string $table, array $datas):QueryBuilder
     {
         $strout = '' ;
+        $this->reset();
         foreach ($datas as $key => $value) {
             $strout =$strout.$key."="."'".$value."'".",";
         }
@@ -65,6 +66,12 @@ class MysqlBuilder implements QueryBuilder {
     public function limit(int $from,int $offset):QueryBuilder
     {
         $this->query->limit=" LIMIT ".$from.", ".$offset;
+        return $this;
+    }
+
+    public function join(string $table,string $id):QueryBuilder
+    {
+        $this->query->join="JOIN".$table."USING('".$id."')";
         return $this;
     }
 

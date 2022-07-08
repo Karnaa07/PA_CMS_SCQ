@@ -16,7 +16,7 @@
   action: pages_settings
 
 /articles:
-  controller: admin
+  controller: article
   action: articles
 
 /user_settings:
@@ -40,6 +40,7 @@
   controller: user
   action: register
 
+
 /addArticle:
   controller: article
   action: addArticle
@@ -59,8 +60,7 @@
 /test:
   controller: admin
   action: builder
-
-
+  
 /dashboard:
   controller: main
   action: home

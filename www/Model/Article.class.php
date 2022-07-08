@@ -2,6 +2,8 @@
 namespace App\Model;
 
 use App\Core\Sql;
+use App\Core\MysqlBuilder;
+
 
 class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
 {
@@ -17,6 +19,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     public function __construct()
     {
         parent::__construct();
+      
     }
 
 

@@ -20,9 +20,7 @@
 </section>
 <label>
     <?php 
-    session_start();
-    if(isset($_COOKIE['token'])){
-        echo('Voici votre dashboard ');
-    }
+   // session_start();
+
     ?>
 </label>
