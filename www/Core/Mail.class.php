@@ -22,16 +22,16 @@ class Mail {
                 //Server settings
                 $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
                 $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host       = 'smtp.gmail.com';                       //Set the SMTP server to send through
+                $mail->Host       = 'smtp.hostinger.com';                       //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = 'waterlily.cqs@gmail.com';              //SMTP username
-                $mail->Password   = 'Waterlily2022';                        //SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;             //Enable implicit TLS encryption
+                $mail->Username   = 'contact@waterlilycms.fr';              //SMTP username
+                $mail->Password   = 'Waterlily2022!';                       //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
                 $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                 //Recipients
-                $mail->setFrom('waterlily.cqs@gmail.com', 'Clem admin');
-                $mail->addAddress('syalicheff@myges.fr', 'Seb user');     //DESTINATAIRE
+                $mail->setFrom('contact@waterlilycms.fr', 'WaterlilyCorp');
+                $mail->addAddress('syalicheff@myges.fr', 'Seb leboss');     //DESTINATAIRE
                 //$mail->addAddress('ellen@example.com');               //Name is optional
                 //$mail->addReplyTo('info@example.com', 'Information');
                 //$mail->addCC('cc@example.com');
