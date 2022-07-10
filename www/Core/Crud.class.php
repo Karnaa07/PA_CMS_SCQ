@@ -40,6 +40,7 @@ class Crud
         ->where($column,$id,"=")
         ->getQuery();
         $queryPrepared = $this->pdo->query($req);
+        var_dump($req);
 
     }
     public function addUser(){

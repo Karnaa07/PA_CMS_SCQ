@@ -77,7 +77,7 @@ class MysqlBuilder implements QueryBuilder {
     public function delete(string $table):QueryBuilder
     {
         $this->reset();
-        $this->query->base="DELETE ".$table;
+        $this->query->base="DELETE FROM ".$table;
         return $this;
     }
 

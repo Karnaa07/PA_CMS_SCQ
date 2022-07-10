@@ -36,11 +36,18 @@ class Admin
         $perms = new Permissions();
         if($perms->cando(3)){ // right  Back end access
             $users = new Crud();
-            var_dump($_POST);
 
             if($_POST) // Secu a revoir
             {
-                $users->updateUser($_POST);
+                if($_POST['firstname']){
+                    var_dump('okay');
+                    $users->updateUser($_POST);
+                }
+                else{
+                    var_dump('ok');
+                    $users->deleteRow('user', 'id', $_POST['id']);
+                }
+                
             }
 
             $tabData = $users->displayUsers();
