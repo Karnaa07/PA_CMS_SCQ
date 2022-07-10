@@ -41,6 +41,7 @@ class MysqlBuilder implements QueryBuilder {
     }
     public function update(string $table, array $datas):QueryBuilder
     {
+        $this->reset();
         $strout = '' ;
         $this->reset();
         foreach ($datas as $key => $value) {
@@ -56,6 +57,7 @@ class MysqlBuilder implements QueryBuilder {
         }
                 return $this;
     }
+
 
     public function where(string $column, string $value, string $operator="="):QueryBuilder
     {

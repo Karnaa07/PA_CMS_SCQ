@@ -9,6 +9,11 @@ use App\Model\Page as PageModel;
 use App\Core\Mail;
 use App\Core\Permissions;
 
+use App\Core\MysqlBuilder;
+use App\Core\CrudPages as PageCrud;
+
+
+
 class Page
 {
     public function addPage(){

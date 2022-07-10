@@ -9,7 +9,6 @@ abstract class Sql
     private $pdo;
     private $table;
     private $builder;
-    
     public function __construct() // Constructeur qui connect à la BDD à la création d'un objet de la classe SQL
     {
         //Se connecter à la bdd
@@ -35,6 +34,7 @@ abstract class Sql
     }
     public function save($table) // Enregistrement en BDD de valeurs provenants de formulaires
     {
+        $table=DBPREFIXE.$table;
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
 
@@ -54,7 +54,7 @@ abstract class Sql
             //     $update[] = $column."=:".$column;
             // }
             // $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
-            $sql =  $this->builder-> update($this->table, $columns)
+            $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
             //var_dump($sql);
