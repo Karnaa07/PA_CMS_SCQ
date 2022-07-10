@@ -1,40 +1,37 @@
 $(document).ready(function () {
     let modalBtn = $('.modify')
     let modal = $(".modal")
-    let modalDelete = $(".modalDelete")
     let closeBtn = $(".close-btnDelete")
-    let closeBtnDelete = $(".close-btn")
-    let modalDeleteBtn = $('.delete')
+  
+    let deleteBtn = $('.delete')
+    let deleteCloseBtn = $('.deleteClose-btn')
+    let deleteModal = $(".deleteModal")
 
     modalBtn.click(function(){
         //Listeners
-
+        console.log('truc')
         modal.css("display", "block");
 
         // Datatable Inputs Values
         let id = $(this).parents('tr').find('td').eq(0).text().trim()
+        console.log(id)
         let name = $(this).parents('tr').find('td').eq(1).text().trim()
 
         // Modal Input base Values
-        $("[name='id']").val(id)
+        $("[name='idPage']").val(id)
         $("[name='name']").val(name)
     })
 
-    modalDeleteBtn.click(function(){
-        //Listeners
-
-        modalDelete.css("display", "block");
-
-        // Datatable Inputs Values
-        let id = $(this).parents('tr').find('td').eq(0).text().trim()
-
-        // Modal Input base Values
-        $("[name='id']").val(id)
-    })
     closeBtn.click(()=>{
         modal.css("display", "none");
     })
-    closeBtnDelete.click(()=>{
-        modalDelete.css("display", "none");
+    deleteCloseBtn.click(()=>{
+        deleteModal.css("display", "none");
+    })
+    deleteBtn.click(function(){
+        console.log('pipi')
+        let id = $(this).parents('tr').find('td').eq(0).text().trim()
+        deleteModal.css("display", "block");
+        $("[name='idPage']").val(id)
     })
 })

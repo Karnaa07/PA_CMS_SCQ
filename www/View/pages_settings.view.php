@@ -77,7 +77,7 @@
         <form id="modifUser" method="post" action="">
 
         
-            <input  name="id" type="hidden" value=""><br>
+            <input  name="idPage" type="hidden" value=""><br>
 
 
             <label for="name">Nom</label>
@@ -90,14 +90,14 @@
   </div>
 </div>
 
-<div class="modalDelete">
+<div class="deleteModal">
   <div class="modal-content">
-    <span class="close-btnDelete">&times;</span>
+    <span class="deleteClose-btn">&times;</span>
     <div class = "modal--inputs">
         <form id="modifUser" method="post" action="">
 
         
-            <input  name="id" type="hidden" value=""><br>
+            <input  name="idPage" type="hidden" value=""><br>
 
             <input type="submit" value="Confirmer la suppression">
 
