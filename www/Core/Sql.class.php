@@ -39,26 +39,18 @@ abstract class Sql
         $columns = array_diff_key($columns, get_class_vars(get_class()));
 
         $table=DBPREFIXE.$table;
-        $values=array_keys($columns);
+        //$values=array_keys($columns);
         if($this->getId() == null){
-            
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
-           
-            
         } else { 
-            // $update = [];
-            // foreach ($columns as $column=>$value)
-            // {
-            //     $update[] = $column."=:".$column;
-            // }
-            // $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
-            $sql =  $this->builder-> update($this->table, $columns)
+
+            $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
             //var_dump($sql);
          
         }
-       
+        
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
         //var_dump($columns);
         if($table==DBPREFIXE.'user'){
@@ -120,7 +112,9 @@ abstract class Sql
         
         $prepare=$this->pdo->prepare($sql);
         $prepare->execute($where);
+
         $result=$prepare->fetch();
+        var_dump($result);
         if(gettype($result)!=="array"){
             $result=null;
             

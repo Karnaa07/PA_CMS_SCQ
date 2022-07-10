@@ -355,12 +355,6 @@ series.data.setAll(dataStats);
 
 
     // Make stuff animate on load
-    chart.appear(1000, 100);
-
-
-
-
-
 
 // Set themes
 // https://www.amcharts.com/docs/v5/concepts/themes/
@@ -506,7 +500,7 @@ secondsDataItem.get("grid").set("visible", false);
 
 // week label
 var label = chart.radarContainer.children.push(am5.Label.new(horloge, {
-  fontSize: "2em",
+  fontSize: "1.5em",
   centerX: am5.p50,
   centerY: am5.p50
 }));

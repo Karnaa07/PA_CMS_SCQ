@@ -92,6 +92,8 @@ class User {
     {
         // Gestion de déconnexion 
         // Supprimer le Token    
+        $_SESSION = [];
+
         setcookie('Connected',"test",1);
         header('Location: login');
     }
@@ -107,14 +109,16 @@ class User {
                 $user->setForgetUser($unicity['id'],$unicity['firstname'], $unicity['lastname'], $unicity['email'], $unicity['status']);
                 $pwd=substr(bin2hex(random_bytes(128)), 0, 15);
                 //envoyer par mail le pwd
+                $mail = new Mail();
+                $mail-> pwd_forget_mail($_POST['email']);
                 $user->setPassword($pwd);
-                //var_dump($user);
-                $user->save('user');
+                var_dump($user);
+                $user->save(DBPREFIXE.'user');
                 $view = new View("login");
-                $view->assign("user", $user);
-                
+                $view->assign("user", $user);          
             }
             else{
+                echo $_POST["email"]."<br>";
                 echo "ce mail n'existe pas";
             }
         }
@@ -124,6 +128,11 @@ class User {
             echo "Mot de passe oublié";
         }
 
+    }
+
+    public function newpwd(){
+
+            
     }
 }
 

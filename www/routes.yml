@@ -53,6 +53,10 @@
   controller: user
   action: pwdforget
 
+/newpwd:
+  controller: user
+  action: newpwd
+
 /logout:
   controller: user
   action: logout
