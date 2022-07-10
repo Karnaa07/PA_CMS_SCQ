@@ -12,6 +12,9 @@ nav  {
     list-style-type: none;
 
 }
+.user--noperms:hover{
+   background-color: grey;
+}
 nav ul {
     list-style-type: none;
     margin-left: 15%;

@@ -17,30 +17,14 @@ class MysqlBuilder implements QueryBuilder {
 
     public function insert(string $table,array $values):QueryBuilder
     {
-        // $this->reset();
-        // $this->query->base="INSERT INTO ".$table." VALUES (".implode(", ",$values).")";
-        // return $this;
-
         $this->reset();
-        $keys = array_keys($values);
-        $this->query->base = "INSERT INTO " . $table . " (" . implode(", ", $keys) . ") VALUES (";
-
-        for ($i = 0; $i < count($values) ; $i++) { 
-
-            if($i == 0) {
-                $this->query->base .= '?';
-            } else {
-                $this->query->base .= ', ?';
-            }
-            
-        }
-
-        $this->query->base .= ')';
-
+        var_dump('toto', $table);
+        $this->query->base="INSERT INTO ".$table." VALUES ( null ".implode(", ",$values).")";
         return $this;
     }
     public function update(string $table, array $datas):QueryBuilder
     {
+        $this->reset();
         $strout = '' ;
         foreach ($datas as $key => $value) {
             $strout =$strout.$key."="."'".$value."'".",";
@@ -56,6 +40,18 @@ class MysqlBuilder implements QueryBuilder {
                 return $this;
     }
 
+    public function delete(string $table):QueryBuilder
+    {
+        $this->reset();
+        $this->query->base="DELETE FROM ".$table;
+        return $this;
+
+    }
+    public function join(string $table,string $id):QueryBuilder
+    {
+        $this->query->join="JOIN ".$table." USING(".$id.")";
+        return $this;
+    }
     public function where(string $column, string $value, string $operator="="):QueryBuilder
     {
         $this->query->where[]=$column.$operator."'".$value."'";

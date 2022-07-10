@@ -1,4 +1,9 @@
 
+<?php
+    use App\Core\Permissions;
+    $perms = new Permissions();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -26,15 +31,22 @@
             <li><a href="/user_settings"><img src="../data/snippets/Utilisateurs.svg">Utilisateurs</a></li>
             
             <li><a href="#"><img src="../data/snippets/Assistances.svg">Assistances</a></li>
-            <li><a href="#"><img src="../data/snippets/Reglage.svg">Réglages</a></li>
+            <?php if($perms->cando(12 ,"view")){ // reglages ?>
+                <li><a href="#"><img src="../data/snippets/Reglage.svg">Réglages</a></li>
+            <?php } else {?>
+                <li class="user--noperms"><a href="#"><img src="../data/snippets/Reglage.svg">Réglages</a></li>
+            <?php } ?>
+
         </ul>
         <br><br>
-        <div id="snippet">
-            <a href = "#"><img src="../data/snippets/Instagram.svg"> </a>
-            <a href = "#"><img src="../data/snippets/Facebook.svg"> </a>
-            <a href = "#"><img src="../data/snippets/Twitter.svg"> </a>
-            <a href = "#"><img src="../data/snippets/Linkedin.svg"> </a>
-        </div>
+
+            <div id="snippet">
+                <a href = "#"><img src="../data/snippets/Instagram.svg"> </a>
+                <a href = "#"><img src="../data/snippets/Facebook.svg"> </a>
+                <a href = "#"><img src="../data/snippets/Twitter.svg"> </a>
+                <a href = "#"><img src="../data/snippets/Linkedin.svg"> </a>
+            </div>
+
     </nav>
 
     <section class="main-content ">

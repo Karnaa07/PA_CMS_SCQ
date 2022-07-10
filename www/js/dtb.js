@@ -22,13 +22,15 @@ $(document).ready( function () {
             dataType: 'json'
          });
     })
-
-    $('button.delete').click(function(){
+    console.log('riri')
+    $('.delete').click(function(){
+        console.log('toto')
         var userDatas = [
             $(this).parents('tr').find('td').eq(0).text().trim(),
             $(this).parents('tr').find('td').eq(1).text().trim(),
             $(this).parents('tr').find('td').eq(2).text().trim()
         ]
+        console.log(userDatas)
         // console.log(userDatas)
         $.ajax({
             url:"/delete_user",

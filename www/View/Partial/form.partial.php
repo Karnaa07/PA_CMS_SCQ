@@ -30,5 +30,5 @@
 
     <?php endif;endforeach;?>
 
-    <input type="submit" value="<?= $data["config"]["submit"]??"Valider" ?>">
+    <input class="btn--submit" type="submit" value="<?= $data["config"]["submit"]??"Valider" ?>">
 </form>

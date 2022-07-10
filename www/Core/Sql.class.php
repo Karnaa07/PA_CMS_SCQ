@@ -9,8 +9,6 @@ abstract class Sql
     private $pdo;
     private $table;
     private $builder;
-
-
     public function __construct() // Constructeur qui connect à la BDD à la création d'un objet de la classe SQL
     {
         //Se connecter à la bdd
@@ -20,11 +18,7 @@ abstract class Sql
         }catch (\Exception $e){
             die("Erreur SQL : ".$e->getMessage());
         }
-
-
-
         $this->builder =new MysqlBuilder();
-
     }
     /**
      * @param int $id
@@ -40,27 +34,30 @@ abstract class Sql
     }
     public function save($table) // Enregistrement en BDD de valeurs provenants de formulaires
     {
+        $table=DBPREFIXE.$table;
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
 
-        $table=DBPREFIXE.$table;
         $values=array_keys($columns);
+        var_dump('toto');
+        var_dump($this->getId());
         if($this->getId() == null){
             
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
-           
+
+            var_dump($sql);
             
-        }else{ 
+        } else { 
             // $update = [];
             // foreach ($columns as $column=>$value)
             // {
             //     $update[] = $column."=:".$column;
             // }
             // $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
-            $sql =  $this->builder-> update($this->table, $columns)
+            $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
-            var_dump($sql);
+            //var_dump($sql);
          
         }
        
@@ -79,34 +76,34 @@ abstract class Sql
             ]);
         }
         else{
+            //var_dump($columns);
             $queryPrepared->execute($columns);
         }
  // On les éxécutes avec nos données
-        var_dump($queryPrepared);
+       // var_dump($queryPrepared);
 
     }
     public function exist_user($table,$email,$password)
     {
         $table=DBPREFIXE.$table;
         $req =  $this->builder-> select($table, ["*"])
+        -> join("waterlily_roles","role_id")
         -> where("email", $email)
-        ->getQuery();
-        var_dump($email);
-        //$req = "SELECT * FROM esgi_user WHERE email = ?";
+        -> getQuery();
+
         $queryPrepared = $this->pdo->query($req);
-        // $queryPrepared->execute([
-        //     'email'=> $email 
-        // ]);
-        var_dump($req);
         $result = $queryPrepared->fetch();
-        var_dump($result);
+        //var_dump($result);
+
         if (password_verify($password,$result["password"])){
+            
+            $_SESSION["user"]["permissions"] = [];
             return $result; 
         }
     }
 
     public function Crud(){
-        $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM `esgi_user`");
+        $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM `waterlily_user`");
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
     }
@@ -132,6 +129,15 @@ abstract class Sql
         }
         return $result;
 
+    }
+    public function getUserPerms(string $permsId) : ?array 
+    {
+        $req =  $this->builder-> select('waterlily_roles_permissions', ["*"])
+        -> where("role_id", $permsId)
+        -> getQuery();
+        $reqPrep = $this->pdo->prepare($req);
+        $reqPrep -> execute();
+        return $reqPrep->fetchAll();
     }
 
 }

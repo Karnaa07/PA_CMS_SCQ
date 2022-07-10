@@ -12,6 +12,7 @@
                 <th>Email</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
+                <th>Role</th>
                 <th>Actions</th>
             </tr>
     </thead>
@@ -26,8 +27,10 @@
             if(array_key_exists($key,$tab))
                 {echo('<td class="userInfos"> '.utf8_encode($value).' </td>');}
         }
-        echo('<td class="buttons"> '.'<button  class="modify"><img src="../data/snippets/Edit.svg"></button><button class="delete"><img src="../data/snippets/trash.svg"></button>'.' </td>');
-        echo('</tr>');
+        if($perms->cando(1 ,"view")){
+            echo('<td class="buttons"> '.'<button  class="modify"><img src="../data/snippets/Edit.svg"></button><button class="delete"><img src="../data/snippets/trash.svg"></button>'.' </td>');
+            echo('</tr>');
+        }
     }
     ?> 
     </tbody>
@@ -40,10 +43,8 @@
     <span class="close-btn">&times;</span>
     <div class = "modal--inputs">
         <form id="modifUser" method="post" action="">
-
-        
+       
             <input  name="id" type="hidden" value=""><br>
-
 
             <label for="email">Email</label>
             <input name="email" type="text" value=""><br>
@@ -53,7 +54,27 @@
 
             <label for="lastname">Lastname</label>
             <input name="lastname" type="text" value=""><br>
+
+            <label for="role_id">Role</label>
+            <input name="role_id" type="text" value=""><br>
+
             <input type="submit" value="Confirmer les changements">
+
+        </form>
+    </div>
+  </div>
+</div>
+
+<div class="deleteModal">
+  <div class="modal-content">
+    <span class="deleteClose-btn">&times;</span>
+    <div class = "modal--inputs">
+        <form id="modifUser" method="post" action="">
+
+        
+            <input  name="id" type="hidden" value=""><br>
+
+            <input type="submit" value="Confirmer la suppression">
 
         </form>
     </div>

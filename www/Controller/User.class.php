@@ -7,8 +7,9 @@ use App\Core\Verificator;
 use App\Core\View;
 use App\Model\User as UserModel;  // Alias de class User dans Model/User.class.php
 use App\Core\Mail;
+use App\Core\Permissions;
 
-class User {
+class User {    
     public function login() //login
     {
         if(!isset($_COOKIE["Connected"]))
@@ -26,20 +27,25 @@ class User {
             } elseif ($request_method === 'POST') {
                 
                 $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
-            
-                // if (!$token || $token !== $_SESSION['token']) {
-                //     // return 405 http status code
-                //     header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
-                //     exit;
-                // }
                 if(!empty($_POST))
                 {
                     $user->setUser();              
                     $exist = $user->exist_user('user',$_POST["email"],$_POST["password"]);
-                    var_dump($exist);
+                    
                     if($exist["id"]){
-                        $_SESSION['firstname'] = $exist['firstname']; 
+                        // var_dump($exist['firstname']);
+                        setcookie('Connected',$exist['firstname'],time()+3600); 
                         $view = new View("dashboard","back");
+                        // var_dump($);
+                        $user->setRole($exist['role_id']);
+                        $perms = $user->getUserPerms($user->getRole());
+                        foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; }
+                        // $_SESSION["user"]["permissions"]; 
+                        // $user->setPerms($perms);
+                        // var_dump($user->getPerms());
+                        // var_dump($user);
+                        // var_dump($exist);
+
                     }
                     else
                     {
@@ -49,35 +55,38 @@ class User {
             }
         }
         else {
+            //var_dump($_SESSION);
             header('Location: dashboard'); // Utilisateur déjà connecté
         }
     }
     public function register()
     {
-        $user = new UserModel();
-        if(!empty($_POST)){
-            $unicity=$user->getOneBy('user',["email"=>$_POST['email']]);
-            if($unicity==null)
-            {
-                $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
-                //dans le cas il n'y a pas d'erreur, et insertion en base de donnée
-                if(count($result)<1){
-                    echo "ce mail n'existe pas, utilisateur enregistre";
-                    $user->setUser();
-                    var_dump($user);
-                    $user->save('user');
-                    print_r($result);
+        if(!isset($_COOKIE["Connected"])){
+            $user = new UserModel();
+            if(!empty($_POST)){
+                $unicity=$user->getOneBy('user',["email"=>$_POST['email']]);
+                if($unicity==null)
+                {
+                    $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
+                    //dans le cas il n'y a pas d'erreur, et insertion en base de donnée
+                    if(count($result)<1){
+                        echo "ce mail n'existe pas, utilisateur enregistre";
+                        $user->setUser();
+                        $user->save('user');
+                    }
+                    else{
+                        echo $result[0];
+                    }
                 }
                 else{
-                    echo $result[0];
+                    echo "ce mail existe deja";
                 }
             }
-            else{
-                echo "ce mail existe deja";
-            }
+            $view = new View("register");
+            $view->assign("user", $user);
+        } else {
+            header('Location: dashboard');
         }
-        $view = new View("register");
-        $view->assign("user", $user);
     }
     public function logout()
     {
@@ -88,8 +97,36 @@ class User {
     }
     public function pwdforget()
     {
-        echo "Mot de passe oublié";
+        $user = new UserModel();
+        $unicity = new UserModel();
+        if(!empty($_POST)){
+            $unicity=$user->getOneBy('user',["email"=>$_POST['email']]);
+            if($unicity!==null)
+            {
+                session_start();
+                $user->setForgetUser($unicity['id'],$unicity['firstname'], $unicity['lastname'], $unicity['email'], $unicity['status']);
+                $pwd=substr(bin2hex(random_bytes(128)), 0, 15);
+                //envoyer par mail le pwd
+                $user->setPassword($pwd);
+                //var_dump($user);
+                $user->save('user');
+                $view = new View("login");
+                $view->assign("user", $user);
+                
+            }
+            else{
+                echo "ce mail n'existe pas";
+            }
+        }
+        else{
+            $view = new View("forgetPassword");
+            $view->assign("user", $user);
+            echo "Mot de passe oublié";
+        }
+
     }
+
+
 }
 
 
