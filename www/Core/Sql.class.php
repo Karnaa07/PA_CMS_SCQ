@@ -37,20 +37,16 @@ abstract class Sql
     {
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
-
         $table=DBPREFIXE.$table;
         //$values=array_keys($columns);
         if($this->getId() == null){
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
         } else { 
-
             $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
-            //var_dump($sql);
-         
-        }
-        
+            var_dump($sql); 
+        } 
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
         //var_dump($columns);
         if($table==DBPREFIXE.'user'){
@@ -62,16 +58,12 @@ abstract class Sql
                 $columns['password'],
                 $columns['status'],
                 $columns['token']
-    
             ]);
         }
         else{
-            //var_dump($columns);
+            // var_dump($columns);
             $queryPrepared->execute($columns);
         }
- // On les éxécutes avec nos données
-       // var_dump($queryPrepared);
-
     }
     public function exist_user($table,$email,$password)
     {
@@ -80,11 +72,9 @@ abstract class Sql
         -> join("waterlily_roles","role_id")
         -> where("email", $email)
         -> getQuery();
-
         $queryPrepared = $this->pdo->query($req);
         $result = $queryPrepared->fetch();
         //var_dump($result);
-
         if (password_verify($password,$result["password"])){
             
             $_SESSION["user"]["permissions"] = [];
@@ -114,7 +104,7 @@ abstract class Sql
         $prepare->execute($where);
 
         $result=$prepare->fetch();
-        var_dump($result);
+        //var_dump($result);
         if(gettype($result)!=="array"){
             $result=null;
             

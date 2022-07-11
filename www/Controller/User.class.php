@@ -110,10 +110,10 @@ class User {
                 $pwd=substr(bin2hex(random_bytes(128)), 0, 15);
                 //envoyer par mail le pwd
                 $mail = new Mail();
-                $mail-> pwd_forget_mail($_POST['email']);
+                $mail-> pwd_forget_mail($_POST['email'],$pwd);
                 $user->setPassword($pwd);
-                var_dump($user);
-                $user->save(DBPREFIXE.'user');
+                // var_dump($user);
+                $user->save('user');
                 $view = new View("login");
                 $view->assign("user", $user);          
             }
@@ -127,7 +127,6 @@ class User {
             $view->assign("user", $user);
             echo "Mot de passe oublié";
         }
-
     }
 
     public function newpwd(){

@@ -8,7 +8,7 @@
                 <?php $this->includePartial("form", $user->getLoginForm());?>
         </div>
         <br><br><br>
-        <a class="login--mdpoublie"> Mot de passe oublié ?</a>
+        <a href="/forget" class="login--mdpoublie"> Mot de passe oublié ?</a>
         <div class="login--socials">
                 <a href = "#"><img src="../data/snippets/Instagram.svg"> </a>
                 <a href = "#"><img src="../data/snippets/Facebook.svg"> </a>
@@ -24,11 +24,10 @@
                 <span class="close-btn">&times;</span>
                 <div class = "modal--inputs">
                         <form id="forgetPassword" method="post" action="">
-                                <input  name="id" type="hidden" value=""><br>
+                                <input name="id" type="hidden" value=""><br>
                                 <label for="email">Email</label>
                                 <input name="email" type="text" value=""><br>
                                 <input type="submit" value="Envoyer">
-
                         </form>
                 </div>
         </div>
