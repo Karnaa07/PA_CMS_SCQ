@@ -44,7 +44,7 @@ abstract class Sql
         if($this->getId() == null){
             
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
-
+           // $queryPrepared = $this->pdo->query($sql);
             var_dump($sql);
             
         } else { 
