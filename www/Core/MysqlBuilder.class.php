@@ -19,7 +19,13 @@ class MysqlBuilder implements QueryBuilder {
     {
         $this->reset();
         var_dump('toto', $table);
+       if($table==DBPREFIXE.'page'){
+        $this->query->base="INSERT INTO ".$table." (name) VALUES ('".$values['name']."')";
+       }
+       else{
         $this->query->base="INSERT INTO ".$table." VALUES ( null ".implode(", ",$values).")";
+       }
+
         return $this;
     }
     public function update(string $table, array $datas):QueryBuilder
