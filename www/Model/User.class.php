@@ -130,8 +130,6 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         $this->role = $role_id;
     }
-    
-
     /**
      * @return null|string
      */
@@ -139,7 +137,6 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         return $this->token;
     }
-
     /**
      * length : 255
      */
@@ -147,8 +144,6 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         $this->token = substr(bin2hex(random_bytes(128)), 0, 255);
     }
-
-
     public function getRegisterForm(): array
     {
         return [
@@ -273,15 +268,6 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
         $this->generateToken();
         $this->setStatus(0);
     }
-    public function setForgetUser($id,$firstname, $lastname, $email, $status){
-        $this->setIdUser($id);
-        $this->setEmail($email);
-        if(!empty($firstname))
-            $this->setFirstname($firstname);
-        if(!empty($lastname))
-            $this->setLastname($lastname);
-        $this->generateToken();
-        $this->setStatus($status);
-    }
+
 
 }

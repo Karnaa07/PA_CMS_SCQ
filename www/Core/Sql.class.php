@@ -121,5 +121,20 @@ abstract class Sql
         $reqPrep -> execute();
         return $reqPrep->fetchAll();
     }
+    public function setResetedPwd($datas){
+        $req =  $this->builder-> update(DBPREFIXE.'user', $datas)
+        -> where("id", $datas['id'])
+        -> getQuery();
+        $test = $this->pdo->prepare($req);
+        $test->execute();    
+    }
+    public function setBasicUser(?array $usr){
+        $req =  $this->builder-> update(DBPREFIXE.'user', $usr)
+        -> where("name",$usr['name'])
+        -> where("email",$usr['email'])
+        -> getQuery();
+        $test = $this->pdo->prepare($req);
+        $test->execute();  
 
+    }
 }

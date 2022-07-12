@@ -53,7 +53,10 @@
   controller: user
   action: pwdforget
 
-
+/veryfieduser:
+  controller: user
+  action: verificated
+  
 /logout:
   controller: user
   action: logout

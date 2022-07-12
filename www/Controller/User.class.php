@@ -73,6 +73,8 @@ class User {
                         echo "ce mail n'existe pas, utilisateur enregistre";
                         $user->setUser();
                         $user->save('user');
+                        $mail = new Mail();
+                        $mail->verif_account($user->getEmail(), $user->getFirstname(),bin2hex(random_bytes(10)));
                     }
                     else{
                         echo $result[0];
@@ -106,14 +108,16 @@ class User {
             if($unicity!==null)
             {
                 session_start();
-                $user->setForgetUser($unicity['id'],$unicity['firstname'], $unicity['lastname'], $unicity['email'], $unicity['status']);
                 $pwd=substr(bin2hex(random_bytes(128)), 0, 15);
+                $user->setPassword($pwd);
+                $reset = [
+                    'id' =>  $unicity['id'],
+                    'password'=> $user->getPassword(),
+                ];
+                $user->setResetedPwd($reset);
                 //envoyer par mail le pwd
                 $mail = new Mail();
                 $mail-> pwd_forget_mail($_POST['email'],$pwd);
-                $user->setPassword($pwd);
-                // var_dump($user);
-                $user->save('user');
                 $view = new View("login");
                 $view->assign("user", $user);          
             }
@@ -129,9 +133,15 @@ class User {
         }
     }
 
-    public function newpwd(){
-
-            
+    public function verificated(){
+        if(isset($_GET)){
+            $user = new UserModel();
+            $user->setBasicUser(['name'=>$_GET['name'],'email'=>$_GET['email']]);
+            $view = new View("accountActivated");
+            $view->assign("user", $user);
+            echo('<br><br>');
+            var_dump($_GET);
+        }
     }
 }
 
