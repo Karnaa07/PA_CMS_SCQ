@@ -10,6 +10,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     protected $lastname = null;
     protected $email;
     protected $password;
+    protected $contry;
     protected $status = 0;
     protected $role_id = null;
     protected $perms = null;
@@ -80,6 +81,22 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     public function setEmail(string $email): void
     {
         $this->email = strtolower(trim($email));
+    }
+
+    /**
+     * @return string
+     */
+    public function getContry(): string
+    {
+        return $this->contry;
+    }
+
+    /**
+     * @param string $contry
+     */
+    public function setContry(string $contry): void
+    {
+        $this->email = strtolower(trim($contry));
     }
 
     /**
@@ -196,6 +213,15 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "id"=>"lastnameForm",
                     "min"=>2,
                     "max"=>100,
+                    "error"=>"Nom incorrect"
+                ],
+                "pays"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Votre pays ...",
+                    "class"=>"inputForm",
+                    "id"=>"paysForm",
+                    "min"=>2,
+                    "max"=>50,
                     "error"=>"Nom incorrect"
                 ],
             ]

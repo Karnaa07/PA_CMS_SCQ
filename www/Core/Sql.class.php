@@ -41,6 +41,7 @@ abstract class Sql
         //$values=array_keys($columns);
         if($this->getId() == null){
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
+            var_dump($sql);
         } else { 
             $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
@@ -56,7 +57,10 @@ abstract class Sql
                 $columns['lastname'],
                 $columns['email'],
                 $columns['password'],
+                $columns['contry'],
                 $columns['status'],
+                $columns['role_id'],
+                $columns['perms'],
                 $columns['token']
             ]);
         }
