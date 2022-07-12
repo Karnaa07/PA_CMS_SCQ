@@ -10,5 +10,8 @@
 <nav>
     <?php include "View/".$this->view.".view.php"; ?>
 
+    <footer>
+        <i>Ce site est propulsée par Waterlily™</i>
+    </footer>
 </body>
 </html>

@@ -20,7 +20,7 @@ class User {
             if ($request_method === 'GET') {
                 // generate a token
                 $_SESSION['token'] = bin2hex(random_bytes(35));
-                $view = new View("login","front");
+                $view = new View("login");
                 $view->assign("user", $user);
 
                 // show the form@
@@ -40,12 +40,6 @@ class User {
                         $user->setRole($exist['role_id']);
                         $perms = $user->getUserPerms($user->getRole());
                         foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; }
-                        // $_SESSION["user"]["permissions"]; 
-                        // $user->setPerms($perms);
-                        // var_dump($user->getPerms());
-                        // var_dump($user);
-                        // var_dump($exist);
-
                     }
                     else
                     {
@@ -132,7 +126,6 @@ class User {
             echo "Mot de passe oublié";
         }
     }
-
     public function verificated(){
         if(isset($_GET)){
             $user = new UserModel();
