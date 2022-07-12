@@ -56,7 +56,7 @@
             </div>
             <div id="snippet">
                 <a href = "/login"><img src="../data/snippets/Profile.svg"> </a>
-                <a href = "/login"><img src="../data/snippets/Deconnexion.svg"> </a>
+                <a href = "/logout"><img src="../data/snippets/Deconnexion.svg"> </a>
                 <a href = "#"><img src="../data/snippets/Sombre.svg"> </a>
             </div>
             <div id="profile">
