@@ -89,7 +89,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                 "content"=>[
                     "type"=>"textarea",
                     "placeholder"=>"",
-                    "required"=>true,
+                    "required"=>true,                //remplace par wysiwyg addarticle view
                     "class"=>"inputForm",
                     "id"=>"contentArticleForm",
                     "error"=>"Contenu incorect",
