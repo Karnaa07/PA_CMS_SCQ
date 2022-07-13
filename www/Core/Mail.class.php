@@ -119,7 +119,7 @@ class Mail {
                 // AJOUTER UNE VARIABLE GLOBAL AVEC LE NOM DU SITE
                 $mail->Body    = 
                 '
-                    // Bonjour'.$name.'tu as crée ton compte chez '.SITENAME.' et nous t\'en remercions 
+                    // Bonjour '.$name.' tu as crée ton compte chez '.SITENAME.' et nous t\'en remercions 
                     Plus qu\'un pas pour accèder a la formation de l\'année
                     il te suffit de cliquer sur le lien ci-dessous pour valider ton compte
                     <a href="localhost/accountActivated?email='.$email.'&name='.$name.'">Je confirme mon compte</a></h2>

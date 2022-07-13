@@ -69,4 +69,8 @@
   controller: main
   action: home
 
+  
+/accountActivated:
+  controller: user
+  action: verificated
 

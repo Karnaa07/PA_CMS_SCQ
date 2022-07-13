@@ -50,7 +50,7 @@ class User {
         }
         else {
             //var_dump($_SESSION);
-            header('Location: dashboard'); // Utilisateur déjà connecté
+            header('Location: dashboard'); // A refaire
         }
     }
     public function register()
@@ -127,12 +127,12 @@ class User {
         }
     }
     public function verificated(){
+        $user = new UserModel();
+        var_dump($user->getId());
         if(isset($_GET)){
-            $user = new UserModel();
+            // $user = new UserModel();
+            // var_dump($user->getId());
             $user->setBasicUser(['name'=>$_GET['name'],'email'=>$_GET['email']]);
-            $view = new View("accountActivated");
-            $view->assign("user", $user);
-            echo('<br><br>');
             var_dump($_GET);
         }
     }

@@ -12,8 +12,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     protected $password;
     protected $contry;
     protected $status = 0;
-    protected $role_id = null;
-    protected $perms = null;
+    protected $role_id = 4;
     protected $token = null;
 
     public function __construct()
@@ -96,7 +95,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
      */
     public function setContry(string $contry): void
     {
-        $this->email = strtolower(trim($contry));
+        $this->contry = ucfirst(strtolower(trim($contry)));
     }
 
     /**
@@ -130,14 +129,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         $this->status = $status;
     }
-    public function getPerms(): array
-    {
-        return $this->perms;
-    }
-    public function setPerms(array $perms): void
-    {
-        $this->perms = $perms;
-    }
+
 
     public function getRole(): int
     {
@@ -215,7 +207,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "max"=>100,
                     "error"=>"Nom incorrect"
                 ],
-                "pays"=>[
+                "contry"=>[
                     "type"=>"text",
                     "placeholder"=>"Votre pays ...",
                     "class"=>"inputForm",
@@ -291,8 +283,11 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
             $this->setLastname($_POST['lastname']);
         if(!empty($_POST['role_id']))
             $this->setRole($_POST['role_id']);
+        if(!empty($_POST['contry']))
+            $this->setContry($_POST['contry']);
         $this->generateToken();
         $this->setStatus(0);
+
     }
 
 

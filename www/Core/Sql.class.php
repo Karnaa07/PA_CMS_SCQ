@@ -46,9 +46,10 @@ abstract class Sql
             $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
-            var_dump($sql); 
+            //var_dump($sql); 
         } 
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
+        echo'<br>';
         //var_dump($columns);
         if($table==DBPREFIXE.'user'){
             $queryPrepared->execute([
@@ -60,7 +61,6 @@ abstract class Sql
                 $columns['contry'],
                 $columns['status'],
                 $columns['role_id'],
-                $columns['perms'],
                 $columns['token']
             ]);
         }
