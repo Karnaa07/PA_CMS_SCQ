@@ -57,12 +57,12 @@ class Page
                     $page = new PageCrud();
                     if ($_POST) { // Secu a revoir
                         if ($_POST['name']) {
-                            $page->updatePages($_POST);
+                            $page->update($_POST);
                         } else {
                             $page->deleteRow('page', 'idPage', $_POST['idPage']);
                         }
                     }
-                    $tabData = $page->displayPages();
+                    $tabData = $page->display();
                     $view = new View("pages_settings", "back");
                     $view->assign("tabData", $tabData);
                  } else {

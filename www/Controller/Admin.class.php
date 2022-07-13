@@ -68,14 +68,14 @@ class Admin
                     if ($_POST) { // Secu a revoir
                         if ($_POST['firstname']) {
                             var_dump('okay');
-                            $users->updateUser($_POST);
+                            $users->update($_POST);
                         } else {
                             var_dump('ok');
                             $users->deleteRow('user', 'id', $_POST['id']);
                         }
                     }
 
-                    $tabData = $users->displayUsers();
+                    $tabData = $users->display();
                     $view = new View("user_settings", "back");
                     $view->assign("tabData", $tabData);
                     $view->assign("perms", $perms);
