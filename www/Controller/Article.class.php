@@ -8,6 +8,7 @@ use App\Core\View;
 use App\Core\Permissions;
 use App\Model\Article as ArticleModel;  // Alias de class User dans Model/User.class.php
 use App\Core\Mail;
+use App\Core\Crud;
 
 class Article
 {
@@ -25,6 +26,14 @@ class Article
             //http_response_code(403);
             header("HTTP/1.1 403 No perms");
         }
+    }
+    public function articles()
+    {   
+         
+        $article = new Crud();
+        $displayArticles = $article->getArticles();
+        $view = new View("articles","back");
+        $view->assign("article", $displayArticles);      
     }
 }
 

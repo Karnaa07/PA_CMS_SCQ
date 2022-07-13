@@ -45,7 +45,7 @@ abstract class Sql
             $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
-            var_dump($sql); 
+            //var_dump($sql); 
         } 
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
         //var_dump($columns);
@@ -135,6 +135,6 @@ abstract class Sql
         -> getQuery();
         $test = $this->pdo->prepare($req);
         $test->execute();  
-
     }
+
 }

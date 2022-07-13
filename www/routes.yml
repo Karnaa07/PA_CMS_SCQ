@@ -16,7 +16,7 @@
   action: pages_settings
 
 /articles:
-  controller: admin
+  controller: article
   action: articles
 
 /user_settings:
