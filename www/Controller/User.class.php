@@ -35,11 +35,11 @@ class User {
                     if($exist["id"]){
                         // var_dump($exist['firstname']);
                         setcookie('Connected',$exist['firstname'],time()+3600); 
-                        $view = new View("dashboard","back");
-                        // var_dump($);
                         $user->setRole($exist['role_id']);
                         $perms = $user->getUserPerms($user->getRole());
                         foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; }
+                        header('Location: /dashboard'); // A refaire
+
                     }
                     else
                     {
@@ -50,7 +50,7 @@ class User {
         }
         else {
             //var_dump($_SESSION);
-            header('Location: dashboard'); // A refaire
+            header('Location: /dashboard'); // A refaire
         }
     }
     public function register()
