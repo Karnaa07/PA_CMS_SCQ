@@ -107,7 +107,7 @@ abstract class Sql
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
     }
-
+   
     public function getOneBy(string $table, ?array $where=null) : ?array 
     {
         $table=DBPREFIXE.$table;
