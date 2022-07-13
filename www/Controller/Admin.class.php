@@ -10,19 +10,7 @@ use App\Core\UserStats;
 use App\Model\User as UserModel; 
 
 class Admin
-{
-
-    public function dashboard()
-    {
-        $perms = new Permissions();
-        if($perms->cando(3) && isset($_SESSION["user"]) ){ // right Back end access
-            var_dump($_SESSION["user"]);
-            $view = new View("dashboar","back"); // A l'appelle de contact on crée une vue de formumlaire de contact
-        } else {
-            //http_response_code(403);
-            header("HTTP/1.1 403 No perms");
-        }
-    }   
+{  
     public function media()
     {
         $perms = new Permissions();

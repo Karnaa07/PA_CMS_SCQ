@@ -64,11 +64,14 @@ class User {
                     $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
                     //dans le cas il n'y a pas d'erreur, et insertion en base de donnée
                     if(count($result)<1){
+                        session_start();
                         echo "ce mail n'existe pas, utilisateur enregistre";
                         $user->setUser();
                         $user->save('user');
                         $mail = new Mail();
-                        $mail->verif_account($user->getEmail(), $user->getFirstname(),bin2hex(random_bytes(10)));
+                        $tokenVerif = bin2hex(random_bytes(10));
+                        $_SESSION['tokenVerif'] = $tokenVerif;
+                        $mail->verif_account($user->getEmail(), $user->getFirstname(),$tokenVerif);
                     }
                     else{
                         echo $result[0];
@@ -128,12 +131,12 @@ class User {
     }
     public function verificated(){
         $user = new UserModel();
-        var_dump($user->getId());
         if(isset($_GET)){
-            // $user = new UserModel();
-            // var_dump($user->getId());
-            $user->setBasicUser(['name'=>$_GET['name'],'email'=>$_GET['email']]);
-            var_dump($_GET);
+            var_dump($_GET['tkn']);
+            session_start();
+            if($_GET['tkn'] == $_SESSION['tokenVerif']){
+                $user->setBasicUser(['email'=>$_GET['email']]);
+            }
         }
     }
 }

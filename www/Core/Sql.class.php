@@ -78,7 +78,6 @@ abstract class Sql
         -> getQuery();
         $queryPrepared = $this->pdo->query($req);
         $result = $queryPrepared->fetch();
-        //var_dump($result);
         if (password_verify($password,$result["password"])){
             
             $_SESSION["user"]["permissions"] = [];
@@ -133,8 +132,7 @@ abstract class Sql
         $test->execute();    
     }
     public function setBasicUser(?array $usr){
-        $req =  $this->builder-> update(DBPREFIXE.'user', $usr)
-        -> where("name",$usr['name'])
+        $req =  $this->builder-> update(DBPREFIXE.'user', ["role_id"=>3])
         -> where("email",$usr['email'])
         -> getQuery();
         $test = $this->pdo->prepare($req);

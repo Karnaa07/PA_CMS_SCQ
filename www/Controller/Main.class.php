@@ -4,20 +4,25 @@ namespace App\Controller;
 
 use App\Core\View;
 use App\Core\Permissions;
+use App\Core\UserStats;
+
 
 class Main { // Définition de la classe Main
 
     public function home()
     {
         $perms = new Permissions();
-        if($perms->cando(3)){ // right  Back end access
-            $view = new View("dashboard","back");
+        if($perms->cando(3) && isset($_SESSION["user"]) ){ 
+            //var_dump($_SESSION["user"]);
+            $stats = new UserStats();
+            $registeredStats = $stats-> registeredStats();
+            $view = new View("dashboard","back"); 
+            $view->assign('registeredStats',$registeredStats);
         } else {
             //http_response_code(403);
             header("HTTP/1.1 403 No perms");
-        }    
-       // var_dump($_SESSION);
-    }
+        }
+    } 
 
     public function contact()
     {

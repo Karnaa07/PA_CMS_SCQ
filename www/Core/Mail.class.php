@@ -92,7 +92,7 @@ class Mail {
                 echo "Message could not be sent. Mailer Error:";
             }
         }
-        public function verif_account(string $email, string $name) {
+        public function verif_account(string $email, string $name, string $token) {
             //Create an instance; passing `true` enables exceptions
             $mail = new PHPMailer(true);
 
@@ -122,7 +122,7 @@ class Mail {
                     // Bonjour '.$name.' tu as crée ton compte chez '.SITENAME.' et nous t\'en remercions 
                     Plus qu\'un pas pour accèder a la formation de l\'année
                     il te suffit de cliquer sur le lien ci-dessous pour valider ton compte
-                    <a href="localhost/accountActivated?email='.$email.'&name='.$name.'">Je confirme mon compte</a></h2>
+                    <a href="localhost/accountActivated?tkn='.$token.'&email='.$email.'">Je confirme mon compte</a></h2>
                     <h2> Si vous n\'êtes pas à l\'origine de cette procédure : <a href="localhost/contact">Nous contacter</a></h2>
                 ';// href a modifier lors du déploiement
                 $mail->send();
