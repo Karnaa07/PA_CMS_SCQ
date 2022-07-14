@@ -28,6 +28,7 @@
             <li><a href="/articles"><img src="../data/snippets/Articles.svg">Articles</a></li>
             <!-- <li><a href="#"><img src="../data/snippets/Categories.svg">Categories</a><li> -->
             <li><a href="/about"><img src="../data/snippets/Categories.svg">En savoir plus</a></li>
+            <li><a href="/apparence"><img src="../data/snippets/apparence.svg">Apparence</a></li>
             <hr/>
             <li><a href="/user_settings"><img src="../data/snippets/Utilisateurs.svg">Utilisateurs</a></li>
             

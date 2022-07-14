@@ -7,9 +7,9 @@
   controller: admin
   action: media
 
-/plugin:
-  controller: admin
-  action: plugin
+# /plugin:
+#   controller: admin
+#   action: plugin
 
 /pages:
   controller: page
@@ -24,9 +24,9 @@
   action: user_settings
 
 
-/categories:
-  controller: admin
-  action: categorie
+# /categories:
+#   controller: admin
+#   action: categorie
 
 /contact:
   controller: main
@@ -73,4 +73,7 @@
   controller: about
   action: aboutUs
 
+/apparence:
+  controller: about
+  action: aboutUs
 
