@@ -19,6 +19,7 @@ class Article
             if(!empty($_POST)){
             $result = Verificator::checkForm($article->getArticleForm(), $_POST);
             $article->setArticle();
+            $article->save("article"); 
             }
             $view = new View("addArticle","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)    
             $view->assign("article", $article);

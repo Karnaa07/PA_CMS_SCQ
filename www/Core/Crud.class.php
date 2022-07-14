@@ -46,7 +46,7 @@ class Crud
             // var_dump($sql);
     }
     public function getArticles(){
-        $req =  $this->builder-> select('waterlily_article', ["idArticle","title","content","idCategory","idCategory"])
+        $req =  $this->builder-> select('waterlily_article', ["idArticle","title","content","idCategory","idPage"])
         ->getQuery();
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
@@ -54,4 +54,4 @@ class Crud
     }
 
 }
-?>
+?> 

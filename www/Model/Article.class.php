@@ -2,6 +2,8 @@
 namespace App\Model;
 
 use App\Core\Sql;
+use App\Core\MysqlBuilder;
+
 
 class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
 {
@@ -17,6 +19,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     public function __construct()
     {
         parent::__construct();
+      
     }
 
 
@@ -80,7 +83,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
             'inputs'=>[
                 "title"=>[
                     "type"=>"text",
-                    "placeholder"=>"Titre de l'article...",
+                    "placeholder"=>"Titre de votre article...",
                     "required"=>true,
                     "class"=>"inputForm",
                     "id"=>"titleForm",
@@ -88,8 +91,8 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                 ],
                 "content"=>[
                     "type"=>"textarea",
-                    "placeholder"=>"",
-                    "required"=>true,                //remplace par wysiwyg addarticle view
+                    "placeholder"=>"Description breve de votre article",
+                    "required"=>true,
                     "class"=>"inputForm",
                     "id"=>"contentArticleForm",
                     "error"=>"Contenu incorect",
@@ -100,11 +103,12 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "required"=>true,
                     "class"=>"inputForm",
                     "id"=>"urlImageForm",
-                    "error"=>"Contenu incorect",
+                    "error"=>"Image manquante",
                     ],
                 "idCategory"=>[
                     "type"=>"select",
-                    "option"=>['ok','good'],
+                    "placeholder"=>"Quelle est la catégorie de votre article ?",
+                    "option"=>['Publicité','Documentation','Etude','Information','Revue','Debat'],
                     "class"=>"inputForm",
                     "id"=>"urlImageForm",
                     "error"=>"Contenu incorect",

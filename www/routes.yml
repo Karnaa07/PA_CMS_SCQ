@@ -69,4 +69,8 @@
   controller: main
   action: home
 
+/about:
+  controller: about
+  action: aboutUs
+
 
