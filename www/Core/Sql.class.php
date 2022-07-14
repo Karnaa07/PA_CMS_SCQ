@@ -47,6 +47,7 @@ abstract class Sql
             ->getQuery();
             //var_dump($sql); 
         } 
+        var_dump($sql); 
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
         //var_dump($columns);
         if($table==DBPREFIXE.'user'){
@@ -61,7 +62,7 @@ abstract class Sql
             ]);
         }
         else{
-            // var_dump($columns);
+            var_dump($columns);
             $queryPrepared->execute($columns);
         }
     }

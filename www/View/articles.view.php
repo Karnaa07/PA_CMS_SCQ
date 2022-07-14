@@ -21,7 +21,7 @@
     <tbody>
     <?php
      var_dump($article);
-     var_dump("__________________________");
+
     for ($i=0; $i < count($article) ; $i++) 
     { 
         $tab = array_keys($article[$i]);

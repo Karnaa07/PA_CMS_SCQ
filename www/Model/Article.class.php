@@ -7,13 +7,13 @@ use App\Core\MysqlBuilder;
 
 class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
 {
-    protected $idArticle = null;
+    protected $idArticle;
     protected $title;
     protected $content;
     protected $urlImage;
-    protected $idCategory = null;
-    protected $id = null;
-    protected $idPage = null;
+    protected $idCategory;
+    protected $id ;
+    protected $idPage ;
 
 
     public function __construct()
@@ -69,6 +69,14 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         $this->content = trim($content);
     }
+     /**
+    * @param string $urlImage
+    */
+    public function setUrlImage(string $urlImage): void
+    {
+        $this->content = trim($urlImage);
+    }
+
     
 //faut il un setter pour l'url ou faut il le générer?
     public function getArticleForm(): array
@@ -119,5 +127,6 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     public function setArticle(){
         $this->setTitle($_POST["title"]);
         $this->setContent($_POST["content"]);
+        $this->setUrlImage($_POST["image"]);
     }
 }
