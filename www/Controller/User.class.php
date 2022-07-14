@@ -39,7 +39,6 @@ class User {
                         $perms = $user->getUserPerms($user->getRole());
                         foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; }
                         header('Location: /dashboard'); // A refaire
-
                     }
                     else
                     {

@@ -11,8 +11,6 @@
     
         $qr = $dbh->exec($sql);
 
-
-        header('Location: createSuperAdmin.php');
         $fp = fopen('conf.inc.php', 'w');
         $conf = '<?php
             define("DBHOST", "'.$_POST['dbHost'].'");
