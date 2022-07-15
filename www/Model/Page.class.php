@@ -52,7 +52,9 @@ public function getPageForm(): array
                     "required"=>true,
                     "class"=>"inputForm",
                     "id"=>"nameForm",
+                    "unicity"=>"true",
                     "error"=>"Nom incorrect",
+                    "errorUnicity"=>"Email déjà en bdd",
                 ],
             ]
         ];

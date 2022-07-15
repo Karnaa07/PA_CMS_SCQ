@@ -10,7 +10,7 @@
 /plugin:
   controller: admin
   action: plugin
-
+  
 /pages:
   controller: page
   action: pages_settings
@@ -64,5 +64,4 @@
 /dashboard:
   controller: main
   action: home
-
 

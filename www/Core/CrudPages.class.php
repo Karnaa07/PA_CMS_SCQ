@@ -44,5 +44,14 @@ class CrudPages
 
     }
 
+    public function namePage(string $table, int $id){
+        $tableBD=DBPREFIXE.$table;
+        $req = $this->builder-> select($tableBD, ['name'])
+        ->where('idPage',$id,"=")
+        ->getQuery();
+        $queryPrepared = $this->pdo->query($req);
+        return $queryPrepared->fetchAll();
+    }
+
 }
 ?>

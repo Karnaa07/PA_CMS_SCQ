@@ -26,10 +26,23 @@ class Page
                 if ($perms->cando(3) && $perms->cando(13)) { // Create Page right and Back end access
                     $page = new PageModel();
                     if (!empty($_POST)) {
-                        $result = Verificator::checkForm($page->getPageForm(), $_POST);
-                        $page->setPage();
-                        // var_dump($page);
-                        $page->save("page");
+                        $unicity=$page->getOneBy('page',["name"=>$_POST['name']]);
+                        if ($unicity==null) {
+                            $result = Verificator::checkForm($page->getPageForm(), $_POST);
+                            $page->setPage();
+                            // var_dump($page);
+                            $page->save("page");
+                            $nomFichier = $_POST['name'];
+                            $fichier = fopen("View/$nomFichier.view.php", 'a+');
+                            $route = fopen('routes.yml', 'a+');
+                            $controller = fopen('Controller/Front.class.php', 'r+');
+                            fwrite($route, "/$nomFichier: \n");
+                            fwrite($route, " controller: front \n");
+                            fwrite($route, " action: $nomFichier \n");
+                            fseek($controller, -1, SEEK_END);
+                            fwrite($controller, 'public function '. $nomFichier.' (){$view = new View("addArticle", "front");}}');
+                        }
+                        
                     }
                     $view = new View("addPage", "front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)
                     $view->assign("page", $page);
@@ -38,10 +51,10 @@ class Page
                     header("HTTP/1.1 403 No perms");
                 }
             }else{
-                header('Location : /login');
+                header('Location : login');
             }
         }else{
-            header('Location : /login');
+            header('Location : login');
         }
     }
 
@@ -58,8 +71,13 @@ class Page
                     if ($_POST) { // Secu a revoir
                         if ($_POST['name']) {
                             $page->updatePages($_POST);
-                        } else {
+                        } else { 
+                            $id =$_POST['idPage'];
+                            $name = $page->namePage('page',$id);
+                            $namePage = $name[0]['name'];
+                            var_dump($namePage);
                             $page->deleteRow('page', 'idPage', $_POST['idPage']);
+                            unlink("View/$namePage.View.php");
                         }
                     }
                     $tabData = $page->displayPages();
@@ -70,10 +88,10 @@ class Page
                     header("HTTP/1.1 403 No perms");
                 }
             }else{
-                header('Location : /login');
+                header('Location : login');
             }
         }else{
-            header('Location : /login');
+            header('Location : login');
         }
     }
 }
