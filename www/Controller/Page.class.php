@@ -33,6 +33,10 @@ class Page
                             // var_dump($page);
                             $page->save("page");
                             $nomFichier = $_POST['name'];
+                            $nomFichier= trim($nomFichier);
+                            var_dump('namepage',$nomFichier);
+                            $nomFichier = str_replace("'","_",$nomFichier);
+                            $nomFichier = str_replace(" ","_",$nomFichier);
                             $fichier = fopen("View/$nomFichier.view.php", 'a+');
                             $route = fopen('routes.yml', 'a+');
                             $controller = fopen('Controller/Front.class.php', 'r+');
@@ -75,7 +79,10 @@ class Page
                             $id =$_POST['idPage'];
                             $name = $page->namePage('page',$id);
                             $namePage = $name[0]['name'];
-                            var_dump($namePage);
+                          
+                            $namePage = str_replace("'","_",$namePage);
+                            $namePage = str_replace(" ","_",$namePage);
+                            
                             $page->deleteRow('page', 'idPage', $_POST['idPage']);
                             unlink("View/$namePage.View.php");
                         }
