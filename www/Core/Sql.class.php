@@ -42,7 +42,6 @@ abstract class Sql
         var_dump('toto');
         var_dump($this->getId());
         if($this->getId() == null){
-            
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
            // $queryPrepared = $this->pdo->query($sql);
             var_dump($sql);
@@ -57,10 +56,9 @@ abstract class Sql
             $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
-            //var_dump($sql);
-         
-        }
-       
+            //var_dump($sql); 
+        } 
+        var_dump($sql); 
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
         var_dump($columns);
         if($table==DBPREFIXE.'user'){
@@ -72,16 +70,12 @@ abstract class Sql
                 $columns['password'],
                 $columns['status'],
                 $columns['token']
-    
             ]);
         }
         else{
-            //var_dump($columns);
+            var_dump($columns);
             $queryPrepared->execute($columns);
         }
- // On les éxécutes avec nos données
-       // var_dump($queryPrepared);
-
     }
     public function exist_user($table,$email,$password)
     {
@@ -90,11 +84,9 @@ abstract class Sql
         -> join("waterlily_roles","role_id")
         -> where("email", $email)
         -> getQuery();
-
         $queryPrepared = $this->pdo->query($req);
         $result = $queryPrepared->fetch();
         //var_dump($result);
-
         if (password_verify($password,$result["password"])){
             
             $_SESSION["user"]["permissions"] = [];
@@ -122,7 +114,9 @@ abstract class Sql
         
         $prepare=$this->pdo->prepare($sql);
         $prepare->execute($where);
+
         $result=$prepare->fetch();
+        //var_dump($result);
         if(gettype($result)!=="array"){
             $result=null;
             
@@ -138,6 +132,21 @@ abstract class Sql
         $reqPrep = $this->pdo->prepare($req);
         $reqPrep -> execute();
         return $reqPrep->fetchAll();
+    }
+    public function setResetedPwd($datas){
+        $req =  $this->builder-> update(DBPREFIXE.'user', $datas)
+        -> where("id", $datas['id'])
+        -> getQuery();
+        $test = $this->pdo->prepare($req);
+        $test->execute();    
+    }
+    public function setBasicUser(?array $usr){
+        $req =  $this->builder-> update(DBPREFIXE.'user', $usr)
+        -> where("name",$usr['name'])
+        -> where("email",$usr['email'])
+        -> getQuery();
+        $test = $this->pdo->prepare($req);
+        $test->execute();  
     }
 
 }

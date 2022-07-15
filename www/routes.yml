@@ -7,16 +7,16 @@
   controller: admin
   action: media
 
-/plugin:
-  controller: admin
-  action: plugin
+# /plugin:
+#   controller: admin
+#   action: plugin
 
 /pages:
   controller: page
   action: pages_settings
 
 /articles:
-  controller: admin
+  controller: article
   action: articles
 
 /user_settings:
@@ -24,9 +24,9 @@
   action: user_settings
 
 
-/categories:
-  controller: admin
-  action: categorie
+# /categories:
+#   controller: admin
+#   action: categorie
 
 /contact:
   controller: main
@@ -53,6 +53,10 @@
   controller: user
   action: pwdforget
 
+/veryfieduser:
+  controller: user
+  action: verificated
+  
 /logout:
   controller: user
   action: logout
@@ -65,4 +69,11 @@
   controller: main
   action: home
 
+/about:
+  controller: about
+  action: aboutUs
+
+/apparence:
+  controller: about
+  action: aboutUs
 

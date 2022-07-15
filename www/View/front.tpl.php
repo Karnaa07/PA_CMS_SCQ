@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Template FRONT</title>
     <meta name="description" content="Description de ma page">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <nav>
