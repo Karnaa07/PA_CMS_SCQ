@@ -7,13 +7,13 @@ use App\Core\MysqlBuilder;
 
 class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
 {
-    protected $idArticle;
+    protected $idArticle = null;
     protected $title;
     protected $content;
     protected $urlImage;
-    protected $idCategory;
-    protected $id ;
-    protected $idPage ;
+    protected $idCategory = null;
+    protected $id;
+    protected $idPage = null;
 
 
     public function __construct()
