@@ -1,5 +1,8 @@
 $(document).ready(function () {
     let modalBtn = $('.modify')
+    let deleteBtn = $('.delete')
+    let deleteCloseBtn = $('.deleteClose-btn')
+    let deleteModal = $(".deleteModal")
     let modal = $(".modal")
     let closeBtn = $(".close-btn")
 
@@ -26,6 +29,12 @@ $(document).ready(function () {
     })
     closeBtn.click(()=>{
         modal.css("display", "none");
+    })
+    deleteBtn.click(function(){
+        let id = $(this).parents('tr').find('td').eq(0).text().trim()
+        deleteModal.css("display", "block");
+        $("[name='id']").val(id)
+
     })
 })
 
