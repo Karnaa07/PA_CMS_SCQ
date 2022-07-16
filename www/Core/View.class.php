@@ -29,7 +29,6 @@ class View // On définie nos vues
         $this->style = strtolower($template);
     }
 
-
     public function __toString():string
     {
         return "La vue est : ". $this->view;

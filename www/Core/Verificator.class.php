@@ -37,8 +37,6 @@ class Verificator
             }
             
             // a completer
-
-
         }
 
 
