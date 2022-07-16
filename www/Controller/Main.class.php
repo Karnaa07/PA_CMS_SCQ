@@ -16,8 +16,10 @@ class Main { // Définition de la classe Main
             //var_dump($_SESSION["user"]);
             $stats = new UserStats();
             $registeredStats = $stats-> registeredStats();
+            $mapDatas = $stats-> users_country();
             $view = new View("dashboard","back"); 
-            $view->assign('registeredStats',$registeredStats);
+            $view->assign('datas',[$registeredStats,$mapDatas]);
+  
         } else {
             //http_response_code(403);
             header("HTTP/1.1 403 No perms");
