@@ -9,6 +9,7 @@ use App\Core\Permissions;
 use App\Model\Article as ArticleModel;  // Alias de class User dans Model/User.class.php
 use App\Core\Mail;
 use App\Core\Crud as CrudUser;
+use App\Core\CrudArticles as ArticleCrud;
 
 class Article
 {
@@ -38,12 +39,35 @@ class Article
         }
     }
     public function articles()
-    {   
-         
-        $article = new Crud();
-        $displayArticles = $article->getArticles();
-        $view = new View("articles","back");
-        $view->assign("article", $displayArticles);      
+    {     
+        $users = CrudUser :: getInstance();
+        if (isset($_COOKIE['Connected']) && !empty($_COOKIE['Connected']) && isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
+            $token = $users -> tokenReturn('user', $_COOKIE['id']);
+            var_dump($token);
+            if ($token[0]['token'] == $_COOKIE['Connected']) {
+                $perms = new Permissions();
+                if ($perms->cando(3)) {
+                    $article = new ArticleCrud();
+                    if ($_POST) { // Secu a revoir
+                        if ($_POST['title']) {
+                            $article->updateArticles($_POST);
+                        } else {
+                            $article->deleteRow('idArticle', 'title', 'content', 'urlImage', 'updateAt', 'idCategory', 'idPage' , $_POST['idArticle']);
+                        }
+                    }
+                    $tabData = $article->displayArticles();
+                    $view = new View("articles", "back");
+                    $view->assign("tabData", $tabData);
+                 } else {
+                    //http_response_code(403);
+                    header("HTTP/1.1 403 No perms");
+                }
+            }else{
+                header('Location : /login');
+            }
+        }else{
+            header('Location : /login');
+        }     
     }
 }
 

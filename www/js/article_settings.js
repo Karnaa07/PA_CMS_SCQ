@@ -27,4 +27,13 @@ $(document).ready(function () {
     closeBtn.click(()=>{
         modal.css("display", "none");
     })
+    deleteCloseBtn.click(()=>{
+        deleteModal.css("display", "none");
+    })
+    deleteBtn.click(function(){
+        console.log('pipi')
+        let id = $(this).parents('tr').find('td').eq(0).text().trim()
+        deleteModal.css("display", "block");
+        $("[name='idPage']").val(id)
+    })
 })

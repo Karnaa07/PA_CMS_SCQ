@@ -41,7 +41,6 @@ class CrudPages
         ->getQuery();
         $queryPrepared = $this->pdo->query($req);
         var_dump($req);
-
     }
 
 }
