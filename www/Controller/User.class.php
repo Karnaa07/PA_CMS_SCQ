@@ -34,11 +34,16 @@ class User {
                     
                     if($exist["id"]){
                         // var_dump($exist['firstname']);
-                        setcookie('Connected',$exist['firstname'],time()+3600); 
+
+                    setcookie('Connected',$exist['token'],time()+3600);
+                        setcookie('id', $exist['id'], time()+3600 );
+                        $view = new View("dashboard","back");
+                        // var_dump($);
                         $user->setRole($exist['role_id']);
                         $perms = $user->getUserPerms($user->getRole());
                         foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; }
-                        header('Location: /dashboard'); // A refaire
+
+
                     }
                     else
                     {
@@ -89,10 +94,10 @@ class User {
     public function logout()
     {
         // Gestion de déconnexion 
-        // Supprimer le Token    
-        $_SESSION = [];
 
-        setcookie('Connected',"test",1);
+        // Supprimer le Token 
+        unset($_COOKIE['Connected']);   
+        setcookie('Connected','', time() - 4200, '/');
         header('Location: login');
     }
     public function pwdforget()
@@ -138,6 +143,8 @@ class User {
             }
         }
     }
+
+
 }
 
 
