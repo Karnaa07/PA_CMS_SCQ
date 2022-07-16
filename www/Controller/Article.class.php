@@ -14,28 +14,21 @@ use App\Core\CrudArticles as ArticleCrud;
 class Article
 {
     public function addArticle(){
-        $users = CrudUser ::getInstance();
-        if (isset($_COOKIE['Connected']) && !empty($_COOKIE['Connected']) && isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
-            $token = $users -> tokenReturn('user', $_COOKIE['id']);
-            if ($token[0]['token'] == $_COOKIE['Connected']) {
-                $perms = new Permissions();
-                if ($perms->cando(3) && $perms->cando(8)) { // right Back end access and create articles
-                    if (!empty($_POST)) {
-                        $article = new ArticleModel();
-                        $result = Verificator::checkForm($article->getArticleForm(), $_POST);
-                        $article->setArticle();
-                    }
-                    $view = new View("addArticle", "front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)
-                    $view->assign("article", $article);
-                } else {
-                    //http_response_code(403);
-                    header("HTTP/1.1 403 No perms");
-                }
-            }else{
-                header('Location : login');
+        $perms = new Permissions();
+        if($perms->cando(3) && $perms->cando(8)){ // right Back end access and create articles
+            $article = new ArticleModel();
+            if(!empty($_POST)){
+            $result = Verificator::checkForm($article->getArticleForm(), $_POST);
+            $article->setArticle();
+            echo('/////////////////////////////');
+            print_r($article);
+            $article->save("article"); 
             }
-        }else{
-            header('Location : login');
+            $view = new View("addArticle","front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)    
+            $view->assign("article", $article);
+        } else {
+            //http_response_code(403);
+            header("HTTP/1.1 403 No perms");
         }
     }
     public function articles()
@@ -53,7 +46,7 @@ class Article
                             $article->updateArticles($_POST);
                         } else {
                             $article->deleteRow('idArticle', 'title', 'content', 'urlImage', 'updateAt', 'idCategory', 'idPage' , $_POST['idArticle']);
-                        }
+                        } 
                     }
                     $tabData = $article->displayArticles();
                     $view = new View("articles", "back");
