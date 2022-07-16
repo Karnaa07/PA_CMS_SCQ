@@ -37,44 +37,19 @@ abstract class Sql
         $table=DBPREFIXE.$table;
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
-<<<<<<< HEAD
-        //$values=array_keys($columns);
-
-=======
-<<<<<<< HEAD
-        $table=DBPREFIXE.$table;
-        //$values=array_keys($columns);
-=======
->>>>>>> e89fbf526a194939086f3724fc34adbe180894eb
-
         $values=array_keys($columns);
         var_dump('toto');
         var_dump($this->getId());
-<<<<<<< HEAD
-
         if($this->getId() == null){
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
-
-=======
->>>>>>> feature/addPage
-        if($this->getId() == null){
-            $sql =  $this->builder-> insert($table, $columns)->getQuery();
-<<<<<<< HEAD
             var_dump($sql);
-        } else { 
-=======
-           // $queryPrepared = $this->pdo->query($sql);
->>>>>>> e89fbf526a194939086f3724fc34adbe180894eb
-            var_dump($sql);
-        }  else { 
+        }   else { 
             // $update = [];
             // foreach ($columns as $column=>$value)
             // {
             //     $update[] = $column."=:".$column;
             // }
             // $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
-<<<<<<< HEAD
-
             $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
@@ -85,23 +60,6 @@ abstract class Sql
         echo'<br>';
         //var_dump($columns);
 
-        var_dump($columns);
-
-=======
->>>>>>> feature/addPage
-            $sql =  $this->builder-> update($table, $columns)
-            -> where("id",$this->getId())
-            ->getQuery();
-            //var_dump($sql); 
-        } 
-        $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
-<<<<<<< HEAD
-        echo'<br>';
-        //var_dump($columns);
-=======
-        var_dump($columns);
->>>>>>> feature/addPage
->>>>>>> e89fbf526a194939086f3724fc34adbe180894eb
         if($table==DBPREFIXE.'user'){
             $queryPrepared->execute([
                 $columns['id'],
