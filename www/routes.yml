@@ -64,4 +64,3 @@
 /dashboard:
   controller: main
   action: home
-

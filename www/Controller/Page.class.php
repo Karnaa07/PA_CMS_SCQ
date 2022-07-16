@@ -44,11 +44,11 @@ class Page
                             fwrite($route, " controller: front \n");
                             fwrite($route, " action: $nomFichier \n");
                             fseek($controller, -1, SEEK_END);
-                            fwrite($controller, 'public function '. $nomFichier.' (){$view = new View("addArticle", "front");}}');
+                            fwrite($controller, 'public function '. $nomFichier.' (){$view = new View( "'.$nomFichier.'" , "front");}}');
                         }
                         
                     }
-                    $view = new View("addPage", "front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)
+                    $view = new View("addPage", "back"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)
                     $view->assign("page", $page);
                 } else {
                     //http_response_code(403);
