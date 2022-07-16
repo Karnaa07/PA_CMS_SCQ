@@ -23,7 +23,7 @@ class Crud
     }
 
     public function displayUsers(){
-        $req =  $this->builder-> select('waterlily_user', ["id","email","firstname","lastname","role_id"])
+        $req =  $this->builder-> select(DBPREFIXE.'user', ["id","email","firstname","lastname","role_id"])
         ->getQuery();
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
@@ -31,7 +31,7 @@ class Crud
     }
     public function updateUser($infos){
 
-        $req = $this->builder-> update('waterlily_user', $infos)
+        $req = $this->builder-> update(DBPREFIXE.'user', $infos)
         ->where("id",$infos['id'],"=")
         ->getQuery();
         // var_dump($req);
@@ -72,8 +72,8 @@ class Crud
         
             $sql =  $this->builder-> insert($table, $columns);
             // var_dump($sql);
-
     }
+    
 
 }
 ?>

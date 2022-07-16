@@ -53,6 +53,10 @@
   controller: user
   action: pwdforget
 
+/veryfieduser:
+  controller: user
+  action: verificated
+  
 /logout:
   controller: user
   action: logout
@@ -64,3 +68,10 @@
 /dashboard:
   controller: main
   action: home
+
+  
+/accountActivated:
+  controller: user
+  action: verificated
+
+

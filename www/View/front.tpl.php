@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <title>Template FRONT</title>
     <meta name="description" content="Description de ma page">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="../css/tpl.front.css" rel="stylesheet">
+
 </head>
-<body>
+<header>
 <nav>
+<<<<<<< HEAD
     <?php //include "View/".$this->view.".view.php"; ?>
 
 </body>
@@ -24,6 +28,8 @@
 </head>
 <header>
 <nav>
+=======
+>>>>>>> e89fbf526a194939086f3724fc34adbe180894eb
     <?php //Logo en php dans src ?>
     <div class="tplfront--navbar">
         <img class="tplfront--logo" src="../data/img/Logo.svg">
