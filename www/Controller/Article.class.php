@@ -10,6 +10,7 @@ use App\Model\Article as ArticleModel;  // Alias de class User dans Model/User.c
 use App\Core\Mail;
 use App\Core\Crud as CrudUser;
 use App\Core\CrudArticles as ArticleCrud;
+use App\Core\CrudPages as CrudPages;
 
 class Article
 {
@@ -26,7 +27,9 @@ class Article
                         $article->setArticle();
                         $article->save("article");
                     }
-                    $view = new View("addArticle", "front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)
+                    $listpages = $article->displayPages();
+                    $view->assign("listpages", $listpages); // recup les pages pour pouvoir ensuite ajouter un article dans une pages
+                    $view = new View("addArticle", "back"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)
                     $view->assign("article", $article);
                 } else {
                     //http_response_code(403);

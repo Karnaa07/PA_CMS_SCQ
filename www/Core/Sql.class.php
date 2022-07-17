@@ -40,7 +40,6 @@ abstract class Sql
 
         $values=array_keys($columns);
         //var_dump($values);
-
         if($this->getId() == null){
             $sql =  $this->builder
             -> insert($table, $columns)
