@@ -29,22 +29,31 @@ class Page
                         $unicity=$page->getOneBy('page',["name"=>$_POST['name']]);
                         if ($unicity==null) {
                             $result = Verificator::checkForm($page->getPageForm(), $_POST);
-                            $page->setPage();
-                            // var_dump($page);
-                            $page->save("page");
-                            $nomFichier = $_POST['name'];
-                            $nomFichier= trim($nomFichier);
-                            var_dump('namepage',$nomFichier);
-                            $nomFichier = str_replace("'","_",$nomFichier);
-                            $nomFichier = str_replace(" ","_",$nomFichier);
-                            $fichier = fopen("View/$nomFichier.view.php", 'a+');
-                            $route = fopen('routes.yml', 'a+');
-                            $controller = fopen('Controller/Front.class.php', 'r+');
-                            fwrite($route, "/$nomFichier: \n");
-                            fwrite($route, " controller: front \n");
-                            fwrite($route, " action: $nomFichier \n");
-                            fseek($controller, -1, SEEK_END);
-                            fwrite($controller, 'public function '. $nomFichier.' (){$view = new View( "'.$nomFichier.'" , "front");}}');
+                            if(count($result)<1){
+                                $page->setPage();
+                                // var_dump($page);
+                                $page->save("page");
+                                $nomFichier = $_POST['name'];
+                                $nomFichier= trim($nomFichier);
+                                var_dump('namepage',$nomFichier);
+                                $nomFichier = str_replace("'","_",$nomFichier);
+                                $nomFichier = str_replace(" ","_",$nomFichier);
+                                $fichier = fopen("View/$nomFichier.view.php", 'a+');
+                                $route = fopen('routes.yml', 'a+');
+                                $controller = fopen('Controller/Front.class.php', 'r+');
+                                fwrite($route, "/$nomFichier: \n");
+                                fwrite($route, " controller: front \n");
+                                fwrite($route, " action: $nomFichier \n");
+                                fseek($controller, -1, SEEK_END);
+                                fwrite($controller, 'public function '. $nomFichier.'(){$view = new View("'.$nomFichier.'", "front");}}');
+                            }
+                            else{
+                                echo $result[0];
+                            }
+                            
+                        }
+                        else{
+                            echo "cette page existe déja";
                         }
                         
                     }
@@ -79,12 +88,33 @@ class Page
                             $id =$_POST['idPage'];
                             $name = $page->namePage('page',$id);
                             $namePage = $name[0]['name'];
-                          
                             $namePage = str_replace("'","_",$namePage);
                             $namePage = str_replace(" ","_",$namePage);
                             
                             $page->deleteRow('page', 'idPage', $_POST['idPage']);
                             unlink("View/$namePage.View.php");
+                            $ptr = fopen("routes.yml", "r");
+                            $contenu = fread($ptr, filesize("routes.yml"));
+                            /* On a plus besoin du pointeur */
+                            fclose($ptr);
+                            $contenu = explode(PHP_EOL, $contenu);
+                            $nomRoute = '/'.$namePage.': '; 
+                            for($i=0; $i<count($contenu); $i++){
+                                if($nomRoute == $contenu[$i]){
+                                    unset($contenu[$i]);
+                                    $i++;
+                                    unset($contenu[$i]);
+                                    $i++;
+                                    unset($contenu[$i]);
+                                }
+                            }
+                            $contenu = array_values($contenu); /* Ré-indexe l'array */
+    
+                            /* Puis on reconstruit le tout et on l'écrit */
+                            $contenu = implode(PHP_EOL, $contenu);
+                            $ptr = fopen("routes.yml", "w");
+                            fwrite($ptr, $contenu);
+
                         }
                     }
                     $tabData = $page->displayPages();

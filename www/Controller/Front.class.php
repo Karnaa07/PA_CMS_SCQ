@@ -1,4 +1,4 @@
-<?
+<?php
 namespace App\Controller;
 
 use App\Core\CleanWords;

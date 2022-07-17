@@ -98,6 +98,7 @@ class User {
         // Supprimer le Token 
         unset($_COOKIE['Connected']);   
         setcookie('Connected','', time() - 4200, '/');
+
         header('Location: login');
     }
     public function pwdforget()
