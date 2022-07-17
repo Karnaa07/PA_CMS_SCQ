@@ -37,16 +37,13 @@ abstract class Sql
         $table=DBPREFIXE.$table;
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
-
         $values=array_keys($columns);
         var_dump('toto');
         var_dump($this->getId());
         if($this->getId() == null){
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
-           // $queryPrepared = $this->pdo->query($sql);
             var_dump($sql);
-            
-        } else { 
+        }   else { 
             // $update = [];
             // foreach ($columns as $column=>$value)
             // {
@@ -56,11 +53,13 @@ abstract class Sql
             $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
-            //var_dump($sql); 
-        } 
-        var_dump($sql); 
+            //var_dump($sql);
+        }
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
-        var_dump($columns);
+
+        echo'<br>';
+        //var_dump($columns);
+
         if($table==DBPREFIXE.'user'){
             $queryPrepared->execute([
                 $columns['id'],
@@ -68,7 +67,9 @@ abstract class Sql
                 $columns['lastname'],
                 $columns['email'],
                 $columns['password'],
+                $columns['contry'],
                 $columns['status'],
+                $columns['role_id'],
                 $columns['token']
             ]);
         }
@@ -86,7 +87,6 @@ abstract class Sql
         -> getQuery();
         $queryPrepared = $this->pdo->query($req);
         $result = $queryPrepared->fetch();
-        //var_dump($result);
         if (password_verify($password,$result["password"])){
             
             $_SESSION["user"]["permissions"] = [];
@@ -141,8 +141,7 @@ abstract class Sql
         $test->execute();    
     }
     public function setBasicUser(?array $usr){
-        $req =  $this->builder-> update(DBPREFIXE.'user', $usr)
-        -> where("name",$usr['name'])
+        $req =  $this->builder-> update(DBPREFIXE.'user', ["role_id"=>3])
         -> where("email",$usr['email'])
         -> getQuery();
         $test = $this->pdo->prepare($req);

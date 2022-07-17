@@ -10,9 +10,9 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     protected $lastname = null;
     protected $email;
     protected $password;
+    protected $contry;
     protected $status = 0;
-    protected $role_id = null;
-    protected $perms = null;
+    protected $role_id = 4;
     protected $token = null;
 
     public function __construct()
@@ -85,6 +85,22 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     /**
      * @return string
      */
+    public function getContry(): string
+    {
+        return $this->contry;
+    }
+
+    /**
+     * @param string $contry
+     */
+    public function setContry(string $contry): void
+    {
+        $this->contry = ucfirst(strtolower(trim($contry)));
+    }
+
+    /**
+     * @return string
+     */
     public function getPassword(): string
     {
         return $this->password;
@@ -113,14 +129,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         $this->status = $status;
     }
-    public function getPerms(): array
-    {
-        return $this->perms;
-    }
-    public function setPerms(array $perms): void
-    {
-        $this->perms = $perms;
-    }
+
 
     public function getRole(): int
     {
@@ -198,6 +207,15 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "max"=>100,
                     "error"=>"Nom incorrect"
                 ],
+                "contry"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Votre pays ...",
+                    "class"=>"inputForm",
+                    "id"=>"paysForm",
+                    "min"=>2,
+                    "max"=>50,
+                    "error"=>"Nom incorrect"
+                ],
             ]
         ];
     }
@@ -265,8 +283,11 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
             $this->setLastname($_POST['lastname']);
         if(!empty($_POST['role_id']))
             $this->setRole($_POST['role_id']);
+        if(!empty($_POST['contry']))
+            $this->setContry($_POST['contry']);
         $this->generateToken();
         $this->setStatus(0);
+
     }
 
 

@@ -16,7 +16,7 @@ class CrudPages
     }
 
     public function displayPages(){
-        $req =  $this->builder-> select('waterlily_page', ["idPage","name"])
+        $req =  $this->builder-> select(DBPREFIXE."page", ["idPage","name"])
         ->getQuery();
         var_dump($req);
         $queryPrepared = $this->pdo->prepare($req);
@@ -42,6 +42,15 @@ class CrudPages
         $queryPrepared = $this->pdo->query($req);
         var_dump($req);
 
+    }
+
+    public function namePage(string $table, int $id){
+        $tableBD=DBPREFIXE.$table;
+        $req = $this->builder-> select($tableBD, ['name'])
+        ->where('idPage',$id,"=")
+        ->getQuery();
+        $queryPrepared = $this->pdo->query($req);
+        return $queryPrepared->fetchAll();
     }
 
 }

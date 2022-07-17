@@ -7,10 +7,10 @@
   controller: admin
   action: media
 
-# /plugin:
-#   controller: admin
-#   action: plugin
-
+/plugin:
+  controller: admin
+  action: plugin
+  
 /pages:
   controller: page
   action: pages_settings
@@ -69,6 +69,12 @@
   controller: main
   action: home
 
+
+  
+/accountActivated:
+  controller: user
+  action: verificated
+
 /about:
   controller: about
   action: aboutUs
@@ -76,4 +82,5 @@
 /apparence:
   controller: about
   action: aboutUs
+
 

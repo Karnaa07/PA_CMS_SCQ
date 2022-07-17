@@ -11,9 +11,6 @@ RUN pecl install yamL
 RUN docker-php-ext-configure gd \
         --with-freetype-dir=/usr/include/freetype2 \
     && docker-php-ext-install gd
-
-
-
 # Workaround for write permission on write to MacOS X volumes
 # See https://github.com/boot2docker/boot2docker/pull/534
 RUN usermod -u 1000 www-data
