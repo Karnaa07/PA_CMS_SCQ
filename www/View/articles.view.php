@@ -2,7 +2,17 @@
 <link rel="stylesheet" type="text/css" href="../css/datatables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="../js/dtb.js"></script>
+<script type="text/javascript" src="../js/dtb.js"></script>
+
 <link href="../css/article.css" rel="stylesheet">
+
+<a href="/addArticle" class="article--addContainer">
+  <button class="article--button">
+    <img class="article--addbutton"src="../data/snippets/Add.svg">
+    <label>Ajouter</label>
+  </button>
+</a>
+
 
 
 <table id="table_id" class="display cell-border" >

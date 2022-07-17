@@ -5,6 +5,35 @@
   <script src="https://cdn.tiny.cloud/1/9i4ty3dj7s5dyw4g2xbzg2u7udwf4mliqo7r71asossk42gb/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
+<script>
+  var pages = []
+</script>
+<?php 
+$listpages = 
+[
+  [ 
+    'idPage' => 1 ,
+    'name'=>'Connexion'
+  ],
+  [ 
+    'idPage' => 2 ,
+    'name'=>'Inscription'
+  ],
+  [ 
+    'idPage' => 3 ,
+    'name'=>'Page Contact'
+  ],
+  [ 
+    'idPage' => 4 ,
+    'name'=>'Page Accueuil'
+  ]
+] ;
+for ($i=0; $i < count($listpages) ; $i++) 
+    { 
+      echo('<script> pages.push({"idPage" : '.$listpages[$i]["idPage"].','.'"name" : "'.$listpages[$i]["name"].'"})</script>');
+    }
+?>
+  <script src="../js/addArticle.js"></script>
   <script>
     tinymce.init({
       selector: 'textarea',

@@ -1,46 +1,19 @@
-<!-- <!DOCTYPE html>
-<html lang="fr">
-<head>
-	<meta charset="utf-8">
-	<title>Pages_Settings</title>
-    <link href="../css/pages_settings.css" rel="stylesheet">
-</head>
-<body>
-    <section class="section1">
-        <div class="container_view_pages">
-            <article class="benefit">
-                <a href="#">    
-                    <img src="../data/img/create_pages.svg">
-                </a>
-                <a href="#">
-                    <img src="../data/img/modifie_pages.svg">
-                </a>
-                <a href="#">
-                    <img src="../data/img/settings_pages_log.svg">
-                </a>
-                <a href ="#">
-                    <img src="../data/img/delete_pages.svg">
-                </a>
-            </article>
-        </div>
-    </section>
-    <section class= "section1">
-        <div class="container_view_pages">
-            <article class="benefit">
-                <a href="#">
-                    <img src="../data/img/vos_pages.svg">
-                </a>
-            </article>    
-        </div>
-    </section>
-</body>
-</html> -->
+
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 <link rel="stylesheet" type="text/css" href="../css/datatables.css">
+<link rel="stylesheet" type="text/css" href="../css/page.css">
+
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="../js/dtb.js"></script>
+
+<a href="/addPage" class="page--addContainer">
+  <button class="page--button">
+    <img class="page--addbutton"src="../data/snippets/Add.svg">
+    <label>Ajouter</label>
+  </button>
+</a>
 
 <table id="table_id" class="display cell-border" >
 <!-- <input type="text" id="mySearchText" placeholder="Rechercher..."> -->

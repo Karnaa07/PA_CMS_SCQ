@@ -125,6 +125,14 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "id"=>"titleForm",
                     "error"=>"Titre incorrect",
                 ],
+                "idPage"=>[
+                    "type"=>"select",
+                    "id"=>"selectPage",
+                    "placeholder"=>"Dans quel page afficher votre article ?",
+                    "option"=>[],
+                    "class"=>"inputForm",
+                    "error"=>"Contenu incorect",
+                ],
                 "content"=>[
                     "type"=>"textarea",
                     "placeholder"=>"Description breve de votre article",
@@ -148,7 +156,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "class"=>"inputForm",
                     "id"=>"urlImageForm",
                     "error"=>"Contenu incorect",
-                    ],
+                ],
             ]
         ];
     }
