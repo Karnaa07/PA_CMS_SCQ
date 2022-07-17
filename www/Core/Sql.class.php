@@ -74,7 +74,7 @@ abstract class Sql
             ]);
         }
         else{
-            // var_dump($columns);
+            var_dump($columns);
             $queryPrepared->execute($columns);
         }
     }
@@ -146,6 +146,6 @@ abstract class Sql
         -> getQuery();
         $test = $this->pdo->prepare($req);
         $test->execute();  
-
     }
+
 }

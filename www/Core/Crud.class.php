@@ -73,7 +73,13 @@ class Crud
             $sql =  $this->builder-> insert($table, $columns);
             // var_dump($sql);
     }
-    
+    public function getArticles(){
+        $req =  $this->builder-> insert('waterlily_article', ["idArticle","title","content","idCategory","idPage","id"])
+        ->getQuery();
+        $queryPrepared = $this->pdo->prepare($req);
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll();
+    }
 
 }
-?>
+?> 

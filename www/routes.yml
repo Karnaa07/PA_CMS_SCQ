@@ -16,7 +16,7 @@
   action: pages_settings
 
 /articles:
-  controller: admin
+  controller: article
   action: articles
 
 /user_settings:
@@ -24,9 +24,9 @@
   action: user_settings
 
 
-/categories:
-  controller: admin
-  action: categorie
+# /categories:
+#   controller: admin
+#   action: categorie
 
 /contact:
   controller: main
@@ -69,8 +69,18 @@
   controller: main
   action: home
 
+
   
 /accountActivated:
   controller: user
   action: verificated
+
+/about:
+  controller: about
+  action: aboutUs
+
+/apparence:
+  controller: about
+  action: aboutUs
+
 
