@@ -9,7 +9,6 @@ abstract class Sql
     private $pdo;
     private $table;
     private $builder;
-    
     public function __construct() // Constructeur qui connect à la BDD à la création d'un objet de la classe SQL
     {
         //Se connecter à la bdd
@@ -35,22 +34,26 @@ abstract class Sql
     }
     public function save($table) // Enregistrement en BDD de valeurs provenants de formulaires
     {
+        $table=DBPREFIXE.$table;
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
-        $table=DBPREFIXE.$table;
-        //$values=array_keys($columns);
+
+        $values=array_keys($columns);
+        //var_dump($values);
+
         if($this->getId() == null){
-            $sql =  $this->builder-> insert($table, $columns)->getQuery();
+            $sql =  $this->builder
+            -> insert($table, $columns)
+            -> getQuery();
+            echo('<br><br>');
             var_dump($sql);
-        } else { 
+        }  else { 
             $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
-            //var_dump($sql); 
-        } 
+            //var_dump($sql);
+        }
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
-        echo'<br>';
-        //var_dump($columns);
         if($table==DBPREFIXE.'user'){
             $queryPrepared->execute([
                 $columns['id'],
@@ -65,10 +68,13 @@ abstract class Sql
             ]);
         }
         else{
-            // var_dump($columns);
+            //var_dump($columns);
+            echo('<br>');
+            var_dump($queryPrepared);
             $queryPrepared->execute($columns);
         }
     }
+
     public function exist_user($table,$email,$password)
     {
         $table=DBPREFIXE.$table;
@@ -90,7 +96,7 @@ abstract class Sql
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
     }
-
+   
     public function getOneBy(string $table, ?array $where=null) : ?array 
     {
         $table=DBPREFIXE.$table;
@@ -137,6 +143,6 @@ abstract class Sql
         -> getQuery();
         $test = $this->pdo->prepare($req);
         $test->execute();  
-
     }
+
 }

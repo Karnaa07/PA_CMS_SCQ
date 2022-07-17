@@ -22,11 +22,13 @@
         <img id="logo" src="../data/img/Logo.svg"> <br><br><br> 
         <ul>
             <li><a href="/dashboard"><img src="../data/snippets/Dashboard.svg">Dashboard</a></li>
-            <li><a href="#"><img src="../data/snippets/Media.svg">Media</a></li>
-            <li><a href="#"><img src="../data/snippets/Plugins.svg">Plugin</a></li>
-            <li><a href="#"><img src="../data/snippets/Page.svg">Pages</a></li>
-            <li><a href="#"><img src="../data/snippets/Articles.svg">Articles</a></li>
-            <li><a href="#"><img src="../data/snippets/Categories.svg">Categories</a><li>
+            <li><a href="/media"><img src="../data/snippets/Media.svg">Media</a></li>
+            <!-- <li><a href="#"><img src="../data/snippets/Plugins.svg">Plugin</a></li> manque de temps -->
+            <li><a href="/pages"><img src="../data/snippets/Page.svg">Pages</a></li>
+            <li><a href="/articles"><img src="../data/snippets/Articles.svg">Articles</a></li>
+            <!-- <li><a href="#"><img src="../data/snippets/Categories.svg">Categories</a><li> -->
+            <li><a href="/about"><img src="../data/snippets/Categories.svg">En savoir plus</a></li>
+            <li><a href="/apparence"><img src="../data/snippets/apparence.svg">Apparence</a></li>
             <hr/>
             <li><a href="/user_settings"><img src="../data/snippets/Utilisateurs.svg">Utilisateurs</a></li>
             
@@ -41,10 +43,10 @@
         <br><br>
 
             <div id="snippet">
-                <a href = "#"><img src="../data/snippets/Instagram.svg"> </a>
-                <a href = "#"><img src="../data/snippets/Facebook.svg"> </a>
-                <a href = "#"><img src="../data/snippets/Twitter.svg"> </a>
-                <a href = "#"><img src="../data/snippets/Linkedin.svg"> </a>
+                <!-- <a href = "#"><img src="../data/snippets/Facebook.svg"> </a> -->
+                <a href = "https://twitter.com/waterlily_off"><img src="../data/snippets/Twitter.svg"> </a>
+                <!-- <a href = "https://www.instagram.com/esgiparis/?hl=fr"><img src="../data/snippets/Instagram.svg"> </a> -->
+                <a href = "https://www.linkedin.com/company/waterlily-official/about/"><img src="../data/snippets/Linkedin.svg"> </a>
             </div>
 
     </nav>
@@ -56,7 +58,7 @@
             </div>
             <div id="snippet">
                 <a href = "/login"><img src="../data/snippets/Profile.svg"> </a>
-                <a href = "/login"><img src="../data/snippets/Deconnexion.svg"> </a>
+                <a href = "/logout"><img src="../data/snippets/Deconnexion.svg"> </a>
                 <a href = "#"><img src="../data/snippets/Sombre.svg"> </a>
             </div>
             <div id="profile">

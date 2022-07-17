@@ -2,6 +2,8 @@
 namespace App\Model;
 
 use App\Core\Sql;
+use App\Core\MysqlBuilder;
+
 
 class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
 {
@@ -9,7 +11,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     protected $title;
     protected $content;
     protected $urlImage;
-    protected $idCategory = null;
+    protected $idCategory;
     protected $id = null;
     protected $idPage = null;
 
@@ -17,18 +19,19 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     public function __construct()
     {
         parent::__construct();
+      
     }
 
 
     /**
      * @return null|int
      */
-    public function getId(): ?int
+    public function getIdArticle(): ?int
     {
         return $this->idArticle;
     }
 
-        /**
+    /**
      * @return string
      */
     public function getContent(): string
@@ -44,12 +47,33 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
         return $this->title;
     }
 
-        /**
+    /**
      * @return string
      */
     public function getUrlImage(): string
     {
         return $this->urlImage;
+    }
+    /**
+     * @return string
+     */ 
+    public function getIdCategory(): string
+    {
+        return $this->idCategory;
+    }
+    /**
+     * @return null|int
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+    /**
+     * @return null|int
+     */
+    public function getIdPage(): ?int
+    {
+        return $this->idPage;
     }
 
     /**
@@ -66,6 +90,21 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         $this->content = trim($content);
     }
+     /**
+    * @param string $urlImage
+    */
+    public function setUrlImage(string $urlImage): void
+    {
+        $this->urlImage = trim($urlImage);
+    }
+     /**
+    * @param string $urlImage
+    */
+    public function setIdCategory(string $category): void
+    {
+        $this->idCategory = trim($category);
+    }
+
     
 //faut il un setter pour l'url ou faut il le générer?
     public function getArticleForm(): array
@@ -80,7 +119,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
             'inputs'=>[
                 "title"=>[
                     "type"=>"text",
-                    "placeholder"=>"Titre de l'article...",
+                    "placeholder"=>"Titre de votre article...",
                     "required"=>true,
                     "class"=>"inputForm",
                     "id"=>"titleForm",
@@ -88,7 +127,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                 ],
                 "content"=>[
                     "type"=>"textarea",
-                    "placeholder"=>"",
+                    "placeholder"=>"Description breve de votre article",
                     "required"=>true,
                     "class"=>"inputForm",
                     "id"=>"contentArticleForm",
@@ -100,11 +139,12 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "required"=>true,
                     "class"=>"inputForm",
                     "id"=>"urlImageForm",
-                    "error"=>"Contenu incorect",
+                    "error"=>"Image manquante",
                     ],
                 "idCategory"=>[
                     "type"=>"select",
-                    "option"=>['ok','good'],
+                    "placeholder"=>"Quelle est la catégorie de votre article ?",
+                    "option"=>['Publicité','Documentation','Etude','Information','Revue','Debat'],
                     "class"=>"inputForm",
                     "id"=>"urlImageForm",
                     "error"=>"Contenu incorect",
@@ -115,5 +155,8 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     public function setArticle(){
         $this->setTitle($_POST["title"]);
         $this->setContent($_POST["content"]);
+        $this->setUrlImage($_POST["image"]);
+        $this->setIdCategory($_POST["idCategory"]);
+
     }
 }

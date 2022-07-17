@@ -5,6 +5,7 @@ use App\Core\MysqlBuilder;
 
 class Crud
 {
+    private static $instance= null;
     public function __construct()
     {
         $this->builder = new MysqlBuilder();
@@ -13,6 +14,12 @@ class Crud
         }catch (\Exception $e){
             die("Erreur SQL : ".$e->getMessage());
         }
+    }
+    public static function getInstance(){
+        if(is_null(self::$instance)){
+            self::$instance=new Crud();
+        }
+        return self::$instance;
     }
 
     public function displayUsers(){
@@ -34,6 +41,27 @@ class Crud
         //var_dump($queryPrepared);
         //return "done";
     }
+
+    public function tokenReturn(string $table , int $id){
+        $table=DBPREFIXE.$table;
+        $req =  $this->builder-> select($table, ['token'])
+        -> where("id", $id)
+        -> getQuery();
+        $reqPrep = $this->pdo->prepare($req);
+        $reqPrep -> execute();
+        return $reqPrep->fetchAll();
+
+    }
+    
+    public function deleteRow(string $table, string $column, string $id){
+        $tableBD=DBPREFIXE.$table;
+        $req = $this->builder-> delete($tableBD)
+        ->where($column,$id,"=")
+        ->getQuery();
+        $queryPrepared = $this->pdo->query($req);
+        var_dump($req);
+
+    }
     public function addUser(){
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
@@ -45,7 +73,13 @@ class Crud
             $sql =  $this->builder-> insert($table, $columns);
             // var_dump($sql);
     }
-    
+    // public function getArticles(){
+    //     $req =  $this->builder-> insert('waterlily_article', ["idArticle","title","content","idCategory","idPage","id"])
+    //     ->getQuery();
+    //     $queryPrepared = $this->pdo->prepare($req);
+    //     $queryPrepared->execute();
+    //     return $queryPrepared->fetchAll();
+    // }
 
 }
-?>
+?> 
