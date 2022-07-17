@@ -16,9 +16,9 @@ class CrudArticles
     }
 
     public function displayArticles(){
-        $req =  $this->builder-> select('waterlily_articles', ["idArticle","title","content","urlImage","updateAt","idCategory","idPage","id"])
+        $req =  $this->builder-> select('waterlily_article', ["idArticle","title","content","urlImage"])
         ->getQuery();
-        var_dump($req);
+        //var_dump($req);
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
@@ -41,8 +41,16 @@ class CrudArticles
         ->getQuery();
         $queryPrepared = $this->pdo->query($req);
         var_dump($req);
-
     }
+    // public function insertArticle(string $infos){
+    //     $tableBD=DBPREFIXE.$table;
+    //     $req = $this->builder-> delete($tableBD)
+    //     ->where($column,$id,"=")
+    //     ->getQuery();
+    //     $queryPrepared = $this->pdo->query($req);
+    //     var_dump($req);
+    // }
+
 
 }
 ?>

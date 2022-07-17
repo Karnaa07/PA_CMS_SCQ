@@ -39,7 +39,8 @@ class Page
             }else{
                 header('Location : /login');
             }
-        }else{
+        }
+        else{
             header('Location : /login');
         }
     }

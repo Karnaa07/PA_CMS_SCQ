@@ -11,8 +11,8 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     protected $title;
     protected $content;
     protected $urlImage;
-    protected $idCategory = null;
-    protected $id;
+    protected $idCategory;
+    protected $id = null;
     protected $idPage = null;
 
 
@@ -26,12 +26,12 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     /**
      * @return null|int
      */
-    public function getId(): ?int
+    public function getIdArticle(): ?int
     {
         return $this->idArticle;
     }
 
-        /**
+    /**
      * @return string
      */
     public function getContent(): string
@@ -47,12 +47,33 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
         return $this->title;
     }
 
-        /**
+    /**
      * @return string
      */
     public function getUrlImage(): string
     {
         return $this->urlImage;
+    }
+    /**
+     * @return string
+     */ 
+    public function getIdCategory(): string
+    {
+        return $this->idCategory;
+    }
+    /**
+     * @return null|int
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+    /**
+     * @return null|int
+     */
+    public function getIdPage(): ?int
+    {
+        return $this->idPage;
     }
 
     /**
@@ -74,7 +95,14 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     */
     public function setUrlImage(string $urlImage): void
     {
-        $this->content = trim($urlImage);
+        $this->urlImage = trim($urlImage);
+    }
+     /**
+    * @param string $urlImage
+    */
+    public function setIdCategory(string $category): void
+    {
+        $this->idCategory = trim($category);
     }
 
     
@@ -128,5 +156,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
         $this->setTitle($_POST["title"]);
         $this->setContent($_POST["content"]);
         $this->setUrlImage($_POST["image"]);
+        $this->setIdCategory($_POST["idCategory"]);
+
     }
 }

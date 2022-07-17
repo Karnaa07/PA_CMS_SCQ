@@ -18,9 +18,12 @@ class MysqlBuilder implements QueryBuilder {
     public function insert(string $table,array $values):QueryBuilder
     {
         $this->reset();
-        var_dump('toto', $table);
+        //var_dump('toto', $table);
        if($table==DBPREFIXE.'page'){
         $this->query->base="INSERT INTO ".$table." (name) VALUES ('".$values['name']."')";
+       }
+       if($table==DBPREFIXE.'article'){
+        $this->query->base="INSERT INTO (".implode(", ",array_keys($values)).") VALUES ('".implode(", ",$values).")')";
        }
        else{
         $this->query->base="INSERT INTO ".$table." VALUES ( null ".implode(", ",$values).")";
