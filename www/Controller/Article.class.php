@@ -37,5 +37,13 @@ class Article
             header('Location : login');
         }
     }
+    public function articles()
+    {   
+         
+        $article = new Crud();
+        $displayArticles = $article->getArticles();
+        $view = new View("articles","back");
+        $view->assign("article", $displayArticles);      
+    }
 }
 

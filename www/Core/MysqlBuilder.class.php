@@ -14,7 +14,6 @@ class MysqlBuilder implements QueryBuilder {
         $this->query->base="SELECT ". implode(', ',$columns)." FROM ".$table." ";
         return $this;
     }
-
     public function insert(string $table,array $values):QueryBuilder
     {
         $this->reset();
@@ -40,11 +39,12 @@ class MysqlBuilder implements QueryBuilder {
             //var_dump($strout);
             $this->query->base="UPDATE ".$table." SET ".$strout;
         }
-        else{
+        else {
             var_dump('test');
         }
-                return $this;
+            return $this;
     }
+
 
     public function delete(string $table):QueryBuilder
     {
@@ -53,22 +53,29 @@ class MysqlBuilder implements QueryBuilder {
         return $this;
 
     }
-    public function join(string $table,string $id):QueryBuilder
-    {
-        $this->query->join="JOIN ".$table." USING(".$id.")";
-        return $this;
-    }
-    public function where(string $column, string $value, string $operator="="):QueryBuilder
-    {
-        $this->query->where[]=$column.$operator."'".$value."'";
-        return $this;
-    }
 
+    public function where(string $column, string $value , string $operator="=",bool $functionSQL = false):QueryBuilder
+    {
+        $functionSQL ? $this->query->where[]=$column.$operator.$value : $this->query->where[]=$column.$operator."'".$value."'" ;
+        return $this;
+    }
     public function limit(int $from,int $offset):QueryBuilder
     {
         $this->query->limit=" LIMIT ".$from.", ".$offset;
         return $this;
     }
+
+    public function group(string $column):QueryBuilder
+    {
+        $this->query->group="GROUP BY ".$column."";
+        return $this;
+    }
+    public function join(string $table,string $id):QueryBuilder
+    {
+        $this->query->join="JOIN ".$table." USING(".$id.")";
+        return $this;
+    }
+
 
     public function getQuery(): string
     {
@@ -80,7 +87,9 @@ class MysqlBuilder implements QueryBuilder {
         if(isset($query->limit)){
             $sql .= $query->limit;
         }
-        
+        if(isset($query->group)){
+            $sql .= $query->group;
+        }
         $sql .= ';';
         return $sql;
     }

@@ -7,6 +7,7 @@ use App\Core\View;
 use App\Core\MysqlBuilder;
 use App\Core\Crud as CrudUser;
 use App\Core\Permissions;
+use App\Core\UserStats;
 use App\Model\User as UserModel; 
 
 class Admin

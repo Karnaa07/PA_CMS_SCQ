@@ -22,8 +22,9 @@ class Crud extends CrudAbstract
         return self::$instance;
     }
 
+
     public function display(){
-        $req =  $this->builder-> select('waterlily_user', ["id","email","firstname","lastname","role_id"])
+        $req =  $this->builder-> select(DBPREFIXE.'user', ["id","email","firstname","lastname","role_id"])
         ->getQuery();
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
@@ -31,7 +32,7 @@ class Crud extends CrudAbstract
     }
     public function update($infos){
 
-        $req = $this->builder-> update('waterlily_user', $infos)
+        $req = $this->builder-> update(DBPREFIXE.'user', $infos)
         ->where("id",$infos['id'],"=")
         ->getQuery();
         // var_dump($req);
@@ -63,8 +64,14 @@ class Crud extends CrudAbstract
         
             $sql =  $this->builder-> insert($table, $columns);
             // var_dump($sql);
-
+    }
+    public function getArticles(){
+        $req =  $this->builder-> insert('waterlily_article', ["idArticle","title","content","idCategory","idPage","id"])
+        ->getQuery();
+        $queryPrepared = $this->pdo->prepare($req);
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll();
     }
 
 }
-?>
+?> 

@@ -7,6 +7,7 @@ class Verificator
 {
     public static function checkForm($config, $data): array
     {
+        
         $result = [];
         //Le nb de inputs envoyés ?
         if( count($data) != count($config['inputs'])){
@@ -15,7 +16,6 @@ class Verificator
         // (Inspecter l'élément ajout d'un champ)
 
         foreach ($config['inputs'] as $name=>$input){ // ON boucle sur les données de nos inputs pour effectuer des vérifications
-
             if(!isset($data[$name]) ){
                 $result[] = "Le champs ".$name." n'existe pas";
             }
@@ -23,8 +23,10 @@ class Verificator
             if(empty($data[$name]) && !empty($input["required"]) ){
                 $result[] = "Le champs ".$name." ne peut pas être vide";
             }
-
-            if($input["type"] == "email" && !self::checkEmail($data[$name]) ){
+            if($input["id"] == "nameForm" && self::checkName($data[$name])){
+                $result[] = $input["error"];
+            }
+            if($input["type"] == "email" && !self::checkEmail($data[$name])){
                 $result[] = $input["error"];
             }
 
@@ -37,8 +39,6 @@ class Verificator
             }
             
             // a completer
-
-
         }
 
 
@@ -49,6 +49,11 @@ class Verificator
     public static function checkEmail($email): bool
     {
        return filter_var($email, FILTER_VALIDATE_EMAIL); // On vérifie si le champ mail contient une valeur d'email
+    }
+
+    public static function checkName($name): bool
+    {
+      return preg_match("/([^A-Za-z0-9\s])/", $name, $match);		
     }
 
 
