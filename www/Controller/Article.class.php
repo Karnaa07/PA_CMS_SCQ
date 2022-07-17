@@ -27,10 +27,11 @@ class Article
                         $article->setArticle();
                         $article->save("article");
                     }
-                    $listpages = $article->displayPages();
-                    $view->assign("listpages", $listpages); // recup les pages pour pouvoir ensuite ajouter un article dans une pages
+                    $page=new CrudPages();
+                    $listpages = $page->displayPages();
                     $view = new View("addArticle", "back"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)
                     $view->assign("article", $article);
+                    $view->assign("listpages", $listpages); // recup les pages pour pouvoir ensuite ajouter un article dans une pages
                 } else {
                     //http_response_code(403);
                     header("HTTP/1.1 403 No perms");

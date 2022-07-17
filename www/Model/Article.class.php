@@ -12,8 +12,8 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     protected $content;
     protected $urlImage;
     protected $idCategory;
-    protected $id = null;
-    protected $idPage = null;
+    protected $id; //recup id du user connect champs hiden -> 
+    protected $idPage; //
 
 
     public function __construct()
@@ -124,6 +124,14 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "class"=>"inputForm",
                     "id"=>"titleForm",
                     "error"=>"Titre incorrect",
+                ],
+                "idPage"=>[
+                    "type"=>"select",
+                    "id"=>"selectPage",
+                    "placeholder"=>"Dans quel page afficher votre article ?",
+                    "option"=>[],
+                    "class"=>"inputForm",
+                    "error"=>"Contenu incorect",
                 ],
                 "content"=>[
                     "type"=>"textarea",
