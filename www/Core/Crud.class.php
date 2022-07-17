@@ -3,7 +3,7 @@ namespace App\Core;
 use App\Core\MysqlBuilder;
 
 
-class Crud
+class Crud extends CrudAbstract
 {
     private static $instance= null;
     public function __construct()
@@ -22,14 +22,15 @@ class Crud
         return self::$instance;
     }
 
-    public function displayUsers(){
+
+    public function display(){
         $req =  $this->builder-> select(DBPREFIXE.'user', ["id","email","firstname","lastname","role_id"])
         ->getQuery();
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
     }
-    public function updateUser($infos){
+    public function update($infos){
 
         $req = $this->builder-> update(DBPREFIXE.'user', $infos)
         ->where("id",$infos['id'],"=")
@@ -53,15 +54,6 @@ class Crud
 
     }
     
-    public function deleteRow(string $table, string $column, string $id){
-        $tableBD=DBPREFIXE.$table;
-        $req = $this->builder-> delete($tableBD)
-        ->where($column,$id,"=")
-        ->getQuery();
-        $queryPrepared = $this->pdo->query($req);
-        var_dump($req);
-
-    }
     public function addUser(){
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));

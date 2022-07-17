@@ -83,14 +83,14 @@ class Page
                     $page = new PageCrud();
                     if ($_POST) { // Secu a revoir
                         if ($_POST['name']) {
-                            $page->updatePages($_POST);
+
+                            $page->update($_POST);
                         } else { 
                             $id =$_POST['idPage'];
                             $name = $page->namePage('page',$id);
                             $namePage = $name[0]['name'];
                             $namePage = str_replace("'","_",$namePage);
                             $namePage = str_replace(" ","_",$namePage);
-                            
                             $page->deleteRow('page', 'idPage', $_POST['idPage']);
                             unlink("View/$namePage.View.php");
                             $ptr = fopen("routes.yml", "r");
@@ -117,7 +117,7 @@ class Page
 
                         }
                     }
-                    $tabData = $page->displayPages();
+                    $tabData = $page->display();
                     $view = new View("pages_settings", "back");
                     $view->assign("tabData", $tabData);
                  } else {
