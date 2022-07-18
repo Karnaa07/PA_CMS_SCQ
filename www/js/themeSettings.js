@@ -1,7 +1,8 @@
 $(document).ready(function () {
-    ('<label for="name">Test</label>').insertBefore("[name='name']")
-    ('<label for="bgcolor">Test</label>').insertBefore("[name='bgcolor']")
-    ('<label for="fontcolor">Test</label>').insertBefore("[name='fontcolor']")
-    ('<label for="font">Font  : </label>').insertBefore("[name='font']")
+    $("[name='name']").before('<label for="name">Nom du template : </label>')
+    $("[name='bgcolor']").before(' <label for="bgcolor">Couleur de fond du template : </label> ')
+    $("[name='fontcolor']").before(' <label for="fontcolor">Couleur ce la police d\'ecritures : </label> ')
+    $("[name='font']").before(' <label for="font">Police d\'écriture : </label> ')
+    $('.btn--submit').before('<br>')
   })
   

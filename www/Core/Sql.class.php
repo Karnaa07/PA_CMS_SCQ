@@ -42,24 +42,14 @@ abstract class Sql
         var_dump($this->getId());
         if($this->getId() == null){
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
-            var_dump($sql);
         }   else { 
-            // $update = [];
-            // foreach ($columns as $column=>$value)
-            // {
-            //     $update[] = $column."=:".$column;
-            // }
-            // $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
             $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
-            //var_dump($sql);
         }
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
 
         echo'<br>';
-        //var_dump($columns);
-
         if($table==DBPREFIXE.'user'){
             $queryPrepared->execute([
                 $columns['id'],
@@ -75,6 +65,7 @@ abstract class Sql
         }
         else{
             var_dump($columns);
+            var_dump($queryPrepared);
             $queryPrepared->execute($columns);
         }
     }

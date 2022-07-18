@@ -109,7 +109,9 @@ class Admin
                     $tpl = new TplSettingsModel();
                     if ($_POST) { 
                         $tpl->setTplSettings();
-                        $tpl->save('tplsettings');
+                        
+                        var_dump($tpl);
+                        //$tpl->save('tplsettings');
                     }
                     $view = new View("tplstyle", "back");
                     $view->assign("tplsettings", $tpl);

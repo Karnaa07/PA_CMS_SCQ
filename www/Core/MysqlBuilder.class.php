@@ -21,6 +21,9 @@ class MysqlBuilder implements QueryBuilder {
        if($table==DBPREFIXE.'page'){
         $this->query->base="INSERT INTO ".$table." (name) VALUES ('".$values['name']."')";
        }
+       else if($table==DBPREFIXE.'tplsettings'){
+        $this->query->base="INSERT INTO ".$table." (bgcolor,name,fontcolor,font) VALUES ('".$values['name']."')";
+       }
        else{
         $this->query->base="INSERT INTO ".$table." VALUES ( null ".implode(", ",$values).")";
        }
