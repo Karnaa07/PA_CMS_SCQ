@@ -20,7 +20,7 @@ class User {
             if ($request_method === 'GET') {
                 // generate a token
                 $_SESSION['token'] = bin2hex(random_bytes(35));
-                $view = new View("login");
+                $view = new View("login","loginregister");
                 $view->assign("user", $user);
 
                 // show the form@
@@ -35,7 +35,6 @@ class User {
                     if($exist["id"]){
                         // var_dump($exist['firstname']);
                         setcookie('Connected',$exist['token'],time()+3600);
-                        setcookie('id', $exist['id'], time()+3600 );
                         $view = new View("dashboard","back");
                         // var_dump($);
                         $user->setRole($exist['role_id']);
@@ -83,7 +82,7 @@ class User {
                     echo "ce mail existe deja";
                 }
             }
-            $view = new View("register");
+            $view = new View("register","loginregister");
             $view->assign("user", $user);
         } else {
             header('Location: dashboard');
@@ -116,7 +115,7 @@ class User {
                 //envoyer par mail le pwd
                 $mail = new Mail();
                 $mail-> pwd_forget_mail($_POST['email'],$pwd);
-                $view = new View("login");
+                $view = new View("login","loginregister");
                 $view->assign("user", $user);          
             }
             else{

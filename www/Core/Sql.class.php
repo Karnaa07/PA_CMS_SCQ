@@ -92,7 +92,7 @@ abstract class Sql
     }
 
     public function Crud(){
-        $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM `waterlily_user`");
+        $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM ".DBPREFIXE."_user");
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
     }
@@ -123,7 +123,7 @@ abstract class Sql
     }
     public function getUserPerms(string $permsId) : ?array 
     {
-        $req =  $this->builder-> select('waterlily_roles_permissions', ["*"])
+        $req =  $this->builder-> select(DBPREFIXE.'_roles_permissions', ["*"])
         -> where("role_id", $permsId)
         -> getQuery();
         $reqPrep = $this->pdo->prepare($req);

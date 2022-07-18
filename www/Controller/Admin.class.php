@@ -22,7 +22,7 @@ class Admin
             if ($token[0]['token'] == $_COOKIE['Connected']) {
                 $perms = new Permissions();
                 if ($perms->cando(3)) { // right Back end access
-                    $view = new View("dashboard", "back"); // A l'appelle de contact on crée une vue de formumlaire de contact
+                    header('Location : dashboard');
                 } else {
                     //http_response_code(403);
                     header("HTTP/1.1 403 No perms");
