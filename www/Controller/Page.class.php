@@ -110,7 +110,7 @@ class Page
                             $ptr = fopen("routes.yml", "w");
                             fwrite($ptr, $contenu);
                         if ($_POST['name']) {
-                            $page->updatePages($_POST);
+                            $page->update($_POST);
                             $nomFichier = $_POST['name'];
                                 $nomFichier= trim($nomFichier);
                                 var_dump('namepage',$nomFichier);
@@ -128,7 +128,7 @@ class Page
                             $page->deleteRow('page', 'idPage', $_POST['idPage']);                            
                         }
                     }
-                    $tabData = $page->displayPages();
+                    $tabData = $page->display();
                     $view = new View("pages_settings", "back");
                     $view->assign("tabData", $tabData);
                  } else {
