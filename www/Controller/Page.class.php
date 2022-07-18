@@ -82,17 +82,12 @@ class Page
                 if ($perms->cando(3)) {
                     $page = new PageCrud();
                     if ($_POST) { // Secu a revoir
-                        if ($_POST['name']) {
-                            $page->updatePages($_POST);
-                        } else { 
-                            $id =$_POST['idPage'];
-                            $name = $page->namePage('page',$id);
-                            $namePage = $name[0]['name'];
-                            $namePage = str_replace("'","_",$namePage);
-                            $namePage = str_replace(" ","_",$namePage);
-                            
-                            $page->deleteRow('page', 'idPage', $_POST['idPage']);
-                            unlink("View/$namePage.View.php");
+                        $id =$_POST['idPage'];
+                        $name = $page->namePage('page',$id);
+                        $namePage = $name[0]['name'];
+                        $namePage = str_replace("'","_",$namePage);
+                        $namePage = str_replace(" ","_",$namePage);
+                        unlink("View/$namePage.View.php");
                             $ptr = fopen("routes.yml", "r");
                             $contenu = fread($ptr, filesize("routes.yml"));
                             /* On a plus besoin du pointeur */
@@ -114,7 +109,23 @@ class Page
                             $contenu = implode(PHP_EOL, $contenu);
                             $ptr = fopen("routes.yml", "w");
                             fwrite($ptr, $contenu);
-
+                        if ($_POST['name']) {
+                            $page->updatePages($_POST);
+                            $nomFichier = $_POST['name'];
+                                $nomFichier= trim($nomFichier);
+                                var_dump('namepage',$nomFichier);
+                                $nomFichier = str_replace("'","_",$nomFichier);
+                                $nomFichier = str_replace(" ","_",$nomFichier);
+                                $fichier = fopen("View/$nomFichier.view.php", 'a+');
+                                $route = fopen('routes.yml', 'a+');
+                                $controller = fopen('Controller/Front.class.php', 'r+');
+                                fwrite($route, "/$nomFichier: \n");
+                                fwrite($route, " controller: front \n");
+                                fwrite($route, " action: $nomFichier \n");
+                                fseek($controller, -1, SEEK_END);
+                                fwrite($controller, 'public function '. $nomFichier.'(){$view = new View("'.$nomFichier.'", "front");}}');
+                        } else { 
+                            $page->deleteRow('page', 'idPage', $_POST['idPage']);                            
                         }
                     }
                     $tabData = $page->displayPages();
