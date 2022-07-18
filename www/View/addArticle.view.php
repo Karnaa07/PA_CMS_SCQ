@@ -9,25 +9,6 @@
   var pages = []
 </script>
 <?php 
-$listpages = 
-[
-  [ 
-    'idPage' => 1 ,
-    'name'=>'Connexion'
-  ],
-  [ 
-    'idPage' => 2 ,
-    'name'=>'Inscription'
-  ],
-  [ 
-    'idPage' => 3 ,
-    'name'=>'Page Contact'
-  ],
-  [ 
-    'idPage' => 4 ,
-    'name'=>'Page Accueuil'
-  ]
-] ;
 for ($i=0; $i < count($listpages) ; $i++) 
     { 
       echo('<script> pages.push({"idPage" : '.$listpages[$i]["idPage"].','.'"name" : "'.$listpages[$i]["name"].'"})</script>');
