@@ -40,7 +40,7 @@ class Article
     public function articles()
     {   
          
-        $article = new Crud();
+        $article = new CrudUser();
         $displayArticles = $article->getArticles();
         $view = new View("articles","back");
         $view->assign("article", $displayArticles);      
