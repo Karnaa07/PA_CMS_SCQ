@@ -28,10 +28,10 @@ class Admin
                     header("HTTP/1.1 403 No perms");
                 }
             }else{
-                header('Location : login');
+                header('Location: /login');
             }
         }else{
-            header('Location : login');
+            header('Location: /login');
         }
     }   
     public function media()
@@ -49,11 +49,11 @@ class Admin
                     header("HTTP/1.1 403 No perms");
                 }
             }else{
-                header('Location : login');
+                header('Location: /login');
             }
         }
         else{
-            header('Location: login');
+            header('Location: /login');
         }
     }
     public function user_settings()
@@ -86,11 +86,11 @@ class Admin
                 }
             }
             else{
-                header('Location: login');
+                header('Location: /login');
             }
         }
         else{
-            header('Location: login');
+            header('Location: /login');
         }
     }
     public function delete()

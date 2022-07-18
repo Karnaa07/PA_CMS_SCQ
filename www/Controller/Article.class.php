@@ -31,16 +31,16 @@ class Article
                     header("HTTP/1.1 403 No perms");
                 }
             }else{
-                header('Location : login');
+                header('Location: /login');
             }
         }else{
-            header('Location : login');
+            header('Location: /login');
         }
     }
     public function articles()
     {   
          
-        $article = new Crud();
+        $article = new CrudUser();
         $displayArticles = $article->getArticles();
         $view = new View("articles","back");
         $view->assign("article", $displayArticles);      

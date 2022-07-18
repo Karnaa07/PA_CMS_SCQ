@@ -88,7 +88,7 @@ class User {
             $view = new View("register");
             $view->assign("user", $user);
         } else {
-            header('Location: dashboard');
+            header('Location: /dashboard');
         }
     }
     public function logout()
