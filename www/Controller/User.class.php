@@ -20,11 +20,12 @@ class User {
             if ($request_method === 'GET') {
                 // generate a token
                 $_SESSION['token'] = bin2hex(random_bytes(35));
-                $view = new View("login","loginregister");
+                $view = new View("login","singlePage");
                 $view->assign("user", $user);
 
                 // show the form@
             } elseif ($request_method === 'POST') {
+                
                 $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
                 if(!empty($_POST))
                 {
@@ -33,13 +34,14 @@ class User {
                     
                     if($exist["id"]){
                         // var_dump($exist['firstname']);
-                        setcookie('Connected',$exist['token'],time()+3600);
+
+                    setcookie('Connected',$exist['token'],time()+3600);
+                        setcookie('id', $exist['id'], time()+3600 );
                         $view = new View("dashboard","back");
                         // var_dump($);
                         $user->setRole($exist['role_id']);
                         $perms = $user->getUserPerms($user->getRole());
                         foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; }
-
                     }
                     else
                     {
@@ -81,18 +83,20 @@ class User {
                     echo "ce mail existe deja";
                 }
             }
-            $view = new View("register","loginregister");
+            $view = new View("register","singlePage");
             $view->assign("user", $user);
         } else {
-            header('Location: dashboard');
+            header('Location: /dashboard');
         }
     }
     public function logout()
     {
         // Gestion de déconnexion 
+
         // Supprimer le Token 
         unset($_COOKIE['Connected']);   
         setcookie('Connected','', time() - 4200, '/');
+
         header('Location: login');
     }
     public function pwdforget()
@@ -114,7 +118,7 @@ class User {
                 //envoyer par mail le pwd
                 $mail = new Mail();
                 $mail-> pwd_forget_mail($_POST['email'],$pwd);
-                $view = new View("login","loginregister");
+                $view = new View("login","singlePage");
                 $view->assign("user", $user);          
             }
             else{
@@ -123,7 +127,7 @@ class User {
             }
         }
         else{
-            $view = new View("forgetPassword","loginregister");
+            $view = new View("forgetPassword","singlePage");
             $view->assign("user", $user);
             echo "Mot de passe oublié";
         }
@@ -131,7 +135,7 @@ class User {
     public function verificated(){
         $user = new UserModel();
         if(isset($_GET)){
-            var_dump($_GET['tkn']);
+            //var_dump($_GET['tkn']);
             session_start();
             if($_GET['tkn'] == $_SESSION['tokenVerif']){
                 $user->setBasicUser(['email'=>$_GET['email']]);

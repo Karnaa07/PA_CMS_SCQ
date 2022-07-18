@@ -1,13 +1,22 @@
+<?php
+    use App\Core\TplSettings;
+    $styles = new TplSettings();
+    $customCss = $styles -> displayStyles();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Template FRONT</title>
     <meta name="description" content="Description de ma page">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js%22%3E"></script>
     <link href="../css/tpl.front.css" rel="stylesheet">
 
 </head>
+<style>html{
+	—bg-color : <?= $customCss[0]['bgcolor']; ?>;
+}
+</style>
 <header>
 <nav>
     <?php //Logo en php dans src ?>

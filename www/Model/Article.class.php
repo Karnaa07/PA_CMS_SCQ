@@ -11,8 +11,8 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     protected $title;
     protected $content;
     protected $urlImage;
-    protected $idCategory;
-    protected $id = null;
+    protected $idCategory = null;
+    protected $id;
     protected $idPage = null;
 
 
@@ -26,12 +26,12 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     /**
      * @return null|int
      */
-    public function getIdArticle(): ?int
+    public function getId(): ?int
     {
         return $this->idArticle;
     }
 
-    /**
+        /**
      * @return string
      */
     public function getContent(): string
@@ -47,33 +47,12 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
         return $this->title;
     }
 
-    /**
+        /**
      * @return string
      */
     public function getUrlImage(): string
     {
         return $this->urlImage;
-    }
-    /**
-     * @return string
-     */ 
-    public function getIdCategory(): string
-    {
-        return $this->idCategory;
-    }
-    /**
-     * @return null|int
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-    /**
-     * @return null|int
-     */
-    public function getIdPage(): ?int
-    {
-        return $this->idPage;
     }
 
     /**
@@ -95,14 +74,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     */
     public function setUrlImage(string $urlImage): void
     {
-        $this->urlImage = trim($urlImage);
-    }
-     /**
-    * @param string $urlImage
-    */
-    public function setIdCategory(string $category): void
-    {
-        $this->idCategory = trim($category);
+        $this->content = trim($urlImage);
     }
 
     
@@ -124,14 +96,6 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "class"=>"inputForm",
                     "id"=>"titleForm",
                     "error"=>"Titre incorrect",
-                ],
-                "idPage"=>[
-                    "type"=>"select",
-                    "id"=>"selectPage",
-                    "placeholder"=>"Dans quel page afficher votre article ?",
-                    "option"=>[],
-                    "class"=>"inputForm",
-                    "error"=>"Contenu incorect",
                 ],
                 "content"=>[
                     "type"=>"textarea",
@@ -156,7 +120,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "class"=>"inputForm",
                     "id"=>"urlImageForm",
                     "error"=>"Contenu incorect",
-                ],
+                    ],
             ]
         ];
     }
@@ -164,7 +128,5 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
         $this->setTitle($_POST["title"]);
         $this->setContent($_POST["content"]);
         $this->setUrlImage($_POST["image"]);
-        $this->setIdCategory($_POST["idCategory"]);
-
     }
 }

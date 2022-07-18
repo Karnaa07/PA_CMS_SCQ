@@ -17,12 +17,9 @@ class MysqlBuilder implements QueryBuilder {
     public function insert(string $table,array $values):QueryBuilder
     {
         $this->reset();
-        //var_dump('toto', $table);
+        var_dump('toto', $table);
        if($table==DBPREFIXE.'page'){
         $this->query->base="INSERT INTO ".$table." (name) VALUES ('".$values['name']."')";
-       }
-       if($table==DBPREFIXE.'article'){
-        $this->query->base="INSERT INTO (".implode(", ",array_keys($values)).") VALUES ('".implode(", ",$values).")')";
        }
        else{
         $this->query->base="INSERT INTO ".$table." VALUES ( null ".implode(", ",$values).")";
@@ -48,6 +45,7 @@ class MysqlBuilder implements QueryBuilder {
             return $this;
     }
 
+
     public function delete(string $table):QueryBuilder
     {
         $this->reset();
@@ -55,11 +53,7 @@ class MysqlBuilder implements QueryBuilder {
         return $this;
 
     }
-    public function join(string $table,string $id):QueryBuilder
-    {
-        $this->query->join="JOIN ".$table." USING(".$id.")";
-        return $this;
-    }
+
     public function where(string $column, string $value , string $operator="=",bool $functionSQL = false):QueryBuilder
     {
         $functionSQL ? $this->query->where[]=$column.$operator.$value : $this->query->where[]=$column.$operator."'".$value."'" ;
@@ -70,11 +64,19 @@ class MysqlBuilder implements QueryBuilder {
         $this->query->limit=" LIMIT ".$from.", ".$offset;
         return $this;
     }
+
     public function group(string $column):QueryBuilder
     {
         $this->query->group="GROUP BY ".$column."";
         return $this;
     }
+    public function join(string $table,string $id):QueryBuilder
+    {
+        $this->query->join="JOIN ".$table." USING(".$id.")";
+        return $this;
+    }
+
+
     public function getQuery(): string
     {
         $query = $this->query;

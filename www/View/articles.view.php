@@ -1,19 +1,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 <link rel="stylesheet" type="text/css" href="../css/datatables.css">
+<link rel="stylesheet" type="text/css" href="../css/wbbtheme.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="../js/dtb.js"></script>
-<script type="text/javascript" src="../js/dtb.js"></script>
-
-<link href="../css/article.css" rel="stylesheet">
-
-<a href="/addArticle" class="article--addContainer">
-  <button class="article--button">
-    <img class="article--addbutton"src="../data/snippets/Add.svg">
-    <label>Ajouter</label>
-  </button>
-</a>
-
-
+<script src= "js/jquery.wysibb.min.js"></script>
 
 <table id="table_id" class="display cell-border" >
 <!-- <input type="text" id="mySearchText" placeholder="Rechercher..."> -->
@@ -23,19 +13,20 @@
                 <th>Titre</th>
                 <th>Description</th>
                 <th>Categorie</th>
+                <!-- <th>Statut</th> -->
                 <th>Date</th>
                 <th>Actions</th>
             </tr>
     </thead>
     <tbody>
     <?php
-     //var_dump($article);
+     var_dump($article);
 
-    for ($i=0; $i < count($tabData) ; $i++) 
+    for ($i=0; $i < count($article) ; $i++) 
     { 
-        $tab = array_keys($tabData[$i]);
+        $tab = array_keys($article[$i]);
         echo('<tr>');
-        foreach ($tabData[$i] as $key => $value) 
+        foreach ($article[$i] as $key => $value) 
         {
             if(array_key_exists($key,$tab))
                 {echo('<td class="userInfos"> '.utf8_encode($value).' </td>');}
@@ -72,21 +63,6 @@
             <input name="Categorie" type="text" value=""><br>
 
             <input type="submit" value="Confirmer les changements">
-
-        </form>
-    </div>
-  </div>
-</div>
-
-<div class="deleteModal">
-  <div class="modal-content">
-    <span class="deleteClose-btn">&times;</span>
-    <div class = "modal--inputs">
-        <form id="modifUser" method="post" action="">
-
-            <input  name="idArticle" type="hidden" value=""><br>
-
-            <input type="submit" value="Confirmer la suppression">
 
         </form>
     </div>

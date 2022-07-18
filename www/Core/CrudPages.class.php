@@ -3,7 +3,7 @@ namespace App\Core;
 use App\Core\MysqlBuilder;
 
 
-class CrudPages 
+class CrudPages extends CrudAbstract
 {
     public function __construct()
     {
@@ -15,15 +15,15 @@ class CrudPages
         }
     }
 
-    public function displayPages(){
-        $req =  $this->builder-> select('waterlily_page', ["idPage","name"])
+    public function display(){
+        $req =  $this->builder-> select(DBPREFIXE.'page', ["idPage","name"])
         ->getQuery();
         var_dump($req);
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
     }
-    public function updatePages($infos){
+    public function update($infos){
 
         $req = $this->builder-> update(DBPREFIXE."page", $infos)
         ->where("idPage",$infos['idPage'],"=")
@@ -34,13 +34,14 @@ class CrudPages
         //var_dump($queryPrepared);
         //return "done";
     }
-    public function deleteRow(string $table, string $column, string $id){
+
+    public function namePage(string $table, int $id){
         $tableBD=DBPREFIXE.$table;
-        $req = $this->builder-> delete($tableBD)
-        ->where($column,$id,"=")
+        $req = $this->builder-> select($tableBD, ['name'])
+        ->where('idPage',$id,"=")
         ->getQuery();
         $queryPrepared = $this->pdo->query($req);
-        var_dump($req);
+        return $queryPrepared->fetchAll();
     }
 
 }

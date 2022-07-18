@@ -11,42 +11,25 @@
 <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
 
 <script> 
-    var data = []
     var dataStats = []
 </script>
 <?php
-    //print_r($datas);
-    for ($i=0; $i < count($datas[1] ) ; $i++) 
-    { 
-        //var_dump($datas[1][$i]);
-        // echo(print_r($registeredStats[$i]).'<br>');
-        echo('
-                <script> data.push(
-                {
-                    id:"'.strtoupper(substr($datas[1][$i]["contry"], 0, 2)).'",
-                    name:"'.$datas[1][$i]["contry"].'",
-                    value:'.$datas[1][$i]["value"].',
-                    polygonTemplate: {fill:am5.color(0xFF0000) } 
-                })
-                </script>'
-            );
-    }
-
-    // dataStats
-    for ($i=0; $i < count($datas[0]) ; $i++) 
+    for ($i=0; $i < count($registeredStats) ; $i++) 
     { 
         // echo(print_r($registeredStats[$i]).'<br>');
         echo('
                 <script> dataStats.push(
                 {
-                    month:"'.$datas[0][$i]["month"].'",
-                    value:'.$datas[0][$i]["value"].'
+                    month:"'.$registeredStats[$i]["month"].'",
+                    value:'.$registeredStats[$i]["value"].'
                 }) 
                 </script>'
             );
     }
 ?>
-
+<script> 
+   console.log(dataStats)
+</script>
 <div class = "dashboard--statswrapper">
     <div id="chartdiv" class=""><h1>Utilisateurs en ligne </h1></div>  
     <div class ="dashboard--vertical"> 

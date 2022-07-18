@@ -16,3 +16,19 @@
                 <a href = "#"><img src="../data/snippets/Linkedin.svg"> </a>
         </div>
 </div>
+        <!-- <div class="login--img--leftcorner--container">
+                <img class="login--img--leftcorner" src="../data/img/Login.svg" alt="">
+        </div> -->
+<div class="modal">
+        <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <div class = "modal--inputs">
+                        <form id="forgetPassword" method="post" action="">
+                                <input name="id" type="hidden" value=""><br>
+                                <label for="email">Email</label>
+                                <input name="email" type="text" value=""><br>
+                                <input type="submit" value="Envoyer">
+                        </form>
+                </div>
+        </div>
+</div>
