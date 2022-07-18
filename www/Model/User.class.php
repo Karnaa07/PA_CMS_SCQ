@@ -251,6 +251,44 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
             ]
         ];
     }
+    public function getChangeForm(): array{
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "submit"=>"Changer de mot de passe"
+            ],
+            'inputs'=>[
+                "passwordOld"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Votre ancien mot de passe ...",
+                    "required"=>true,
+                    "class"=>"inputForm",
+                    "id"=>"pwdConfirmForm",
+                    "error"=>"Mauvais mot de passe",
+                ],
+                "password"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Votre mot de passe ...",
+                    "required"=>true,
+                    "class"=>"inputForm",
+                    "id"=>"pwdForm",
+                    "error"=>"Votre mot de passe doit faire au min 8 caractères avec majuscule, minuscules et des chiffres",
+                    ],
+                "passwordConfirm"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Confirmation ...",
+                    "required"=>true,
+                    "class"=>"inputForm",
+                    "id"=>"pwdConfirmForm",
+                    "confirm"=>"password",
+                    "error"=>"Votre mot de passe de confirmation ne correspond pas",
+                ],
+               
+            ]
+        ];
+
+    }
     public function getForgetForm(): array{
         return [
             "config"=>[
