@@ -137,6 +137,7 @@ abstract class Sql
         $req =  $this->builder-> update(DBPREFIXE.'user', $datas)
         -> where("id", $datas['id'])
         -> getQuery();
+        var_dump($req);
         $test = $this->pdo->prepare($req);
         $test->execute();    
     }

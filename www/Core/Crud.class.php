@@ -73,5 +73,17 @@ class Crud extends CrudAbstract
         return $queryPrepared->fetchAll();
     }
 
+    public function checkPassword($table,$id,$password){
+        $table=DBPREFIXE.$table;
+        $req =  $this->builder-> select($table, ["*"])
+        -> where("id",$id)
+        -> getQuery();
+        $queryPrepared = $this->pdo->query($req);
+        $result = $queryPrepared->fetch();
+        if (password_verify($password,$result["password"])){
+            return $result;
+        }
+    }
+
 }
 ?> 
