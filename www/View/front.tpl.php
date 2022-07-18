@@ -14,12 +14,12 @@
     <div class="tplfront--navbar">
         <img class="tplfront--logo" src="../data/img/Logo.svg">
         <ul class="tplfront--list">
-            <?php  ?>
-            <li><a href="#">Accueuil</a></li>
-            <li><a href="#">Notre Formation</a></li>
-            <li><a href="#">A Propos</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Contact</a></li>
+            <?php  for ($i=0; $i < count($tabData) ; $i++):?> 
+                    <li><a href="<?= '/'.$tabData[$i]['name'] ?>"><?= $tabData[$i]['name'] ?></a></li>
+                
+            <?php endfor;?> 
+            <li><a href="/changePassword">Changer de mot de passe</a></li>
+
         </ul>
     </div>
 </nav>
