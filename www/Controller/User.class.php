@@ -25,7 +25,6 @@ class User {
 
                 // show the form@
             } elseif ($request_method === 'POST') {
-                
                 $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
                 if(!empty($_POST))
                 {
