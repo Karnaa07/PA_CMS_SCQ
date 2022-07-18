@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Core;
+use App\Core\CrudPages as PageCrud;
 
 class View // On définie nos vues
 {
@@ -49,6 +50,11 @@ class View // On définie nos vues
 
     public function __destruct()
     {
+        if($this->template=="front"){
+            $page = new PageCrud();
+            $tabData = $page->display();
+            $this->data=['tabDate',$tabData];
+        }
         //array("pseudo"=>"Prof") ---> $pseudo = "Prof";
         extract($this->data);
         include "View/".$this->template.".tpl.php";
