@@ -123,7 +123,7 @@ class User {
             }
         }
         else{
-            $view = new View("forgetPassword");
+            $view = new View("forgetPassword","loginregister");
             $view->assign("user", $user);
             echo "Mot de passe oublié";
         }

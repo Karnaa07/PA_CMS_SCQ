@@ -1,8 +1,3 @@
-<?php
-    use App\Core\Permissions;
-    $perms = new Permissions();
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>

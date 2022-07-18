@@ -5,8 +5,7 @@
 
     if(isset($_POST))
     {
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
+
 
 
         $sql = file_get_contents('waterlily.sql');

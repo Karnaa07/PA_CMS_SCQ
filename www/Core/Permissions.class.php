@@ -10,7 +10,12 @@ class Permissions
         { 
             session_start(); 
         }
-        return in_array($neededPerm, $_SESSION["user"]["permissions"]);
+        if(isset($_SESSION["user"]["permissions"])){
+            return in_array($neededPerm, $_SESSION["user"]["permissions"]);
+        } 
+        else{
+            return false;
+        } 
     }
 }
 ?>
