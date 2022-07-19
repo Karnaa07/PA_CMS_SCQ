@@ -69,7 +69,9 @@
   controller: main
   action: home
 
-
+/installer:
+  controller: installer
+  action: install
   
 /accountActivated:
   controller: user

@@ -1,0 +1,29 @@
+<?php
+namespace App\Controller;
+
+use App\Core\View;
+use App\Core\InstallSettings;
+
+use App\Model\User as UserModel; 
+
+
+class Installer { // Définition de la classe Main
+
+    public function install()
+    {
+        if(isset($_POST['name'])) // a ajouter
+        {
+            $setup =  new InstallSettings();
+            // var_dump($_POST);
+            $sql = $setup->SetUpSQL();
+            if($sql){
+                $admin = new UserModel();
+                $admin->setUser();
+            }
+            $setup->delInstaller();
+            $view = new View("login","singlePage");
+        } else {
+            $view = new View("setup","singlePage");
+        }
+    }  
+}
