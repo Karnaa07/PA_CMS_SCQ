@@ -13,6 +13,7 @@
                 <th>Titre</th>
                 <th>Description</th>
                 <th>Categorie</th>
+                <th>Page</th>
                 <th>Date</th>
                 <th>Actions</th>
             </tr>
@@ -35,7 +36,7 @@
     </tbody>
 </table>
 
-<script type="text/javascript" src="../js/user_settings.js"></script>
+<script type="text/javascript" src="../js/articles.js"></script>
 
 <div class="modal">
   <div class="modal-content">
@@ -44,20 +45,21 @@
         <form id="modifUser" method="post" action="">
 
         
-            <input  name="id" type="hidden" value=""><br>
+            <input  name="idArticle" type="hidden" value=""><br>
 
 
             <label for="Utilisateur">Titre</label>
-            <input name="Utilisateur" type="text" value=""><br>
+            <input name="title" type="text" value=""><br>
 
             <label for="Titre">Description</label>
-            <input name="Titre" type="text" value=""><br>
+            <input name="content" type="text" value=""><br>
 
             <label for="Description">Categorie</label>
-            <input name="Description" type="text" value=""><br>
+            <input name="idCategory" type="text" value=""><br>
 
-            <label for="Categorie">Date</label>
-            <input name="Categorie" type="text" value=""><br>
+            
+            <label for="Page">Page</label>
+            <input name="idPage" type="text" value=""><br>
 
             <input type="submit" value="Confirmer les changements">
 

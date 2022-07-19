@@ -66,7 +66,8 @@ class Crud extends CrudAbstract
             // var_dump($sql);
     }
     public function getArticles(){
-        $req =  $this->builder-> select('waterlily_articlee', ["idArticle","title","content","idCategory","idPage"])
+        $req =  $this->builder-> select('waterlily_articlee', ["idArticle","title","content","idCategory","idPage","createdAt"])
+        ->join()
         ->getQuery();
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
