@@ -19,9 +19,12 @@ class Installer { // Définition de la classe Main
             if($sql){
                 $admin = new UserModel();
                 $admin->setUser();
+                $admin->setRole(1);
+                $admin->save('user');
             }
             $setup->delInstaller();
             $view = new View("login","singlePage");
+
         } else {
             $view = new View("setup","singlePage");
         }

@@ -6,7 +6,7 @@
         <meta name="description" content="Installer">
     </head>
     <body>
-        <form class="instaler--form" method="POST" action="installer.php">
+        <form class="instaler--form" method="POST" action="">
             <h1> Options du site: </h1>
             
             <label for="dbHost">BDD Host : </label>
