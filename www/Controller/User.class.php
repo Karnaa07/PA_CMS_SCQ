@@ -172,7 +172,8 @@ class User {
                         echo $result[0];
                     }
                 } else {
-                    $view = new View("changePassword");
+                    $view = new View("changePassword", 'singlePage');
+                    var_dump($user);
                     $view->assign("user", $user);
                 }
             } else{
