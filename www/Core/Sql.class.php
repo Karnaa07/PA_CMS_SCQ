@@ -38,7 +38,7 @@ abstract class Sql
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
         $values=array_keys($columns);
-        var_dump($this->getId());
+        
         if($this->getId() == null){
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
         }else { 
@@ -64,8 +64,7 @@ abstract class Sql
             ]);
         }
         else{
-            var_dump($columns);
-            var_dump($queryPrepared);
+            
             $queryPrepared->execute($columns);
         }
     }
@@ -73,7 +72,7 @@ abstract class Sql
     {
         $table=DBPREFIXE.$table;
         $req =  $this->builder-> select($table, ["*"])
-        -> join("waterlily_roles","role_id")
+        -> join(DBPREFIXE."roles","role_id")
         -> where("email", $email)
         -> getQuery();
         $queryPrepared = $this->pdo->query($req);
@@ -86,7 +85,7 @@ abstract class Sql
     }
 
     public function Crud(){
-        $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM `waterlily_user`");
+        $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM " .DBPREFIXE."user");
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
     }
@@ -114,7 +113,7 @@ abstract class Sql
     }
     public function getUserPerms(string $permsId) : ?array 
     {
-        $req =  $this->builder-> select('waterlily_roles_permissions', ["*"])
+        $req =  $this->builder-> select(DBPREFIXE.'roles_permissions', ["*"])
         -> where("role_id", $permsId)
         -> getQuery();
         $reqPrep = $this->pdo->prepare($req);
@@ -125,7 +124,7 @@ abstract class Sql
         $req =  $this->builder-> update(DBPREFIXE.'user', $datas)
         -> where("id", $datas['id'])
         -> getQuery();
-        var_dump($req);
+       
         $test = $this->pdo->prepare($req);
         $test->execute();    
     }

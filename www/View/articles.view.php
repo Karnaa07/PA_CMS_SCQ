@@ -20,7 +20,6 @@
     </thead>
     <tbody>
     <?php
-     var_dump($article);
 
     for ($i=0; $i < count($article) ; $i++) 
     { 

@@ -39,11 +39,22 @@ class Article
     }
     public function articles()
     {   
-         
-        $article = new CrudUser();
-        $displayArticles = $article->getArticles();
-        $view = new View("articles","back");
-        $view->assign("article", $displayArticles);      
+        $users = CrudUser ::getInstance();
+        if (isset($_COOKIE['Connected']) && !empty($_COOKIE['Connected']) && isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
+            $token = $users -> tokenReturn('user', $_COOKIE['id']);
+            if ($token[0]['token'] == $_COOKIE['Connected']) {
+                $article = new CrudUser();
+                $displayArticles = $article->getArticles();
+                $view = new View("articles", "back");
+                $view->assign("article", $displayArticles);
+            }
+            else{
+                header('Location: /login');
+            }
+        }
+        else{
+            header('Location: /login');
+        }      
     }
 }
 
