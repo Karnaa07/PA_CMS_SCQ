@@ -42,14 +42,7 @@ abstract class Sql
         var_dump($this->getId());
         if($this->getId() == null){
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
-            var_dump($sql);
         }   else { 
-            // $update = [];
-            // foreach ($columns as $column=>$value)
-            // {
-            //     $update[] = $column."=:".$column;
-            // }
-            // $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
             $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
@@ -74,7 +67,7 @@ abstract class Sql
             ]);
         }
         else{
-            var_dump($columns);
+            var_dump($queryPrepared);
             $queryPrepared->execute($columns);
         }
     }

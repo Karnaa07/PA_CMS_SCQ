@@ -48,7 +48,6 @@ class Article
     }
     public function articles()
     {   
-         
         $article = new CrudUser();
         $displayArticles = $article->getArticles();
         $view = new View("articles","back");

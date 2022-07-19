@@ -9,19 +9,16 @@
 <!-- <input type="text" id="mySearchText" placeholder="Rechercher..."> -->
     <thead>
             <tr>
-                <th>Utilisateur</th>
+                <th>Id</th>
                 <th>Titre</th>
                 <th>Description</th>
                 <th>Categorie</th>
-                <!-- <th>Statut</th> -->
                 <th>Date</th>
                 <th>Actions</th>
             </tr>
     </thead>
     <tbody>
     <?php
-     var_dump($article);
-
     for ($i=0; $i < count($article) ; $i++) 
     { 
         $tab = array_keys($article[$i]);
