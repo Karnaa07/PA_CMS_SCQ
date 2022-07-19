@@ -11,10 +11,12 @@
     <meta name="description" content="Front office de notre CMS Waterlily">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js%22%3E"></script>
     <link href="../css/tpl.front.css" rel="stylesheet">
-
 </head>
-<style>html{
-	—bg-color : <?= $customCss[0]['bgcolor']; ?>;
+<style>
+html{
+	--bg-color : <?= $customCss[0]['bgcolor']; ?>;
+    --font-color : <?= $customCss[0]['fontcolor']; ?>;
+    --font : <?= '"'.$customCss[0]['font'].'"'; ?>;
 }
 </style>
 <header>

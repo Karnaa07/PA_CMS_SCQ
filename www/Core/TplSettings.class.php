@@ -22,13 +22,5 @@ class TplSettings
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
     }
-    public function updateStyles($infos){
-        $req = $this->builder-> update(DBPREFIXE."tplsettings", $infos)
-        ->where("id",1,"=")
-        ->getQuery();
-        $queryPrepared = $this->pdo->prepare($req);
-        $queryPrepared->execute();
-    }
-
 }
 ?> 

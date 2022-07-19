@@ -38,7 +38,6 @@ abstract class Sql
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
         $values=array_keys($columns);
-        var_dump('toto');
         var_dump($this->getId());
         if($this->getId() == null){
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
@@ -137,5 +136,4 @@ abstract class Sql
         $test = $this->pdo->prepare($req);
         $test->execute();  
     }
-
 }
