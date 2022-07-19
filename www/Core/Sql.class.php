@@ -41,6 +41,7 @@ abstract class Sql
         
         if($this->getId() == null){
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
+            var_dump($sql);
         }else { 
             $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())

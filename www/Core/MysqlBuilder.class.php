@@ -24,6 +24,9 @@ class MysqlBuilder implements QueryBuilder {
        else if($table==DBPREFIXE.'tplsettings'){
         $this->query->base="INSERT INTO ".$table." (bgcolor,name,fontcolor,font) VALUES ('".$values['name']."')";
        }
+       else if($table==DBPREFIXE.'user'){
+        $this->query->base="INSERT INTO ".$table." (firstname,lastname,email,password,contry, role_id, status,token) VALUES ('".$values['firstname']."', '".$values['lastname']."', '".$values['email']."','".$values['password']."', '".$values['contry']."', ".$values['role_id']." , ".$values['status']." , '".$values['token']."')";
+       }
        else{
         $this->query->base="INSERT INTO ".$table." VALUES ( null ".implode(", ",$values).")";
        }
