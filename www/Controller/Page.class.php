@@ -81,7 +81,7 @@ class Page
                 $perms = new Permissions();
                 if ($perms->cando(3)) {
                     $page = new PageCrud();
-                    if ($_POST) { // Secu a revoir
+                    if ($_POST) { 
                         $id =$_POST['idPage'];
                         $name = $page->namePage('page',$id);
                         $namePage = $name[0]['name'];

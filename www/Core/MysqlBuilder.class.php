@@ -20,7 +20,7 @@ class MysqlBuilder implements QueryBuilder {
        if($table==DBPREFIXE.'page'){
         $this->query->base="INSERT INTO ".$table." (name) VALUES ('".$values['name']."')";
        }
-       else if($table==DBPREFIXE.'articlee') {
+       else if($table==DBPREFIXE.'article') {
             $strout='';
             foreach ($values as $key => $value) {
                 if($value!=null){
