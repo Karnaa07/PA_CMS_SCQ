@@ -84,3 +84,8 @@
   action: tplsettings
 
 
+
+/changePassword:
+  controller: user
+  action: changePassword
+  

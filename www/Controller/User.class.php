@@ -8,6 +8,8 @@ use App\Core\View;
 use App\Model\User as UserModel;  // Alias de class User dans Model/User.class.php
 use App\Core\Mail;
 use App\Core\Permissions;
+use App\Core\Crud as CrudUser;
+
 
 class User {    
     public function login() //login
@@ -141,6 +143,45 @@ class User {
                 $user->setBasicUser(['email'=>$_GET['email']]);
             }
         }
+    }
+
+    public function changePassword(){
+        $user = new UserModel();
+        $users = CrudUser :: getInstance();
+        if (isset($_COOKIE['Connected']) && !empty($_COOKIE['Connected']) && isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
+            $token = $users -> tokenReturn('user', $_COOKIE['id']);
+            if ($token[0]['token'] == $_COOKIE['Connected']) {
+                if (!empty($_POST)) {
+                    $result = Verificator::checkForm($user->getChangeForm(), $_POST);
+                    if(count($result)<1){
+                        $exist = $users->checkPassword('user',$_COOKIE['id'], $_POST['passwordOld']);
+                        if($exist['id']){
+                            $user->setPassword($_POST['password']);
+                            var_dump($user);
+                            $reset = [
+                                'id' =>  $_COOKIE['id'],
+                                'password'=> $user->getPassword(),
+                            ];
+                            $user->setResetedPwd($reset);
+                        }
+                        else{
+                            echo 'Mauvais mot de passe';
+                        }
+                    }
+                    else{
+                        echo $result[0];
+                    }
+                } else {
+                    $view = new View("changePassword");
+                    $view->assign("user", $user);
+                }
+            } else{
+                header('Location: /login');
+            }
+        }else{
+            header('Location: /login');
+        }
+
     }
 
 

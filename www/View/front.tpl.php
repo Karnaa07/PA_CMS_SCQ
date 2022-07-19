@@ -7,8 +7,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Template FRONT</title>
-    <meta name="description" content="Description de ma page">
+    <title>Waterlily FRONT</title>
+    <meta name="description" content="Front office de notre CMS Waterlily">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js%22%3E"></script>
     <link href="../css/tpl.front.css" rel="stylesheet">
 
@@ -23,12 +23,12 @@
     <div class="tplfront--navbar">
         <img class="tplfront--logo" src="../data/img/Logo.svg">
         <ul class="tplfront--list">
-            <?php  ?>
-            <li><a href="#">Accueuil</a></li>
-            <li><a href="#">Notre Formation</a></li>
-            <li><a href="#">A Propos</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Contact</a></li>
+            <?php  for ($i=0; $i < count($tabData) ; $i++):?> 
+                    <li><a href="<?= '/'.$tabData[$i]['name'] ?>"><?= $tabData[$i]['name'] ?></a></li>
+                
+            <?php endfor;?> 
+            <li><a href="/changePassword">Changer de mot de passe</a></li>
+
         </ul>
     </div>
 </nav>

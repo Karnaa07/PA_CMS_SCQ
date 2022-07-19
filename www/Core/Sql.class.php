@@ -42,7 +42,7 @@ abstract class Sql
         var_dump($this->getId());
         if($this->getId() == null){
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
-        }   else { 
+        }else { 
             $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
@@ -50,6 +50,7 @@ abstract class Sql
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
 
         echo'<br>';
+
         if($table==DBPREFIXE.'user'){
             $queryPrepared->execute([
                 $columns['id'],
@@ -125,6 +126,7 @@ abstract class Sql
         $req =  $this->builder-> update(DBPREFIXE.'user', $datas)
         -> where("id", $datas['id'])
         -> getQuery();
+        var_dump($req);
         $test = $this->pdo->prepare($req);
         $test->execute();    
     }
