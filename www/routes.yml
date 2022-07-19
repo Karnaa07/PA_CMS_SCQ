@@ -84,3 +84,6 @@
   action: tplsettings
 
 
+/MaPage: 
+ controller: front 
+ action: MaPage 

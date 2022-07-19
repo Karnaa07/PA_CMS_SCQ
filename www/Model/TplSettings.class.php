@@ -5,7 +5,7 @@ use App\Core\Sql;
 
 class TplSettings extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
 {
-    protected $id = null;
+    protected $id = 1;
     protected $name ;
     protected $bgcolor ;
     protected $fontcolor;

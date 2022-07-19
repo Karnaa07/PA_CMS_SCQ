@@ -16,4 +16,4 @@ use App\Core\Crud as CrudUser;
 
 class Front
 {
-}
+public function MaPage(){$view = new View("MaPage", "front");}}

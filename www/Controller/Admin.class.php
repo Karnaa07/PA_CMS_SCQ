@@ -7,6 +7,7 @@ use App\Core\Crud as CrudUser;
 use App\Core\Permissions;
 use App\Model\User as UserModel; 
 use App\Model\TplSettings as TplSettingsModel;
+use App\Core\TplSettings;
 
 
 class Admin
@@ -105,16 +106,14 @@ class Admin
             $token = $users -> tokenReturn('user', $_COOKIE['id']);
             if ($token[0]['token'] == $_COOKIE['Connected']) {
                 $perms = new Permissions();
-                if ($perms->cando(3)) { // right  Back end access
+                if ($perms->cando(3)) { 
                     $tpl = new TplSettingsModel();
                     if ($_POST) { 
                         $tpl->setTplSettings();
-                        
-                        var_dump($tpl);
-                        //$tpl->save('tplsettings');
+                        $tpl->save('tplsettings');
                     }
                     $view = new View("tplstyle", "back");
-                    $view->assign("tplsettings", $tpl);
+                    $view->assign("tplform", $tpl);
 
                 } else {
                     header("HTTP/1.1 403 No perms");
