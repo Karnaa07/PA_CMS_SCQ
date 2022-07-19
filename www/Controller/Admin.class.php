@@ -3,12 +3,12 @@
 namespace App\Controller;
 
 use App\Core\View;
-//use App\Core\Sql;
-use App\Core\MysqlBuilder;
 use App\Core\Crud as CrudUser;
 use App\Core\Permissions;
-use App\Core\UserStats;
 use App\Model\User as UserModel; 
+use App\Model\TplSettings as TplSettingsModel;
+use App\Core\TplSettings;
+
 
 class Admin
 {
@@ -81,7 +81,6 @@ class Admin
                     $view->assign("tabData", $tabData);
                     $view->assign("perms", $perms);
                 } else {
-                    //http_response_code(403);
                     header("HTTP/1.1 403 No perms");
                 }
             }
@@ -98,5 +97,34 @@ class Admin
         {
             //var_dump($_POST);
         }   
+    }
+    public function tplsettings()
+    {   
+        $users = CrudUser ::getInstance();
+        //$userModel = new UserModel();
+        if (isset($_COOKIE['Connected']) && !empty($_COOKIE['Connected']) && isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
+            $token = $users -> tokenReturn('user', $_COOKIE['id']);
+            if ($token[0]['token'] == $_COOKIE['Connected']) {
+                $perms = new Permissions();
+                if ($perms->cando(3)) { 
+                    $tpl = new TplSettingsModel();
+                    if ($_POST) { 
+                        $tpl->setTplSettings();
+                        $tpl->save('tplsettings');
+                    }
+                    $view = new View("tplstyle", "back");
+                    $view->assign("tplform", $tpl);
+
+                } else {
+                    header("HTTP/1.1 403 No perms");
+                }
+            }
+            else{
+                header('Location: /login');
+            }
+        }
+        else{
+            header('Location: /login');
+        }
     }
 }

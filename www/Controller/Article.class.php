@@ -19,12 +19,12 @@ class Article
             if ($token[0]['token'] == $_COOKIE['Connected']) {
                 $perms = new Permissions();
                 if ($perms->cando(3) && $perms->cando(8)) { // right Back end access and create articles
+                    $article = new ArticleModel();
                     if (!empty($_POST)) {
-                        $article = new ArticleModel();
                         $result = Verificator::checkForm($article->getArticleForm(), $_POST);
                         $article->setArticle();
                     }
-                    $view = new View("addArticle", "front"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)
+                    $view = new View("addArticle", "back"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)
                     $view->assign("article", $article);
                 } else {
                     //http_response_code(403);

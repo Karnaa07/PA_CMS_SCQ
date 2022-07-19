@@ -22,5 +22,6 @@
             define("DBPREFIXE", "'.$_POST['dbPrefix'].'");
             define("SITENAME", "'.$_POST['siteName'].'"); ';
         fwrite($fp, $conf);
+        // delete file
     }
 ?>

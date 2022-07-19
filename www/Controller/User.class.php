@@ -22,7 +22,7 @@ class User {
             if ($request_method === 'GET') {
                 // generate a token
                 $_SESSION['token'] = bin2hex(random_bytes(35));
-                $view = new View("login");
+                $view = new View("login","singlePage");
                 $view->assign("user", $user);
 
                 // show the form@
@@ -44,8 +44,6 @@ class User {
                         $user->setRole($exist['role_id']);
                         $perms = $user->getUserPerms($user->getRole());
                         foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; }
-
-
                     }
                     else
                     {
@@ -87,7 +85,7 @@ class User {
                     echo "ce mail existe deja";
                 }
             }
-            $view = new View("register");
+            $view = new View("register","singlePage");
             $view->assign("user", $user);
         } else {
             header('Location: /dashboard');
@@ -122,7 +120,7 @@ class User {
                 //envoyer par mail le pwd
                 $mail = new Mail();
                 $mail-> pwd_forget_mail($_POST['email'],$pwd);
-                $view = new View("login");
+                $view = new View("login","singlePage");
                 $view->assign("user", $user);          
             }
             else{
@@ -131,7 +129,7 @@ class User {
             }
         }
         else{
-            $view = new View("forgetPassword");
+            $view = new View("forgetPassword","singlePage");
             $view->assign("user", $user);
             echo "Mot de passe oublié";
         }
@@ -139,7 +137,7 @@ class User {
     public function verificated(){
         $user = new UserModel();
         if(isset($_GET)){
-            var_dump($_GET['tkn']);
+            //var_dump($_GET['tkn']);
             session_start();
             if($_GET['tkn'] == $_SESSION['tokenVerif']){
                 $user->setBasicUser(['email'=>$_GET['email']]);

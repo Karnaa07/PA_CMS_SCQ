@@ -80,10 +80,15 @@
   action: aboutUs
 
 /apparence:
-  controller: about
-  action: aboutUs
+  controller: admin
+  action: tplsettings
+
+
+
 
 /changePassword:
   controller: user
   action: changePassword
   
+
+
