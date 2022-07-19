@@ -84,3 +84,12 @@
   action: tplsettings
 
 
+/Seconde_Page: 
+ controller: front 
+ action: Seconde_Page 
+/Accueuil: 
+ controller: front 
+ action: Accueuil 
+/Nous_contacter: 
+ controller: front 
+ action: Nous_contacter 

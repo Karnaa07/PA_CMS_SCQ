@@ -12,7 +12,6 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     protected $content;
     protected $urlImage;
     protected $idCategory = null;
-    protected $id;
     protected $idPage = null;
 
 
@@ -76,6 +75,20 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         $this->content = trim($urlImage);
     }
+    /**
+     * @return null|int
+     */
+    public function getIdPage(): ?int
+    {
+        return $this->idPage;
+    }
+       /**
+     * @param int $idPage
+     */
+    public function setIdPage(string $idPage): void
+    {
+        $this->idPage = $idPage;
+    }
 
     
 //faut il un setter pour l'url ou faut il le générer?
@@ -89,6 +102,14 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                 "submit"=>"Ajouter"
             ],
             'inputs'=>[
+                "idPage"=>[
+                    "type"=>"select",
+                    "placeholder"=>"Dans quelle page votre article s'affiche t'il ?",
+                    "option"=>[],
+                    "class"=>"inputForm",
+                    "id"=>"idPage",
+                    "error"=>"Contenu incorect",
+                    ],
                 "title"=>[
                     "type"=>"text",
                     "placeholder"=>"Titre de votre article...",
@@ -125,6 +146,7 @@ class Article extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
         ];
     }
     public function setArticle(){
+        $this->setIdPage($_POST["idPage"]);
         $this->setTitle($_POST["title"]);
         $this->setContent($_POST["content"]);
         $this->setUrlImage($_POST["image"]);
