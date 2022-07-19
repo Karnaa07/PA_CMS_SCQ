@@ -17,7 +17,7 @@ class MysqlBuilder implements QueryBuilder {
     public function insert(string $table,array $values):QueryBuilder
     {
         $this->reset();
-        var_dump('toto', $table);
+        
        if($table==DBPREFIXE.'page'){
         $this->query->base="INSERT INTO ".$table." (name) VALUES ('".$values['name']."')";
        }
@@ -41,9 +41,6 @@ class MysqlBuilder implements QueryBuilder {
             $strout = substr($strout, 0, -1);
             //var_dump($strout);
             $this->query->base="UPDATE ".$table." SET ".$strout;
-        }
-        else {
-            var_dump('test');
         }
             return $this;
     }

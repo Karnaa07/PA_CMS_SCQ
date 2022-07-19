@@ -34,6 +34,8 @@ class Page extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
      */
     public function setName(string $name): void
     {
+        $name = htmlspecialchars($name);
+        $name = strtolower($name);
         $this->name = trim($name);
     }
 

@@ -15,5 +15,5 @@ use App\Core\Crud as CrudUser;
 
 
 class Front
-{
+{    
 }

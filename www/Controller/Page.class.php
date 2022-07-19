@@ -31,11 +31,9 @@ class Page
                             $result = Verificator::checkForm($page->getPageForm(), $_POST);
                             if(count($result)<1){
                                 $page->setPage();
-                                // var_dump($page);
                                 $page->save("page");
-                                $nomFichier = $_POST['name'];
+                                $nomFichier = $page->getName();
                                 $nomFichier= trim($nomFichier);
-                                var_dump('namepage',$nomFichier);
                                 $nomFichier = str_replace("'","_",$nomFichier);
                                 $nomFichier = str_replace(" ","_",$nomFichier);
                                 $fichier = fopen("View/$nomFichier.view.php", 'a+');
@@ -76,12 +74,14 @@ class Page
         $users = CrudUser :: getInstance();
         if (isset($_COOKIE['Connected']) && !empty($_COOKIE['Connected']) && isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
             $token = $users -> tokenReturn('user', $_COOKIE['id']);
-            var_dump($token);
+
             if ($token[0]['token'] == $_COOKIE['Connected']) {
                 $perms = new Permissions();
                 if ($perms->cando(3)) {
                     $page = new PageCrud();
-                    if ($_POST) { // Secu a revoir
+                    var_dump($_POST);
+                    if (isset($_POST['idPage']) && !empty($_POST['idPage'])) { // Secu a revoir
+
                         $id =$_POST['idPage'];
                         $name = $page->namePage('page',$id);
                         $namePage = $name[0]['name'];
@@ -109,11 +109,12 @@ class Page
                             $contenu = implode(PHP_EOL, $contenu);
                             $ptr = fopen("routes.yml", "w");
                             fwrite($ptr, $contenu);
-                        if ($_POST['name']) {
+                        if ($_POST['name'] && gettype($_POST['name'])=='string'&& !preg_match("/([^A-Za-z0-9\s])/", $_POST['name'], $match)) {
+                            $nomFichier = htmlspecialchars($_POST['name']);
+                            $nameFichier = strtolower($_POST['name']);
                             $page->update($_POST);
-                            $nomFichier = $_POST['name'];
                                 $nomFichier= trim($nomFichier);
-                                var_dump('namepage',$nomFichier);
+                            
                                 $nomFichier = str_replace("'","_",$nomFichier);
                                 $nomFichier = str_replace(" ","_",$nomFichier);
                                 $fichier = fopen("View/$nomFichier.view.php", 'a+');

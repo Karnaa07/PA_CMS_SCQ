@@ -39,11 +39,13 @@ class User {
 
                     setcookie('Connected',$exist['token'],time()+3600);
                         setcookie('id', $exist['id'], time()+3600 );
-                        $view = new View("dashboard","back");
+                        //$view = new View("dashboard","back");
                         // var_dump($);
                         $user->setRole($exist['role_id']);
                         $perms = $user->getUserPerms($user->getRole());
-                        foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; }
+                        foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; 
+                        header('Location: /dashboard');
+                        }
                     }
                     else
                     {
@@ -109,19 +111,22 @@ class User {
             $unicity=$user->getOneBy('user',["email"=>$_POST['email']]);
             if($unicity!==null)
             {
-                session_start();
-                $pwd=substr(bin2hex(random_bytes(128)), 0, 15);
-                $user->setPassword($pwd);
-                $reset = [
-                    'id' =>  $unicity['id'],
-                    'password'=> $user->getPassword(),
-                ];
-                $user->setResetedPwd($reset);
-                //envoyer par mail le pwd
-                $mail = new Mail();
-                $mail-> pwd_forget_mail($_POST['email'],$pwd);
-                $view = new View("login","singlePage");
-                $view->assign("user", $user);          
+                $result = Verificator::checkForm($user->getForgetForm(), $_POST);
+                if (count($result)<1) {
+                    session_start();
+                    $pwd=substr(bin2hex(random_bytes(128)), 0, 15);
+                    $user->setPassword($pwd);
+                    $reset = [
+                        'id' =>  $unicity['id'],
+                        'password'=> $user->getPassword(),
+                    ];
+                    $user->setResetedPwd($reset);
+                    //envoyer par mail le pwd
+                    $mail = new Mail();
+                    $mail-> pwd_forget_mail($_POST['email'], $pwd);
+                    $view = new View("login", "singlePage");
+                    $view->assign("user", $user);
+                }          
             }
             else{
                 echo $_POST["email"]."<br>";
@@ -157,7 +162,7 @@ class User {
                         $exist = $users->checkPassword('user',$_COOKIE['id'], $_POST['passwordOld']);
                         if($exist['id']){
                             $user->setPassword($_POST['password']);
-                            var_dump($user);
+                            
                             $reset = [
                                 'id' =>  $_COOKIE['id'],
                                 'password'=> $user->getPassword(),
@@ -173,7 +178,7 @@ class User {
                     }
                 } else {
                     $view = new View("changePassword", 'singlePage');
-                    var_dump($user);
+                 
                     $view->assign("user", $user);
                 }
             } else{
@@ -182,10 +187,7 @@ class User {
         }else{
             header('Location: /login');
         }
-
     }
-
-
 }
 
 

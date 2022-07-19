@@ -48,6 +48,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
      */
     public function setFirstname(?string $firstname): void
     {
+        $firstname = htmlspecialchars($firstname);
         $this->firstname = ucwords(strtolower(trim($firstname)));
     }
     /**
@@ -63,6 +64,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
      */
     public function setLastname(?string $lastname): void
     {
+        $lastname = htmlspecialchars($lastname);
         $this->lastname = strtoupper(trim($lastname));
     }
 
@@ -95,6 +97,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
      */
     public function setContry(string $contry): void
     {
+        $contry = htmlspecialchars($contry);
         $this->contry = ucfirst(strtolower(trim($contry)));
     }
 

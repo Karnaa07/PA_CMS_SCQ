@@ -16,6 +16,6 @@ class about { // Définition de la classe Main
             //http_response_code(403);
             header("HTTP/1.1 403 No perms");
         }    
-       // var_dump($_SESSION);
+
     }
 }

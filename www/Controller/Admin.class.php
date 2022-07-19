@@ -59,19 +59,26 @@ class Admin
     public function user_settings()
     { 
         $users = CrudUser ::getInstance();
-        //$userModel = new UserModel();
+        $userModel = new UserModel();
         if (isset($_COOKIE['Connected']) && !empty($_COOKIE['Connected']) && isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
             $token = $users -> tokenReturn('user', $_COOKIE['id']);
             if ($token[0]['token'] == $_COOKIE['Connected']) {
                 $perms = new Permissions();
                 if ($perms->cando(3)) { // right  Back end access
 
-                    if ($_POST) { // Secu a revoir
-                        if ($_POST['firstname']) {
-                            var_dump('okay');
-                            $users->update($_POST);
+                    if (isset($_POST['id']) && !empty($_POST['id'])) { // Secu a revoir
+                        if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['role_id']) && gettype($_POST['firstname']) == 'string' && gettype($_POST['lastname']) == 'string') {
+                            $userModel->setFirstname($_POST['firstname']);
+                            $userModel->setLastname($_POST['lastname']);
+                            $userModel->setEmail($_POST['email']);
+                            $userModel->setIdUser($_POST['id']);
+                            $userModel->setRole($_POST['role_id']);
+                            $firstname= htmlspecialchars($userModel->getFirstname());
+                            $lastname= htmlspecialchars($userModel->getLastname());
+                            $tabEnvoi=['id'=>$userModel->getId(), 'email'=>$userModel->getEmail(), 'firstname'=>$firstname, 'lastname'=>$lastname, 'role_id'=>$userModel->getRole()];
+                            $users->update($tabEnvoi);
                         } else {
-                            var_dump('ok');
+
                             $users->deleteRow('user', 'id', $_POST['id']);
                         }
                     }
