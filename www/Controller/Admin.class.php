@@ -8,6 +8,7 @@ use App\Core\Permissions;
 use App\Model\User as UserModel; 
 use App\Model\TplSettings as TplSettingsModel;
 use App\Core\TplSettings;
+use App\Core\CrudPages as PageCrud;
 
 
 class Admin
@@ -133,5 +134,26 @@ class Admin
         else{
             header('Location: /login');
         }
+    }
+
+    public function generateSitemap(){
+        $page = new PageCrud();
+        $tabData = $page->display();
+        $fichier = fopen("sitemap.xml", 'w+');
+        fwrite($fichier, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        fwrite($fichier, "<urlset xmlns=\"http://waterlily-cms.fr\"> \n");
+        
+        for($i=0; $i<count($tabData); $i++){
+            fwrite($fichier, "<url> \n");
+            fwrite($fichier, "<loc>http://waterlily-cms.fr/".$tabData[$i]['name']."</loc> \n");
+            fwrite($fichier, "</url> \n");
+        }
+        fwrite($fichier, "</urlset> \n");
+        fclose($fichier);
+        $fichierRead = fopen("sitemap.xml", "r");
+        $contenu = fread($fichierRead, filesize("sitemap.xml"));
+        $contenu = htmlentities($contenu);
+        print_r($contenu);
+        
     }
 }
