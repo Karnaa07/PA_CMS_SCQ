@@ -48,4 +48,7 @@ class Main { // Définition de la classe Main
     public function delete(){
         echo "coucou";
     }
+    public function acceuil(){
+        $view = new View('acceuil');
+    }
 } 
