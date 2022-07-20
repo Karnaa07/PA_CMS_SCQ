@@ -3,7 +3,7 @@ namespace App\Core;
 use App\Core\MysqlBuilder;
 
 
-class Crud
+class Crud extends CrudAbstract
 {
     private static $instance= null;
     public function __construct()
@@ -22,14 +22,15 @@ class Crud
         return self::$instance;
     }
 
-    public function displayUsers(){
+
+    public function display(){
         $req =  $this->builder-> select(DBPREFIXE.'user', ["id","email","firstname","lastname","role_id"])
         ->getQuery();
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
     }
-    public function updateUser($infos){
+    public function update($infos){
 
         $req = $this->builder-> update(DBPREFIXE.'user', $infos)
         ->where("id",$infos['id'],"=")
@@ -53,15 +54,6 @@ class Crud
 
     }
     
-    public function deleteRow(string $table, string $column, string $id){
-        $tableBD=DBPREFIXE.$table;
-        $req = $this->builder-> delete($tableBD)
-        ->where($column,$id,"=")
-        ->getQuery();
-        $queryPrepared = $this->pdo->query($req);
-        var_dump($req);
-
-    }
     public function addUser(){
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
@@ -74,11 +66,23 @@ class Crud
             // var_dump($sql);
     }
     public function getArticles(){
-        $req =  $this->builder-> insert('waterlily_article', ["idArticle","title","content","idCategory","idPage","id"])
+        $req =  $this->builder-> insert(DBPREFIXE.'article', ["idArticle","title","content","idCategory","idPage","id"])
         ->getQuery();
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
+    }
+
+    public function checkPassword($table,$id,$password){
+        $table=DBPREFIXE.$table;
+        $req =  $this->builder-> select($table, ["*"])
+        -> where("id",$id)
+        -> getQuery();
+        $queryPrepared = $this->pdo->query($req);
+        $result = $queryPrepared->fetch();
+        if (password_verify($password,$result["password"])){
+            return $result;
+        }
     }
 
 }

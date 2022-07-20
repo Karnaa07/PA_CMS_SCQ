@@ -10,9 +10,9 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     protected $lastname = null;
     protected $email;
     protected $password;
+    protected $contry;
     protected $status = 0;
-    protected $role_id = null;
-    protected $perms = null;
+    protected $role_id = 4;
     protected $token = null;
 
     public function __construct()
@@ -48,6 +48,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
      */
     public function setFirstname(?string $firstname): void
     {
+        $firstname = htmlspecialchars($firstname);
         $this->firstname = ucwords(strtolower(trim($firstname)));
     }
     /**
@@ -63,6 +64,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
      */
     public function setLastname(?string $lastname): void
     {
+        $lastname = htmlspecialchars($lastname);
         $this->lastname = strtoupper(trim($lastname));
     }
 
@@ -80,6 +82,23 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     public function setEmail(string $email): void
     {
         $this->email = strtolower(trim($email));
+    }
+
+    /**
+     * @return string
+     */
+    public function getContry(): string
+    {
+        return $this->contry;
+    }
+
+    /**
+     * @param string $contry
+     */
+    public function setContry(string $contry): void
+    {
+        $contry = htmlspecialchars($contry);
+        $this->contry = ucfirst(strtolower(trim($contry)));
     }
 
     /**
@@ -113,14 +132,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         $this->status = $status;
     }
-    public function getPerms(): array
-    {
-        return $this->perms;
-    }
-    public function setPerms(array $perms): void
-    {
-        $this->perms = $perms;
-    }
+
 
     public function getRole(): int
     {
@@ -198,6 +210,15 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "max"=>100,
                     "error"=>"Nom incorrect"
                 ],
+                "contry"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Votre pays ...",
+                    "class"=>"inputForm",
+                    "id"=>"paysForm",
+                    "min"=>2,
+                    "max"=>50,
+                    "error"=>"Nom incorrect"
+                ],
             ]
         ];
     }
@@ -233,6 +254,44 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
             ]
         ];
     }
+    public function getChangeForm(): array{
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "submit"=>"Changer de mot de passe"
+            ],
+            'inputs'=>[
+                "passwordOld"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Votre ancien mot de passe ...",
+                    "required"=>true,
+                    "class"=>"inputForm",
+                    "id"=>"pwdConfirmForm",
+                    "error"=>"Mauvais mot de passe",
+                ],
+                "password"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Votre mot de passe ...",
+                    "required"=>true,
+                    "class"=>"inputForm",
+                    "id"=>"pwdForm",
+                    "error"=>"Votre mot de passe doit faire au min 8 caractères avec majuscule, minuscules et des chiffres",
+                    ],
+                "passwordConfirm"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Confirmation ...",
+                    "required"=>true,
+                    "class"=>"inputForm",
+                    "id"=>"pwdConfirmForm",
+                    "confirm"=>"password",
+                    "error"=>"Votre mot de passe de confirmation ne correspond pas",
+                ],
+               
+            ]
+        ];
+
+    }
     public function getForgetForm(): array{
         return [
             "config"=>[
@@ -265,8 +324,11 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
             $this->setLastname($_POST['lastname']);
         if(!empty($_POST['role_id']))
             $this->setRole($_POST['role_id']);
+        if(!empty($_POST['contry']))
+            $this->setContry($_POST['contry']);
         $this->generateToken();
         $this->setStatus(0);
+
     }
 
 

@@ -3,6 +3,15 @@ namespace App\Core;
 
 class UserStats
 {
+    public function __construct()
+    {
+        $this->builder = new MysqlBuilder();
+        try{
+            $this->pdo = new \PDO( DBDRIVER.":host=".DBHOST.";port=".DBPORT.";dbname=".DBNAME,DBUSER, DBPWD);
+        }catch (\Exception $e){
+            die("Erreur SQL : ".$e->getMessage());
+        }
+    }
     public function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
         $output = NULL;
         if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
@@ -66,5 +75,29 @@ class UserStats
             }
         }
         return $output;
+    }
+    public function users_country() {
+        $req =  $this->builder
+        ->select(DBPREFIXE.'user', ["contry","COUNT(*)"])
+        ->group("contry")
+        ->getQuery();
+        $queryPrepared = $this->pdo->prepare($req);
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll();
+    }
+    public function registeredStats()
+    {
+        $req =  $this->builder
+        -> select(DBPREFIXE.'user', ["MONTH(createdAt) as month","COUNT(*) as value"])
+        -> where("YEAR(createdAt)",'YEAR(CURRENT_TIMESTAMP)',"=",true)
+        -> group("month")
+        -> getQuery();
+        $queryPrepared = $this->pdo->prepare($req);
+        $queryPrepared->execute();
+        $result = $queryPrepared->fetchAll();
+        for ($i=0; $i < count($result); $i++) { 
+            $result[$i]['month'] = date("F", mktime(0, 0, 0,$result[$i]['month'], 10));
+        }
+        return $result;
     }
 }

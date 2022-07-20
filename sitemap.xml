@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://waterlily-cms.fr">
+
+   <url>
+      <loc>http://waterlily-cms.fr/login</loc>
+   </url>
+    <url>
+      <loc>http://waterlily-cms.fr/register</loc>
+   </url>
+    <url>
+      <loc>http://waterlily-cms.fr/pages</loc>
+   </url>
+    <url>
+      <loc>http://waterlily-cms.fr/articles</loc>
+   </url>
+    <url>
+      <loc>http://waterlily-cms.fr/user_settings</loc>
+   </url>
+    <url>
+      <loc>http://waterlily-cms.fr/addArticle</loc>
+   </url>
+    <url>
+      <loc>http://waterlily-cms.fr/addPage</loc>
+   </url>
+    <url>
+      <loc>http://waterlily-cms.fr/forget</loc>
+   </url>
+    <url>
+      <loc>http://waterlily-cms.fr/dashboard</loc>
+   </url>
+       <url>
+      <loc>http://waterlily-cms.fr/apparence</loc>
+   </url>
+   
+
+</urlset> 

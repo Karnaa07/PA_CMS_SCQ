@@ -218,15 +218,15 @@
 
     for (var i = 0; i < data.length; i++) {
         var dataContext = data[i];
-        var countryDataItem = polygonSeries.getDataItemById(dataContext.id);
-        var countryPolygon = countryDataItem.get("mapPolygon");
+        var monthDataItem = polygonSeries.getDataItemById(dataContext.id);
+        var monthPolygon = monthDataItem.get("mapPolygon");
 
         var value = dataContext.value;
 
         var radius = minRadius + maxRadius * (value - valueLow) / (valueHigh - valueLow);
 
-        if (countryPolygon) {
-        var geometry = am5map.getGeoCircle(countryPolygon.visualCentroid(), radius);
+        if (monthPolygon) {
+        var geometry = am5map.getGeoCircle(monthPolygon.visualCentroid(), radius);
         circleSeries.data.push({
             name: dataContext.name,
             value: dataContext.value,
@@ -276,7 +276,7 @@ xRenderer.labels.template.setAll({
 
 var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(stickStats, {
   maxDeviation: 0.3,
-  categoryField: "country",
+  categoryField: "month",
   renderer: xRenderer,
   tooltip: am5.Tooltip.new(stickStats, {})
 }));
@@ -295,7 +295,7 @@ var series = chart.series.push(am5xy.ColumnSeries.new(stickStats, {
   yAxis: yAxis,
   valueYField: "value",
   sequencedInterpolation: true,
-  categoryXField: "country",
+  categoryXField: "month",
   tooltip: am5.Tooltip.new(stickStats, {
     labelText:"{valueY}"
   })
@@ -310,45 +310,6 @@ series.columns.template.adapters.add("stroke", function(stroke, target) {
   return chart.get("colors").getIndex(series.columns.indexOf(target));
 });
 
-
-// Set data
-var dataStats = [{
-  country: "Janvier",
-  value: 2025
-}, {
-  country: "Fevrier",
-  value: 1882
-}, {
-  country: "Mars",
-  value: 1809
-}, {
-  country: "Avril",
-  value: 1322
-}, {
-  country: "Mai",
-  value: 1122
-}, {
-  country: "Juin",
-  value: 1114
-}, {
-  country: "Juillet",
-  value: 984
-}, {
-  country: "Aout",
-  value: 711
-}, {
-  country: "Septembre",
-  value: 665
-}, {
-  country: "Octobre",
-  value: 580
-}, {
-  country: "Novembre",
-  value: 443
-}, {
-  country: "Decembre",
-  value: 441
-}];
 
 xAxis.data.setAll(dataStats);
 series.data.setAll(dataStats);

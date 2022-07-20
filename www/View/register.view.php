@@ -1,8 +1,7 @@
 <?php 
 // var_dump($this);
 $this->includePartial("form", $user->getRegisterForm()) // à remettre plus tard ?> 
-
-
+<link rel="stylesheet" type="text/css" href="../css/login.css">
 
 <!-- <html lang="fr">
 

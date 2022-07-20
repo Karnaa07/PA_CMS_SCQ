@@ -7,4 +7,4 @@ define("DBNAME", "waterlilyyyyyy");
 define("DBPORT", "3306");
 define("DBDRIVER", "mysql");
 define("DBPREFIXE", "waterlily_");
-
+define("SITENAME", "WATERLILY Corp");

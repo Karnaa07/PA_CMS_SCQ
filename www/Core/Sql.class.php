@@ -37,30 +37,19 @@ abstract class Sql
         $table=DBPREFIXE.$table;
         $columns = get_object_vars($this);
         $columns = array_diff_key($columns, get_class_vars(get_class()));
-
         $values=array_keys($columns);
-        var_dump('toto');
-        var_dump($this->getId());
+        
         if($this->getId() == null){
             $sql =  $this->builder-> insert($table, $columns)->getQuery();
-           // $queryPrepared = $this->pdo->query($sql);
-            var_dump($sql);
-            
-        } else { 
-            // $update = [];
-            // foreach ($columns as $column=>$value)
-            // {
-            //     $update[] = $column."=:".$column;
-            // }
-            // $sql = "UPDATE ".$this->table." SET ".implode(",",$update)." WHERE id=".$this->getId() ;
+        }   else { 
             $sql =  $this->builder-> update($table, $columns)
             -> where("id",$this->getId())
             ->getQuery();
-            //var_dump($sql); 
-        } 
-        var_dump($sql); 
+        }
         $queryPrepared = $this->pdo->prepare($sql); // On prépare nos requêtes
-        var_dump($columns);
+
+        echo'<br>';
+
         if($table==DBPREFIXE.'user'){
             $queryPrepared->execute([
                 $columns['id'],
@@ -68,12 +57,13 @@ abstract class Sql
                 $columns['lastname'],
                 $columns['email'],
                 $columns['password'],
+                $columns['contry'],
                 $columns['status'],
+                $columns['role_id'],
                 $columns['token']
             ]);
         }
         else{
-            var_dump($columns);
             $queryPrepared->execute($columns);
         }
     }
@@ -81,12 +71,11 @@ abstract class Sql
     {
         $table=DBPREFIXE.$table;
         $req =  $this->builder-> select($table, ["*"])
-        -> join("waterlily_roles","role_id")
+        -> join(DBPREFIXE."roles","role_id")
         -> where("email", $email)
         -> getQuery();
         $queryPrepared = $this->pdo->query($req);
         $result = $queryPrepared->fetch();
-        //var_dump($result);
         if (password_verify($password,$result["password"])){
             
             $_SESSION["user"]["permissions"] = [];
@@ -95,7 +84,7 @@ abstract class Sql
     }
 
     public function Crud(){
-        $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM `waterlily_user`");
+        $queryPrepared =$this->pdo->prepare("SELECT email,firstname,lastname FROM " .DBPREFIXE."user");
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
     }
@@ -111,10 +100,8 @@ abstract class Sql
             }
             $sql.=" WHERE ".implode(" AND ", $select);
         }
-        
         $prepare=$this->pdo->prepare($sql);
         $prepare->execute($where);
-
         $result=$prepare->fetch();
         //var_dump($result);
         if(gettype($result)!=="array"){
@@ -122,11 +109,10 @@ abstract class Sql
             
         }
         return $result;
-
     }
     public function getUserPerms(string $permsId) : ?array 
     {
-        $req =  $this->builder-> select('waterlily_roles_permissions', ["*"])
+        $req =  $this->builder-> select(DBPREFIXE.'roles_permissions', ["*"])
         -> where("role_id", $permsId)
         -> getQuery();
         $reqPrep = $this->pdo->prepare($req);
@@ -137,16 +123,15 @@ abstract class Sql
         $req =  $this->builder-> update(DBPREFIXE.'user', $datas)
         -> where("id", $datas['id'])
         -> getQuery();
+       
         $test = $this->pdo->prepare($req);
         $test->execute();    
     }
     public function setBasicUser(?array $usr){
-        $req =  $this->builder-> update(DBPREFIXE.'user', $usr)
-        -> where("name",$usr['name'])
+        $req =  $this->builder-> update(DBPREFIXE.'user', ["role_id"=>3])
         -> where("email",$usr['email'])
         -> getQuery();
         $test = $this->pdo->prepare($req);
         $test->execute();  
     }
-
 }

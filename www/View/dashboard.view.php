@@ -10,7 +10,26 @@
 
 <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
 
-
+<script> 
+    var dataStats = []
+</script>
+<?php
+    for ($i=0; $i < count($registeredStats) ; $i++) 
+    { 
+        // echo(print_r($registeredStats[$i]).'<br>');
+        echo('
+                <script> dataStats.push(
+                {
+                    month:"'.$registeredStats[$i]["month"].'",
+                    value:'.$registeredStats[$i]["value"].'
+                }) 
+                </script>'
+            );
+    }
+?>
+<script> 
+   console.log(dataStats)
+</script>
 <div class = "dashboard--statswrapper">
     <div id="chartdiv" class=""><h1>Utilisateurs en ligne </h1></div>  
     <div class ="dashboard--vertical"> 

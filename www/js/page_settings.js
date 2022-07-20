@@ -2,19 +2,22 @@ $(document).ready(function () {
     let modalBtn = $('.modify')
     let modal = $(".modal")
     let closeBtn = $(".close-btnDelete")
+    let show = $('.show')
   
     let deleteBtn = $('.delete')
     let deleteCloseBtn = $('.deleteClose-btn')
     let deleteModal = $(".deleteModal")
-
+    show.click(function(){
+        let name = $(this).parents('tr').find('td').eq(1).text().trim()
+        name= name.replace(' ', '_')
+        window.location.replace("/"+name)
+    })
     modalBtn.click(function(){
         //Listeners
-        console.log('truc')
         modal.css("display", "block");
 
         // Datatable Inputs Values
         let id = $(this).parents('tr').find('td').eq(0).text().trim()
-        console.log(id)
         let name = $(this).parents('tr').find('td').eq(1).text().trim()
 
         // Modal Input base Values
@@ -29,7 +32,6 @@ $(document).ready(function () {
         deleteModal.css("display", "none");
     })
     deleteBtn.click(function(){
-        console.log('pipi')
         let id = $(this).parents('tr').find('td').eq(0).text().trim()
         deleteModal.css("display", "block");
         $("[name='idPage']").val(id)

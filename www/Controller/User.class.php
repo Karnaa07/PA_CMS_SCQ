@@ -8,6 +8,8 @@ use App\Core\View;
 use App\Model\User as UserModel;  // Alias de class User dans Model/User.class.php
 use App\Core\Mail;
 use App\Core\Permissions;
+use App\Core\Crud as CrudUser;
+
 
 class User {    
     public function login() //login
@@ -20,7 +22,7 @@ class User {
             if ($request_method === 'GET') {
                 // generate a token
                 $_SESSION['token'] = bin2hex(random_bytes(35));
-                $view = new View("login","front");
+                $view = new View("login","singlePage");
                 $view->assign("user", $user);
 
                 // show the form@
@@ -34,14 +36,16 @@ class User {
                     
                     if($exist["id"]){
                         // var_dump($exist['firstname']);
-                        setcookie('Connected',$exist['token'],time()+3600);
+
+                    setcookie('Connected',$exist['token'],time()+3600);
                         setcookie('id', $exist['id'], time()+3600 );
-                        $view = new View("dashboard","back");
+                        //$view = new View("dashboard","back");
                         // var_dump($);
                         $user->setRole($exist['role_id']);
                         $perms = $user->getUserPerms($user->getRole());
-                        foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; }
-
+                        foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; 
+                        header('Location: /dashboard');
+                        }
                     }
                     else
                     {
@@ -52,7 +56,7 @@ class User {
         }
         else {
             //var_dump($_SESSION);
-            header('Location: dashboard'); // Utilisateur déjà connecté
+            header('Location: /dashboard'); // A refaire
         }
     }
     public function register()
@@ -66,11 +70,14 @@ class User {
                     $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
                     //dans le cas il n'y a pas d'erreur, et insertion en base de donnée
                     if(count($result)<1){
+                        session_start();
                         echo "ce mail n'existe pas, utilisateur enregistre";
                         $user->setUser();
                         $user->save('user');
                         $mail = new Mail();
-                        $mail->verif_account($user->getEmail(), $user->getFirstname(),bin2hex(random_bytes(10)));
+                        $tokenVerif = bin2hex(random_bytes(10));
+                        $_SESSION['tokenVerif'] = $tokenVerif;
+                        $mail->verif_account($user->getEmail(), $user->getFirstname(),$tokenVerif);
                     }
                     else{
                         echo $result[0];
@@ -80,18 +87,20 @@ class User {
                     echo "ce mail existe deja";
                 }
             }
-            $view = new View("register");
+            $view = new View("register","singlePage");
             $view->assign("user", $user);
         } else {
-            header('Location: dashboard');
+            header('Location: /dashboard');
         }
     }
     public function logout()
     {
         // Gestion de déconnexion 
+
         // Supprimer le Token 
         unset($_COOKIE['Connected']);   
         setcookie('Connected','', time() - 4200, '/');
+
         header('Location: login');
     }
     public function pwdforget()
@@ -102,19 +111,22 @@ class User {
             $unicity=$user->getOneBy('user',["email"=>$_POST['email']]);
             if($unicity!==null)
             {
-                session_start();
-                $pwd=substr(bin2hex(random_bytes(128)), 0, 15);
-                $user->setPassword($pwd);
-                $reset = [
-                    'id' =>  $unicity['id'],
-                    'password'=> $user->getPassword(),
-                ];
-                $user->setResetedPwd($reset);
-                //envoyer par mail le pwd
-                $mail = new Mail();
-                $mail-> pwd_forget_mail($_POST['email'],$pwd);
-                $view = new View("login");
-                $view->assign("user", $user);          
+                $result = Verificator::checkForm($user->getForgetForm(), $_POST);
+                if (count($result)<1) {
+                    session_start();
+                    $pwd=substr(bin2hex(random_bytes(128)), 0, 15);
+                    $user->setPassword($pwd);
+                    $reset = [
+                        'id' =>  $unicity['id'],
+                        'password'=> $user->getPassword(),
+                    ];
+                    $user->setResetedPwd($reset);
+                    //envoyer par mail le pwd
+                    $mail = new Mail();
+                    $mail-> pwd_forget_mail($_POST['email'], $pwd);
+                    $view = new View("login", "singlePage");
+                    $view->assign("user", $user);
+                }          
             }
             else{
                 echo $_POST["email"]."<br>";
@@ -122,24 +134,60 @@ class User {
             }
         }
         else{
-            $view = new View("forgetPassword");
+            $view = new View("forgetPassword","singlePage");
             $view->assign("user", $user);
             echo "Mot de passe oublié";
         }
     }
-
     public function verificated(){
+        $user = new UserModel();
         if(isset($_GET)){
-            $user = new UserModel();
-            $user->setBasicUser(['name'=>$_GET['name'],'email'=>$_GET['email']]);
-            $view = new View("accountActivated");
-            $view->assign("user", $user);
-            echo('<br><br>');
-            var_dump($_GET);
+            //var_dump($_GET['tkn']);
+            session_start();
+            if($_GET['tkn'] == $_SESSION['tokenVerif']){
+                $user->setBasicUser(['email'=>$_GET['email']]);
+            }
         }
     }
 
-
+    public function changePassword(){
+        $user = new UserModel();
+        $users = CrudUser :: getInstance();
+        if (isset($_COOKIE['Connected']) && !empty($_COOKIE['Connected']) && isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
+            $token = $users -> tokenReturn('user', $_COOKIE['id']);
+            if ($token[0]['token'] == $_COOKIE['Connected']) {
+                if (!empty($_POST)) {
+                    $result = Verificator::checkForm($user->getChangeForm(), $_POST);
+                    if(count($result)<1){
+                        $exist = $users->checkPassword('user',$_COOKIE['id'], $_POST['passwordOld']);
+                        if($exist['id']){
+                            $user->setPassword($_POST['password']);
+                            
+                            $reset = [
+                                'id' =>  $_COOKIE['id'],
+                                'password'=> $user->getPassword(),
+                            ];
+                            $user->setResetedPwd($reset);
+                        }
+                        else{
+                            echo 'Mauvais mot de passe';
+                        }
+                    }
+                    else{
+                        echo $result[0];
+                    }
+                } else {
+                    $view = new View("changePassword", 'singlePage');
+                 
+                    $view->assign("user", $user);
+                }
+            } else{
+                header('Location: /login');
+            }
+        }else{
+            header('Location: /login');
+        }
+    }
 }
 
 
