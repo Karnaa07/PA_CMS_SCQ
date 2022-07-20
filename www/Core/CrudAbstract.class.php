@@ -8,6 +8,7 @@ abstract class CrudAbstract{
         ->where($column,$id,"=")
         ->getQuery();
         $queryPrepared = $this->pdo->query($req);
+        
     }
     public function display(){}
     public function update($infos){}

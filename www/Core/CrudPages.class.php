@@ -18,7 +18,6 @@ class CrudPages extends CrudAbstract
     public function display(){
         $req =  $this->builder-> select(DBPREFIXE.'page', ["idPage","name"])
         ->getQuery();
-       
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();

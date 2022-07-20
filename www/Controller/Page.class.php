@@ -79,7 +79,6 @@ class Page
                 $perms = new Permissions();
                 if ($perms->cando(3)) {
                     $page = new PageCrud();
-                    var_dump($_POST);
                     if (isset($_POST['idPage']) && !empty($_POST['idPage'])) { // Secu a revoir
 
                         $id =$_POST['idPage'];

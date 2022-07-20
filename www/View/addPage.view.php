@@ -1,5 +1,5 @@
 <?php $this->includePartial("form", $page->getPageForm()) // à remettre plus tard ?> 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
   <script src="https://cdn.tiny.cloud/1/9i4ty3dj7s5dyw4g2xbzg2u7udwf4mliqo7r71asossk42gb/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
@@ -19,4 +19,4 @@
     });
   </script>
 </body>
-</html>
+</html> -->

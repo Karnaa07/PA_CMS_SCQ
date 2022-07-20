@@ -17,10 +17,27 @@ class MysqlBuilder implements QueryBuilder {
     public function insert(string $table,array $values):QueryBuilder
     {
         $this->reset();
-        
+
        if($table==DBPREFIXE.'page'){
         $this->query->base="INSERT INTO ".$table." (name) VALUES ('".$values['name']."')";
        }
+       else if($table==DBPREFIXE.'article') {
+            $strout='';
+            foreach ($values as $key => $value) {
+                if($value!=null){
+                    $strout =$strout."'".$value."',";
+                } else {
+                    $strout =$strout.$value.",";
+
+                }
+            }
+            if(strlen($strout) > 1){
+                var_dump($strout);
+                $strout = substr($strout, 0, -1);
+                $this->query->base="INSERT INTO ".$table.' (idArticle,title,content,urlimage,idCategory,idPage) VALUES (null  '.
+                $strout.')';
+            }
+        }
        else if($table==DBPREFIXE.'tplsettings'){
         $this->query->base="INSERT INTO ".$table." (bgcolor,name,fontcolor,font) VALUES ('".$values['name']."')";
        }

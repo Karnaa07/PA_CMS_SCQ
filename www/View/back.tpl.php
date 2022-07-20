@@ -22,7 +22,7 @@
         <img id="logo" src="../data/img/Logo.svg"> <br><br><br> 
         <ul>
             <li><a href="/dashboard"><img src="../data/snippets/Dashboard.svg">Dashboard</a></li>
-            <li><a href="/media"><img src="../data/snippets/Media.svg">Media</a></li>
+            <!-- <li><a href="/media"><img src="../data/snippets/Media.svg">Media</a></li> -->
             <!-- <li><a href="#"><img src="../data/snippets/Plugins.svg">Plugin</a></li> manque de temps -->
             <li><a href="/pages"><img src="../data/snippets/Page.svg">Pages</a></li>
             <li><a href="/articles"><img src="../data/snippets/Articles.svg">Articles</a></li>
@@ -32,7 +32,7 @@
             <hr/>
             <li><a href="/user_settings"><img src="../data/snippets/Utilisateurs.svg">Utilisateurs</a></li>
             
-            <li><a href="#"><img src="../data/snippets/Assistances.svg">Assistances</a></li>
+            <!-- <li><a href="#"><img src="../data/snippets/Assistances.svg">Assistances</a></li> -->
             <?php if($perms->cando(12 ,"view")){ // reglages ?>
                 <li><a href="#"><img src="../data/snippets/Reglage.svg">Réglages</a></li>
             <?php } else {?>
