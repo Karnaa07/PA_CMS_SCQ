@@ -32,7 +32,7 @@
             <hr/>
             <li><a href="/user_settings"><img src="../data/snippets/Utilisateurs.svg">Utilisateurs</a></li>
             
-            <li><a href="#"><img src="../data/snippets/Assistances.svg">Assistances</a></li>
+            <!-- <li><a href="#"><img src="../data/snippets/Assistances.svg">Assistances</a></li> -->
             <?php if($perms->cando(12 ,"view")){ // reglages ?>
                 <li><a href="#"><img src="../data/snippets/Reglage.svg">Réglages</a></li>
             <?php } else {?>
