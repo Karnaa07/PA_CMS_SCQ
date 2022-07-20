@@ -11,11 +11,12 @@ class Installer { // Définition de la classe Main
 
     public function install()
     {
-        if(isset($_POST['name'])) // a ajouter
+        if(isset($_POST['lastname'])) // a ajouter
         {
             $setup =  new InstallSettings();
             // var_dump($_POST);
             $sql = $setup->SetUpSQL();
+            $setup->setConfFile();
             if($sql){
                 $admin = new UserModel();
                 $admin->setUser();
@@ -27,6 +28,7 @@ class Installer { // Définition de la classe Main
 
         } else {
             $view = new View("setup","singlePage");
+            var_dump('test');
         }
     }  
 }
