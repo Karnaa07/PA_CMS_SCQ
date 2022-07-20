@@ -18,8 +18,11 @@
                 <label for="dbName">BDD Name : </label>
                 <input required type="text" placeholder="DB Name" name="dbName"><br>
                 <label for="dbPrefix">BDD Prefix : </label>
+                <input required type="text" value="waterlily_" name="dbPort"><br>
+                <label for="dbPort">BDD Port : </label>
                 <input required type="text" value="waterlily_" name="dbPrefix"><br>
                 <label for="siteName">Website name : </label>
+
             <input type="text" name="siteName" placeholder="Nom du site"><br>
             <hr>
             <h1> Compte Admin </h1>

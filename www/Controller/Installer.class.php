@@ -11,20 +11,21 @@ class Installer { // Définition de la classe Main
 
     public function install()
     {
-        if(isset($_POST['lastname'])) // a ajouter
-        {
+        // var_dump('test');
+        if(isset($_POST['lastname'])) 
+        {            
+            var_dump($_POST);
             $setup =  new InstallSettings();
-            // var_dump($_POST);
-            $sql = $setup->SetUpSQL();
-            $setup->setConfFile();
-            if($sql){
-                $admin = new UserModel();
-                $admin->setUser();
-                $admin->setRole(1);
-                $admin->save('user');
-            }
-            $setup->delInstaller();
-            $view = new View("login","singlePage");
+            // $sql = $setup->SetUpSQL();
+            // $setup->setConfFile();
+            // if($sql){
+            //     $admin = new UserModel();
+            //     $admin->setUser();
+            //     $admin->setRole(1);
+            //     $admin->save('user');
+            // }
+            // $setup->delInstaller();
+            // $view = new View("login","singlePage");
 
         } else {
             $view = new View("setup","singlePage");

@@ -25,6 +25,7 @@ function myAutoloader($class)
     }
 
     $routes = yaml_parse_file($routeFile);
+    var_dump($routes[$uri]['action']);
     if(file_exists("./setup.php") && $routes[$uri]['action']!="install"){
         header("Location: installer");
     } else {
