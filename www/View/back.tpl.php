@@ -22,7 +22,7 @@
         <img id="logo" src="../data/img/Logo.svg"> <br><br><br> 
         <ul>
             <li><a href="/dashboard"><img src="../data/snippets/Dashboard.svg">Dashboard</a></li>
-            <li><a href="/media"><img src="../data/snippets/Media.svg">Media</a></li>
+            <!-- <li><a href="/media"><img src="../data/snippets/Media.svg">Media</a></li> -->
             <!-- <li><a href="#"><img src="../data/snippets/Plugins.svg">Plugin</a></li> manque de temps -->
             <li><a href="/pages"><img src="../data/snippets/Page.svg">Pages</a></li>
             <li><a href="/articles"><img src="../data/snippets/Articles.svg">Articles</a></li>
