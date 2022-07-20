@@ -67,3 +67,19 @@
     </div>
   </div>
 </div>
+
+<div class="deleteModal">
+  <div class="modal-content">
+    <span class="deleteClose-btn">&times;</span>
+    <div class = "modal--inputs">
+        <form id="modifUser" method="post" action="">
+
+        
+            <input  name="idArticle" type="hidden" value=""><br>
+
+            <input type="submit" value="Confirmer la suppression">
+
+        </form>
+    </div>
+  </div>
+</div>

@@ -33,8 +33,8 @@ $(document).ready(function () {
     deleteBtn.click(function(){
         let id = $(this).parents('tr').find('td').eq(0).text().trim()
         deleteModal.css("display", "block");
-        $("[name='id']").val(id)
-
+        $("[name='idArticle']").val(id)
+        
     })
 })
 
