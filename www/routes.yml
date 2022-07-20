@@ -83,6 +83,10 @@
   controller: admin
   action: tplsettings
 
+/sitemap:
+  controller : admin
+  action : generateSitemap
+
 
 
 
