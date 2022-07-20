@@ -39,6 +39,7 @@ class User {
 
                     setcookie('Connected',$exist['token'],time()+3600);
                         setcookie('id', $exist['id'], time()+3600 );
+                        setcookie('role', $exist['role_id'], time()+3600);
                         //$view = new View("dashboard","back");
                         // var_dump($);
                         $user->setRole($exist['role_id']);
@@ -55,8 +56,13 @@ class User {
             }
         }
         else {
-            //var_dump($_SESSION);
-            header('Location: /dashboard'); // A refaire
+            if($_COOKIE['role']==1){
+                header('Location: /dashboard');
+            }
+            else{
+                header('Location: /acceuil');
+            }
+            // A refaire
         }
     }
     public function register()

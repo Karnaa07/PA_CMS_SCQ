@@ -96,28 +96,7 @@
   controller: user
   action: changePassword
   
+/acceuil:
+  controller: main
+  action: acceuil
 
-/Seconde_Page: 
- controller: front 
- action: Seconde_Page 
-/Accueuil: 
- controller: front 
- action: Accueuil 
-/Nous_contacter: 
- controller: front 
- action: Nous_contacter 
-/Nouvelle_Page: 
- controller: front 
- action: Nouvelle_Page 
-/Ma_belle_Page: 
- controller: front 
- action: Ma_belle_Page 
-/Accueuil: 
- controller: front 
- action: Accueuil 
-/Newsletter: 
- controller: front 
- action: Newsletter 
-/test: 
- controller: front 
- action: test 
