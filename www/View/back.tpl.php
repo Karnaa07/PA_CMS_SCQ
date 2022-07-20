@@ -8,8 +8,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Template BACK</title>
-    <meta name="description" content="Description de ma page">
+    <title>Waterlily BACK</title>
+    <meta name="description" content="Back office de notre CMS Waterlily">
     <link href="../css/tpl.back.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="../js/tpl.back.js"></script>

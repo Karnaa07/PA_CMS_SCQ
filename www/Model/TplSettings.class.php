@@ -5,7 +5,7 @@ use App\Core\Sql;
 
 class TplSettings extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
 {
-    protected $id = null;
+    protected $id = 1;
     protected $name ;
     protected $bgcolor ;
     protected $fontcolor;
@@ -23,13 +23,6 @@ class TplSettings extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     public function getId(): ?int
     {
         return $this->id;
-    }
-       /**
-     * @param int $id
-     */
-    public function setIdStyle(string $id): void
-    {
-        $this->id = $id;
     }
     /**
      * @return null|string
@@ -61,7 +54,7 @@ class TplSettings extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
      */
     public function setBgColor(?string $bgcolor): void
     {
-        $this->firstname = strtolower(trim($bgcolor));
+        $this->bgcolor = strtolower(trim($bgcolor));
     }
     /**
      * @return null|string
@@ -90,7 +83,7 @@ class TplSettings extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
      */
     public function setFont(?string $font): void
     {
-        $this->firstname = strtolower(trim($font));
+        $this->font = strtolower(trim($font));
     }
     /**
      * @return null|string
@@ -135,7 +128,7 @@ class TplSettings extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     }
     public function setTplSettings(){
         if(!empty($_POST['bgcolor']))
-            $this->setBgColor($_POST['bocolor']);
+            $this->setBgColor($_POST['bgcolor']);
         if(!empty($_POST['name']))
             $this->setName($_POST['name']);
         if(!empty($_POST['fontcolor']))

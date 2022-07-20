@@ -85,6 +85,17 @@
   controller: admin
   action: tplsettings
 
+/sitemap:
+  controller : admin
+  action : generateSitemap
+
+
+
+
+/changePassword:
+  controller: user
+  action: changePassword
+  
 
 /Seconde_Page: 
  controller: front 

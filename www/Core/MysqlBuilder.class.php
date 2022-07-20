@@ -17,6 +17,7 @@ class MysqlBuilder implements QueryBuilder {
     public function insert(string $table,array $values):QueryBuilder
     {
         $this->reset();
+
        if($table==DBPREFIXE.'page'){
         $this->query->base="INSERT INTO ".$table." (name) VALUES ('".$values['name']."')";
        }
@@ -37,6 +38,12 @@ class MysqlBuilder implements QueryBuilder {
                 $strout.')';
             }
         }
+       else if($table==DBPREFIXE.'tplsettings'){
+        $this->query->base="INSERT INTO ".$table." (bgcolor,name,fontcolor,font) VALUES ('".$values['name']."')";
+       }
+       else if($table==DBPREFIXE.'user'){
+        $this->query->base="INSERT INTO ".$table." (firstname,lastname,email,password,contry, role_id, status,token) VALUES ('".$values['firstname']."', '".$values['lastname']."', '".$values['email']."','".$values['password']."', '".$values['contry']."', ".$values['role_id']." , ".$values['status']." , '".$values['token']."')";
+       }
        else{
         $this->query->base="INSERT INTO ".$table." VALUES ( null ".implode(", ",$values).")";
        }
@@ -54,9 +61,6 @@ class MysqlBuilder implements QueryBuilder {
             $strout = substr($strout, 0, -1);
             //var_dump($strout);
             $this->query->base="UPDATE ".$table." SET ".$strout;
-        }
-        else {
-            var_dump('test');
         }
             return $this;
     }

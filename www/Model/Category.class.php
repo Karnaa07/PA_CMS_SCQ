@@ -68,8 +68,7 @@ class Category extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "class"=>"inputForm",
                     "id"=>"nameCategoryForm",
                     "error"=>"Nom incorrect",
-                ],
-                
+                ], 
             ]
         ];
     }

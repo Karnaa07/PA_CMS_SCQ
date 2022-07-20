@@ -66,12 +66,23 @@ class Crud extends CrudAbstract
             // var_dump($sql);
     }
     public function getArticles(){
-        $req =  $this->builder-> select('waterlily_article', ["idArticle","title","content","idCategory","idPage","createdAt"])
-        //->join("","")
+        $req =  $this->builder-> insert(DBPREFIXE.'article', ["idArticle","title","content","idCategory","idPage","id"])
         ->getQuery();
         $queryPrepared = $this->pdo->prepare($req);
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
+    }
+
+    public function checkPassword($table,$id,$password){
+        $table=DBPREFIXE.$table;
+        $req =  $this->builder-> select($table, ["*"])
+        -> where("id",$id)
+        -> getQuery();
+        $queryPrepared = $this->pdo->query($req);
+        $result = $queryPrepared->fetch();
+        if (password_verify($password,$result["password"])){
+            return $result;
+        }
     }
 
 }

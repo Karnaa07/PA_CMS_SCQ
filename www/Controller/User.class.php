@@ -8,6 +8,8 @@ use App\Core\View;
 use App\Model\User as UserModel;  // Alias de class User dans Model/User.class.php
 use App\Core\Mail;
 use App\Core\Permissions;
+use App\Core\Crud as CrudUser;
+
 
 class User {    
     public function login() //login
@@ -37,11 +39,13 @@ class User {
 
                     setcookie('Connected',$exist['token'],time()+3600);
                         setcookie('id', $exist['id'], time()+3600 );
-                        $view = new View("dashboard","back");
+                        //$view = new View("dashboard","back");
                         // var_dump($);
                         $user->setRole($exist['role_id']);
                         $perms = $user->getUserPerms($user->getRole());
-                        foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; }
+                        foreach ($perms as $p) { $_SESSION["user"]["permissions"][] = $p["perm_id"]; 
+                        header('Location: /dashboard');
+                        }
                     }
                     else
                     {
@@ -107,19 +111,22 @@ class User {
             $unicity=$user->getOneBy('user',["email"=>$_POST['email']]);
             if($unicity!==null)
             {
-                session_start();
-                $pwd=substr(bin2hex(random_bytes(128)), 0, 15);
-                $user->setPassword($pwd);
-                $reset = [
-                    'id' =>  $unicity['id'],
-                    'password'=> $user->getPassword(),
-                ];
-                $user->setResetedPwd($reset);
-                //envoyer par mail le pwd
-                $mail = new Mail();
-                $mail-> pwd_forget_mail($_POST['email'],$pwd);
-                $view = new View("login","singlePage");
-                $view->assign("user", $user);          
+                $result = Verificator::checkForm($user->getForgetForm(), $_POST);
+                if (count($result)<1) {
+                    session_start();
+                    $pwd=substr(bin2hex(random_bytes(128)), 0, 15);
+                    $user->setPassword($pwd);
+                    $reset = [
+                        'id' =>  $unicity['id'],
+                        'password'=> $user->getPassword(),
+                    ];
+                    $user->setResetedPwd($reset);
+                    //envoyer par mail le pwd
+                    $mail = new Mail();
+                    $mail-> pwd_forget_mail($_POST['email'], $pwd);
+                    $view = new View("login", "singlePage");
+                    $view->assign("user", $user);
+                }          
             }
             else{
                 echo $_POST["email"]."<br>";
@@ -143,7 +150,44 @@ class User {
         }
     }
 
-
+    public function changePassword(){
+        $user = new UserModel();
+        $users = CrudUser :: getInstance();
+        if (isset($_COOKIE['Connected']) && !empty($_COOKIE['Connected']) && isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
+            $token = $users -> tokenReturn('user', $_COOKIE['id']);
+            if ($token[0]['token'] == $_COOKIE['Connected']) {
+                if (!empty($_POST)) {
+                    $result = Verificator::checkForm($user->getChangeForm(), $_POST);
+                    if(count($result)<1){
+                        $exist = $users->checkPassword('user',$_COOKIE['id'], $_POST['passwordOld']);
+                        if($exist['id']){
+                            $user->setPassword($_POST['password']);
+                            
+                            $reset = [
+                                'id' =>  $_COOKIE['id'],
+                                'password'=> $user->getPassword(),
+                            ];
+                            $user->setResetedPwd($reset);
+                        }
+                        else{
+                            echo 'Mauvais mot de passe';
+                        }
+                    }
+                    else{
+                        echo $result[0];
+                    }
+                } else {
+                    $view = new View("changePassword", 'singlePage');
+                 
+                    $view->assign("user", $user);
+                }
+            } else{
+                header('Location: /login');
+            }
+        }else{
+            header('Location: /login');
+        }
+    }
 }
 
 

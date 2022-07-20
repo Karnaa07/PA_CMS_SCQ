@@ -31,7 +31,6 @@ class Article
                     }
                     $pageid = new CrudPages();
                     $pages = $pageid->display();
-                    //var_dump($pages);
                     $view = new View("addArticle", "back"); 
                     $view->assign("article", $article);
                     $view->assign("pageid", $pages);       
@@ -52,7 +51,6 @@ class Article
         $users = CrudUser :: getInstance();
         if (isset($_COOKIE['Connected']) && !empty($_COOKIE['Connected']) && isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
             $token = $users -> tokenReturn('user', $_COOKIE['id']);
-            // var_dump($token);
             if ($token[0]['token'] == $_COOKIE['Connected']) {
                 $perms = new Permissions();
                 if ($perms->cando(3)) {
