@@ -18,10 +18,7 @@ class Installer { // Définition de la classe Main
             $sql = $setup->SetUpSQL();
             $test = $setup->setConfFile();
             if($test){
-                $admin = new UserModel();
-                $admin->setUser();
-                $admin->setRole(1);
-                $admin->save('user');
+                $setup->setAdmin();                
             }
             $setup->delInstaller();
             header("Location: /login");

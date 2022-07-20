@@ -5,4 +5,5 @@
                 define("DBPORT", "3306");
                 define("DBDRIVER", "mysql");
                 define("DBPREFIXE", "waterlily_");
-                define("SITENAME", "Ma Formation"); 
+                define("SITEURL", "http://51.75.200.94"); 
+                define("SITENAME", "monSite"); 

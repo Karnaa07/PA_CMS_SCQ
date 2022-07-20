@@ -4,7 +4,6 @@ namespace App;
 
 require "conf.inc.php";
 
-echo(DBHOST);
 function myAutoloader($class)
 {
     // $class => CleanWords

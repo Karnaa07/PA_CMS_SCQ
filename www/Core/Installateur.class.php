@@ -30,20 +30,30 @@ class Installateur
                 define("DBPORT", "3306");
                 define("DBDRIVER", "mysql");
                 define("DBPREFIXE", "'.$_POST['dbPrefix'].'");
+                define("SITEURL", "'.$_POST['siteUrl'].'"); 
                 define("SITENAME", "'.$_POST['siteName'].'"); ';
+
             fwrite($fp, $conf);
-            fclose($fp);
-            sleep(15);
+            // fclose($fp);
+            // sleep(15);
             return true;
         }
     }
     public function setAdmin()
     {
-        $insertProbleme=$this->pdo->prepare("INSERT INTO ".$_POST['dbPrefixe']."user (id, email, password, firstname, lastname, contry, role_id, status, token, createdAt, updatedAt) Values (:commentaire, :urlProbleme, :codeAffaire, :idCategorie, :dateProbleme, :reparation)");
+        $password=password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $lastname=strtoupper(trim($_POST['lastname']));
+        $token= substr(bin2hex(random_bytes(128)), 0, 255);
+        $insertProbleme=$this->pdo->prepare("INSERT INTO ".$_POST['dbPrefix']."user (email, password, firstname, lastname, contry, role_id, status, token) VALUES (:email, :password, :firstname, :lastname, :contry, :role_id, :status, :token)");
         $insertProbleme -> execute ([
-            'commentaire'=>$contenu,
-
-        
+            'email'=>$_POST['email'], 
+            'password'=>$password, 
+            'firstname'=>$_POST['firstname'], 
+            'lastname'=>$lastname, 
+            'contry'=>$_POST['contry'], 
+            'role_id'=>1, 
+            'status'=>0, 
+            'token'=>$token
         ]);
     }
     public function delInstaller(){

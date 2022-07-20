@@ -1,7 +1,7 @@
 
 /:
-  controller: main
-  action: home
+  controller: admin
+  action: dashboard
 
 /media:
   controller: admin
@@ -66,8 +66,8 @@
   action: builder
   
 /dashboard:
-  controller: main
-  action: home
+  controller: admin
+  action: dashboard
 
 /installer:
   controller: installer

@@ -14,7 +14,6 @@ class CrudPages extends CrudAbstract
             die("Erreur SQL : ".$e->getMessage());
         }
     }
-
     public function display(){
         $req =  $this->builder-> select(DBPREFIXE.'page', ["idPage","name"])
         ->getQuery();

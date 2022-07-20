@@ -78,7 +78,7 @@ class UserStats
     }
     public function users_country() {
         $req =  $this->builder
-        ->select(DBPREFIXE.'user', ["contry","COUNT(*)"])
+        ->select(DBPREFIXE.'user', ["contry","COUNT(*) as value"])
         ->group("contry")
         ->getQuery();
         $queryPrepared = $this->pdo->prepare($req);
