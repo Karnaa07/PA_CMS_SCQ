@@ -73,7 +73,6 @@
     <span class="deleteClose-btn">&times;</span>
     <div class = "modal--inputs">
         <form id="modifUser" method="post" action="">
-
         
             <input  name="idArticle" type="hidden" value=""><br>
 

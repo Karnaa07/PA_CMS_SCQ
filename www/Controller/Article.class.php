@@ -31,7 +31,7 @@ class Article
                     }
                     $pageid = new CrudPages();
                     $pages = $pageid->display();
-                    var_dump($pages);
+                    //var_dump($pages);
                     $view = new View("addArticle", "back"); // On crée une page de vue en appelant le partial Login avec un template front (front.tpl.php)
                     $view->assign("article", $article);
                     $view->assign("pageid", $pages);       
