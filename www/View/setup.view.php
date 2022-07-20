@@ -9,7 +9,7 @@
     <body>
         <form class="instaler--form" method="POST" action="installer.php">
             <h1> Options du site: </h1>
-            
+
             <label for="dbHost">BDD Host : </label>
             <input required type="text" placeholder="Hôte" name="dbHost"><br>
             <label for="dbUserName">BDD Username : </label>

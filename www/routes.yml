@@ -100,3 +100,6 @@
   controller: main
   action: acceuil
 
+/installer:
+  controller: installer
+  action: install
