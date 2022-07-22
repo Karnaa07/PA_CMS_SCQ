@@ -131,5 +131,41 @@ class Mail {
                 // echo "Message could not be sent. Mailer Error:";
             }
         }
+        public function send_mail_page(string $email, string $name) {
+            $mail = new PHPMailer(true);
+
+            //To load the French version
+            $mail->setLanguage('fr', '/optional/path/to/language/directory/');
+
+            try { 
+                //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.hostinger.com';                       //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'contact@waterlilycms.fr';              //SMTP username
+                $mail->Password   = 'Waterlily2022!';                        //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;             //Enable implicit TLS encryption
+                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                //Recipients
+                $mail->setFrom('contact@waterlilycms.fr', 'Waterlily CORP');
+                $mail->addAddress($email, '');     //DESTINATAIRE
+
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = "Nouvelle page";
+                // AJOUTER UNE VARIABLE GLOBAL AVEC LE NOM DU SITE
+                $mail->Body    = 
+                '
+                    <p>Bonjour la page '.$name.' à été crée .</p>
+                ';// href a modifier lors du déploiement
+                $mail->send();
+                $mail->smtpClose();
+                // echo 'Message has been sent';
+            } catch (Exception $e) {
+                // echo "Message could not be sent. Mailer Error:";
+            }
+
+        }
         
 }

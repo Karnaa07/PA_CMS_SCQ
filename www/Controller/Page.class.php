@@ -12,6 +12,7 @@ use App\Core\Permissions;
 use App\Core\MysqlBuilder;
 use App\Core\CrudPages as PageCrud;
 use App\Core\Crud as CrudUser;
+use App\Model\User as Model;
 
 
 
@@ -19,6 +20,8 @@ class Page
 {
     public function addPage(){
         $users = CrudUser :: getInstance();
+        $user= new Model();
+        $user->setUser();
         if (isset($_COOKIE['Connected']) && !empty($_COOKIE['Connected']) && isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
             $token = $users -> tokenReturn('user', $_COOKIE['id']);
             if ($token[0]['token'] == $_COOKIE['Connected']) {
@@ -31,6 +34,8 @@ class Page
                             $result = Verificator::checkForm($page->getPageForm(), $_POST);
                             if(count($result)<1){
                                 $page->setPage();
+                                $page->addSubscriber($user);
+                                $page->notify();
                                 $page->save("page");
                                 $nomFichier = $page->getName();
                                 $nomFichier= trim($nomFichier);

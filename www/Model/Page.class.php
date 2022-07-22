@@ -64,4 +64,18 @@ public function getPageForm(): array
     public function setPage(){
         $this->setName($_POST["name"]);
     }
+
+    public function addSubscriber(User $user) {
+        $this->subscribers[ $user->id ] = $user;
+    }
+
+    public function removeSubscriber(User $user) {
+        unset($this->subscribers [ $user->id ]);
+    }
+
+    public function notify() {
+        foreach ($this->subscribers as $user) {
+            $user->update($this);
+        }
+    }
 }
