@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\Sql;
+use App\Core\Mail;
 
 class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
 {
@@ -329,6 +330,12 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
         $this->generateToken();
         $this->setStatus(0);
 
+    }
+
+    public function update(Page $page) {
+        echo( ' La page ' . $page->name . ' a été publié !');
+        $mail = new Mail();
+        $mail-> send_mail_page($this->email, $page->name);
     }
 
 
