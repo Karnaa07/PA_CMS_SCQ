@@ -9,5 +9,11 @@ class CleanWords // définition d'une classe de nétoyage de champs
     {
         return strtoupper(trim($lastname)); // On met les valeurs en majuscule 
     }
+    public static function name($name):string
+    {
+        $name=trim($name);
+        $name=str_replace("'","_",$name);
+        return $name;
+    }
     // Ajouter d'autres classes 
 }

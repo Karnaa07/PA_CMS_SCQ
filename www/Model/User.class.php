@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\Sql;
+use App\Core\Mail;
 
 class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
 {
@@ -10,7 +11,9 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     protected $lastname = null;
     protected $email;
     protected $password;
+    protected $contry;
     protected $status = 0;
+    protected $role_id = 4;
     protected $token = null;
 
     public function __construct()
@@ -26,6 +29,13 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         return $this->id;
     }
+       /**
+     * @param int $id
+     */
+    public function setIdUser(string $id): void
+    {
+        $this->id = $id;
+    }
     /**
      * @return null|string
      */
@@ -39,6 +49,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
      */
     public function setFirstname(?string $firstname): void
     {
+        $firstname = htmlspecialchars($firstname);
         $this->firstname = ucwords(strtolower(trim($firstname)));
     }
     /**
@@ -54,6 +65,7 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
      */
     public function setLastname(?string $lastname): void
     {
+        $lastname = htmlspecialchars($lastname);
         $this->lastname = strtoupper(trim($lastname));
     }
 
@@ -71,6 +83,23 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     public function setEmail(string $email): void
     {
         $this->email = strtolower(trim($email));
+    }
+
+    /**
+     * @return string
+     */
+    public function getContry(): string
+    {
+        return $this->contry;
+    }
+
+    /**
+     * @param string $contry
+     */
+    public function setContry(string $contry): void
+    {
+        $contry = htmlspecialchars($contry);
+        $this->contry = ucfirst(strtolower(trim($contry)));
     }
 
     /**
@@ -105,6 +134,15 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
         $this->status = $status;
     }
 
+
+    public function getRole(): int
+    {
+        return $this->role;
+    }
+    public function setRole(int $role_id): void
+    {
+        $this->role = $role_id;
+    }
     /**
      * @return null|string
      */
@@ -112,7 +150,6 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         return $this->token;
     }
-
     /**
      * length : 255
      */
@@ -120,8 +157,6 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
     {
         $this->token = substr(bin2hex(random_bytes(128)), 0, 255);
     }
-
-
     public function getRegisterForm(): array
     {
         return [
@@ -176,6 +211,15 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                     "max"=>100,
                     "error"=>"Nom incorrect"
                 ],
+                "contry"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Votre pays ...",
+                    "class"=>"inputForm",
+                    "id"=>"paysForm",
+                    "min"=>2,
+                    "max"=>50,
+                    "error"=>"Nom incorrect"
+                ],
             ]
         ];
     }
@@ -189,6 +233,10 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
                 "submit"=>"Se connecter"
             ],
             'inputs'=>[
+                "token"=>[
+                    "type"=>"hidden",
+                    "value"=> $_SESSION['token']
+                ],
                 "email"=>[
                     "type"=>"email",
                     "placeholder"=>"Votre email ...",
@@ -207,13 +255,88 @@ class User extends Sql  // SETTERS ET GETTERS DE NOS INFOS UTILISATEUR
             ]
         ];
     }
+    public function getChangeForm(): array{
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "submit"=>"Changer de mot de passe"
+            ],
+            'inputs'=>[
+                "passwordOld"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Votre ancien mot de passe ...",
+                    "required"=>true,
+                    "class"=>"inputForm",
+                    "id"=>"pwdConfirmForm",
+                    "error"=>"Mauvais mot de passe",
+                ],
+                "password"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Votre mot de passe ...",
+                    "required"=>true,
+                    "class"=>"inputForm",
+                    "id"=>"pwdForm",
+                    "error"=>"Votre mot de passe doit faire au min 8 caractères avec majuscule, minuscules et des chiffres",
+                    ],
+                "passwordConfirm"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Confirmation ...",
+                    "required"=>true,
+                    "class"=>"inputForm",
+                    "id"=>"pwdConfirmForm",
+                    "confirm"=>"password",
+                    "error"=>"Votre mot de passe de confirmation ne correspond pas",
+                ],
+               
+            ]
+        ];
+
+    }
+    public function getForgetForm(): array{
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "submit"=>"Changer de mot de passe"
+            ],
+            'inputs'=>[
+                "email"=>[
+                    "type"=>"email",
+                    "placeholder"=>"Votre email ...",
+                    "required"=>true,
+                    "class"=>"inputForm",
+                    "id"=>"emailForm",
+                    "error"=>"Email incorrect",
+                    "unicity"=>"true",
+                    "errorUnicity"=>"Email déjà en bdd",
+                ],
+               
+            ]
+        ];
+
+    }
     public function setUser(){
         $this->setEmail($_POST["email"]);
         $this->setPassword($_POST["password"]);
-        $this->setFirstname($_POST["firstname"]);
-        $this->setLastname($_POST["lastname"]);
+        if(!empty($_POST['firstname']))
+            $this->setFirstname($_POST['firstname']);
+        if(!empty($_POST['lastname']))
+            $this->setLastname($_POST['lastname']);
+        if(!empty($_POST['role_id']))
+            $this->setRole($_POST['role_id']);
+        if(!empty($_POST['contry']))
+            $this->setContry($_POST['contry']);
         $this->generateToken();
         $this->setStatus(0);
+
     }
+
+    public function update(Page $page) {
+        echo( ' La page ' . $page->name . ' a été publié !');
+        $mail = new Mail();
+        $mail-> send_mail_page($this->email, $page->name);
+    }
+
 
 }

@@ -1,2 +1,10 @@
 [auto]
-server-uuid=89a9987d-9899-11ec-9d8e-0242ac120002
+<<<<<<< HEAD
+server-uuid=56f55d61-0824-11ed-8c71-0242ac1e0002
+=======
+<<<<<<< HEAD
+server-uuid=ad7d2d7e-07ff-11ed-a90a-0242ac1e0002
+=======
+server-uuid=35d71c8f-078c-11ed-9837-0242ac120002
+>>>>>>> bfe8b726eef854b8c0dd879e606d102df7fd6a08
+>>>>>>> b44d65d409c0551ce539879f1bb87da7e968c1db

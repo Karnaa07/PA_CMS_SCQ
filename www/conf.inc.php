@@ -3,8 +3,8 @@
 define("DBUSER", "root");
 define("DBPWD", "password");
 define("DBHOST", "database");
-define("DBNAME", "mvcdocker2");
+define("DBNAME", "waterlilyyyyyy");
 define("DBPORT", "3306");
 define("DBDRIVER", "mysql");
-define("DBPREFIXE", "esgi_");
-
+define("DBPREFIXE", "waterlily_");
+define("SITENAME", "WATERLILY Corp");

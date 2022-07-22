@@ -1,8 +1,9 @@
-<h1>S'inscrire</h1>
+<?php 
+// var_dump($this);
+$this->includePartial("form", $user->getRegisterForm()) // à remettre plus tard ?> 
+<link rel="stylesheet" type="text/css" href="../css/login.css">
 
-<?php //$this->includePartial("form", $user->getRegisterForm()) // à remettre plus tard ?> 
-
-<html lang="fr">
+<!-- <html lang="fr">
 
 <head>
   <meta charset="UTF-8">
@@ -53,7 +54,7 @@
 </body>
 
 </html>
-
+ -->
 
 
 

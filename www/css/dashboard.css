@@ -57,3 +57,38 @@
   grid-column: 3;
   grid-row: 4;
 }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#chartdiv {
+  width: 30%;
+  height: 40em;
+}
+#chartStats {
+  width: 40em;
+  height: 20em;
+}
+#horloge {
+  width: 40em;
+  height: 20em;
+}
+.dashboard--vertical{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 0px 0px 5em;
+}
+
+div.card{
+
+  background: #F3F3F3;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding-right: 30px;
+}
+.dashboard--statswrapper{
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-evenly;
+}
