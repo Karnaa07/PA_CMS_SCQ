@@ -51,4 +51,6 @@ class Main { // Définition de la classe Main
     public function acceuil(){
         $view = new View('acceuil');
     }
+
+    
 } 

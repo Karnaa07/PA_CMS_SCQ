@@ -194,6 +194,7 @@ class User {
             header('Location: /login');
         }
     }
+
 }
 
 
